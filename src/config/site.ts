@@ -40,8 +40,19 @@ export const site = {
     directeurPublication: null as string | null,
   },
 
-  /** {{À REMPLIR}} — ex. https://spowclean.fr */
-  domaine: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.invalid',
+  /**
+   * {{À REMPLIR}} — ex. https://spowclean.fr
+   *
+   * Sert aux canoniques, au sitemap et au JSON-LD. Tant que le domaine
+   * définitif n'est pas connu, on retombe sur l'URL de production Vercel
+   * plutôt que sur un placeholder : mieux vaut une canonique juste sur une
+   * URL provisoire qu'une canonique fausse.
+   */
+  domaine:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : 'https://example.invalid'),
 
   /**
    * Chiffres clés. `null` = non validé par le client → rien ne s'affiche.

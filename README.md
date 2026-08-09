@@ -115,7 +115,7 @@ L'échantillonnier occupe la moitié du hero ; un bandeau de 8 px identifie chaq
 
 Un seul moment animé : la pose en cascade des douze plaques au chargement. Le reste (révélations au scroll, compactage du header) est en CSS scroll-driven — aucun listener, les pages de contenu restent 100 % serveur.
 
-Navigation : trois groupes (Prestations, Secteurs, L'entreprise), les deux premiers alimentés par le contenu MDX. Menus en `<details>` exclusifs — clavier, refermables, sans JavaScript.
+Navigation : trois groupes (Prestations, Secteurs, L'entreprise), les deux premiers alimentés par le contenu MDX. Menus en `<details>` exclusifs — clavier, refermables. Seule dépendance client du header : `NavAutoClose`, qui les referme après un clic (la navigation Next ne recrée pas le DOM, l'attribut `open` y survivrait).
 
 L'ancienne direction artistique est conservée dans `archive/v1/`, hors compilation et hors lint.
 

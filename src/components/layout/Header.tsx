@@ -7,6 +7,7 @@ import { nav } from '@/copy/common';
 import { getSecteurs, getServices } from '@/lib/content';
 import { materiaux } from '@/lib/materiaux';
 import { Logo } from './Logo';
+import { NavAutoClose } from './NavAutoClose';
 
 type MenuLink = { href: string; label: string; mat?: string };
 type Groupe = { label: string; href: string; aide: string; links: MenuLink[] };
@@ -20,7 +21,10 @@ type Groupe = { label: string; href: string; aide: string; links: MenuLink[] };
  * apparaître au menu sans intervention.
  *
  * Les menus sont des <details> exclusifs (`name="nav"`) : ouverture au clic,
- * refermables, pilotables au clavier, sans une ligne de JavaScript (§8).
+ * refermables, pilotables au clavier. Leur seule dépendance client est
+ * `<NavAutoClose />`, qui les referme après un clic — la navigation Next ne
+ * recréant pas le DOM du header, l'attribut `open` y survivrait sinon.
+ *
  * Chaque entrée de prestation porte sa plaque de revêtement — le menu est
  * lui-même un échantillonnier.
  */
@@ -84,13 +88,16 @@ export async function Header() {
           </div>
         </div>
       </Container>
+
+      {/* Referme les menus après un clic — voir NavAutoClose. */}
+      <NavAutoClose />
     </header>
   );
 }
 
 function DesktopMenu({ groupe }: { groupe: Groupe }) {
   return (
-    <details name="nav" className="group relative">
+    <details name="nav" data-nav-menu className="group relative">
       <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-4 font-mono text-13 uppercase tracking-[0.12em] text-slate hover:text-ink group-open:text-ink [&::-webkit-details-marker]:hidden">
         {groupe.label}
         <span
@@ -138,7 +145,7 @@ function DesktopMenu({ groupe }: { groupe: Groupe }) {
 
 function MobileMenu({ groupes }: { groupes: Groupe[] }) {
   return (
-    <details className="relative lg:hidden">
+    <details data-nav-menu className="relative lg:hidden">
       <summary
         className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center border border-ink px-3 [&::-webkit-details-marker]:hidden"
         aria-label={nav.openMenu}
@@ -157,7 +164,7 @@ function MobileMenu({ groupes }: { groupes: Groupe[] }) {
         <ul className="list-none">
           {groupes.map((groupe) => (
             <li key={groupe.label}>
-              <details name="nav-mobile" className="group">
+              <details name="nav-mobile" data-nav-menu className="group">
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 border-b border-ink font-mono text-13 uppercase tracking-[0.12em] text-ink [&::-webkit-details-marker]:hidden">
                   {groupe.label}
                   <span

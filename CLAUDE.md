@@ -189,7 +189,9 @@ L'échantillonnier occupe la moitié du hero d'accueil. Il se rejoue ailleurs : 
 - Trois fonds seulement : papier (courant), blanc (plan qui remonte), abyss (bandes denses).
 
 ### Navigation
-Trois groupes : **Prestations**, **Secteurs**, **L'entreprise**. Les deux premiers sont alimentés par le contenu MDX — ajouter une prestation la fait apparaître au menu sans intervention. Menus en `<details>` exclusifs (`name="nav"`) : clic pour ouvrir, refermables, clavier, sans JavaScript. Un menu au survol ne satisferait pas le critère WCAG 1.4.13.
+Trois groupes : **Prestations**, **Secteurs**, **L'entreprise**. Les deux premiers sont alimentés par le contenu MDX — ajouter une prestation la fait apparaître au menu sans intervention. Menus en `<details>` exclusifs (`name="nav"`) : clic pour ouvrir, refermables, clavier. Un menu au survol ne satisferait pas le critère WCAG 1.4.13.
+
+Seule dépendance client du header : `<NavAutoClose />`, qui referme les menus après un clic sur une entrée. La navigation Next ne recrée pas le DOM du header, donc l'attribut `open` y survivrait au changement de page, et aucune règle CSS ne peut le retirer.
 
 ### Motion
 - Un seul moment orchestré : la pose en cascade des douze plaques au chargement (45ms d'écart). Ensuite, plus rien ne bouge tout seul.
@@ -238,7 +240,7 @@ Budgets, vérifiés en CI, build en échec si dépassement :
 
 - Images : `next/image`, AVIF + WebP, `sizes` toujours explicite, `priority` sur le seul visuel du hero.
 - Polices : `next/font/local`, `display: swap`, subset latin, préchargement des deux graisses utilisées.
-- Zéro dépendance client sur les pages de contenu — elles sont 100 % RSC. Seuls `/devis` et le comparateur portent du JS client.
+- Les pages de contenu sont 100 % RSC. Le seul JS client est `/devis`, `/contact`, le comparateur photographique et `<NavAutoClose />` (≈ 1 ko, voir §6).
 
 ---
 

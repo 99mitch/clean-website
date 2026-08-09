@@ -1,0 +1,244 @@
+@import 'tailwindcss';
+
+/* --------------------------------------------------------------------------
+   Tokens — CLAUDE.md §6.
+   Palette bleue : bleu profond de marque, accent bleu vif réservé au CTA,
+   le reste porté par le blanc, le gris et le noir.
+   -------------------------------------------------------------------------- */
+@theme {
+  /* Couleurs */
+  --color-ink: #0a0e12; /* texte principal, fonds sombres */
+  --color-navy: #0b2e4f; /* couleur de marque, sections denses */
+  --color-azure: #1d6fe0; /* accent — CTA et signature UNIQUEMENT */
+  --color-slate: #4a5765; /* texte secondaire (7,4:1 sur blanc) */
+  --color-steel: #7a8794; /* filets, décor, texte ≥ 21px uniquement */
+  --color-frost: #f1f4f7; /* fond clair, « surface traitée » */
+  --color-white: #ffffff;
+
+  /* Typographie */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Échelle stricte : 13 / 15 / 17 / 21 / 28 / 40 / 64 / 88. Rien entre. */
+  --text-13: 0.8125rem;
+  --text-13--line-height: 1.4;
+  --text-15: 0.9375rem;
+  --text-15--line-height: 1.5;
+  --text-17: 1.0625rem;
+  --text-17--line-height: 1.6;
+  --text-21: 1.3125rem;
+  --text-21--line-height: 1.45;
+  --text-28: 1.75rem;
+  --text-28--line-height: 1.25;
+  --text-40: 2.5rem;
+  --text-40--line-height: 1.1;
+  --text-64: 4rem;
+  --text-64--line-height: 1.03;
+  --text-88: 5.5rem;
+  --text-88--line-height: 0.98;
+
+  /*
+   * Rayon : 12px sur les conteneurs, 4px sur les micro-éléments (puces,
+   * badges, champs). Aucune valeur intermédiaire, aucun rayon plus grand —
+   * les pilules et le glassmorphism sont explicitement hors système.
+   */
+  --radius: 12px;
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+
+  /* Grille 12 colonnes, gouttière 24px. */
+  --spacing-gutter: 1.5rem;
+
+  --ease-out-site: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-17);
+    line-height: 1.6;
+    font-feature-settings: 'kern', 'liga';
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  /* Focus visible partout, jamais outline:none — §10. */
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Sur fond sombre, l'anneau navy serait invisible. */
+  .on-dark :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  ::selection {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Mesure de lecture : 68 caractères max (§6). */
+  .measure {
+    max-width: 68ch;
+  }
+
+  /*
+   * Carte-surface : chaque carte porte une bande de trame — la partie
+   * non encore traitée. Au survol, la trame se retire et découvre la
+   * surface propre. Le même geste que l'arête, à l'échelle d'un composant.
+   */
+  .card-surface {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 38%;
+    background: repeating-linear-gradient(
+      122deg,
+      color-mix(in srgb, var(--color-steel) 30%, transparent) 0 1px,
+      transparent 1px 9px
+    );
+    transition: height 220ms var(--ease-out-site);
+    pointer-events: none;
+  }
+
+  .card-surface:hover::before,
+  .card-surface:focus-within::before {
+    height: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-surface::before {
+      transition: none;
+    }
+  }
+
+  /*
+   * Trame de surface non traitée, sur fond sombre. Utilisée uniquement sur
+   * la bande d'appel au devis, où le contraste avec les sections claires
+   * porte encore l'idée d'un état à traiter.
+   */
+  .hatch-dark {
+    background-image: repeating-linear-gradient(
+      122deg,
+      rgba(241, 244, 247, 0.055) 0 1px,
+      transparent 1px 9px
+    );
+  }
+
+  /* Filet 1px — la seule ligne décorative autorisée. */
+  .rule {
+    border-color: color-mix(in srgb, var(--color-steel) 30%, transparent);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-13);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /*
+   * Révélation au scroll — §6 : opacity + translateY(12px), 400ms, ease-out,
+   * une seule fois. Implémentée en CSS scroll-driven : zéro JS client, donc
+   * les pages de contenu restent 100 % RSC (§8).
+   * Hors @supports, le contenu est simplement visible — jamais masqué.
+   */
+  .reveal {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    animation: site-reveal 400ms var(--ease-out-site) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+
+/*
+ * Header sticky qui se compacte après 120px de scroll (§6).
+ * Scroll-driven en CSS : aucun listener, aucun JS client.
+ */
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-compact linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
+  }
+}
+
+@keyframes header-compact {
+  from {
+    padding-block: 1.25rem;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  to {
+    padding-block: 0.5rem;
+    box-shadow: 0 1px 0 0 color-mix(in srgb, var(--color-steel) 35%, transparent);
+  }
+}
+
+@keyframes site-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

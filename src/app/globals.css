@@ -1,0 +1,381 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   SPOWCLEAN — système visuel « ÉCHANTILLONNIER »
+
+   Registre : dossier technique. Le site parle la langue du métier — les
+   revêtements. Aucune photographie, aucune icône décorative, aucune carte
+   arrondie : des filets, des plans d'échantillons générés en CSS, et de la
+   donnée en monospace.
+
+   Fond : papier froid. Bandes denses : bleu abyssal. Un seul bleu signal.
+   ========================================================================== */
+
+@theme {
+  /* ---- Couleurs -------------------------------------------------------- */
+  --color-abyss: #071320; /* bandes denses, pied de page */
+  --color-ink: #0b1620; /* texte principal, filets pleins */
+  --color-cobalt: #16467a; /* couleur de marque, structure */
+  --color-signal: #2560e8; /* ACCENT — usage strictement limité (§6) */
+  --color-slate: #4a5a6b; /* texte secondaire — 6,4:1 sur papier */
+  --color-graphite: #8494a5; /* filets et décor — jamais de texte */
+  --color-mist: #e4eaf1; /* aplats légers, remplissages */
+  --color-paper: #f6f8fb; /* fond courant */
+  --color-white: #ffffff;
+
+  /* ---- Typographie ----------------------------------------------------- */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Échelle stricte : 13 / 15 / 17 / 21 / 28 / 40 / 64 / 88. Rien entre. */
+  --text-13: 0.8125rem;
+  --text-13--line-height: 1.4;
+  --text-15: 0.9375rem;
+  --text-15--line-height: 1.5;
+  --text-17: 1.0625rem;
+  --text-17--line-height: 1.6;
+  --text-21: 1.3125rem;
+  --text-21--line-height: 1.4;
+  --text-28: 1.75rem;
+  --text-28--line-height: 1.2;
+  --text-40: 2.5rem;
+  --text-40--line-height: 1.06;
+  --text-64: 4rem;
+  --text-64--line-height: 0.98;
+  --text-88: 5.5rem;
+  --text-88--line-height: 0.94;
+
+  /* ---- Formes ---------------------------------------------------------- */
+  /* Un dossier technique n'a pas d'angles arrondis. 2px sur les contrôles de
+     formulaire pour ne pas paraître cassé ; rien ailleurs. */
+  --radius: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+
+  --ease-out-site: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-17);
+    line-height: 1.6;
+    font-feature-settings: 'kern', 'liga';
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  /* Focus visible partout, jamais outline:none — §10. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* ========================================================================
+     ÉCHANTILLONS DE REVÊTEMENT
+
+     Douze surfaces, générées uniquement en dégradés CSS : aucune image,
+     aucun octet réseau, aucune banque d'images générique (§6). Au survol,
+     la trame se retire — la surface est traitée.
+     ======================================================================== */
+  .sample {
+    position: relative;
+    display: block;
+    background-color: var(--color-mist);
+    overflow: hidden;
+  }
+
+  .sample::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 500ms var(--ease-out-site);
+  }
+
+  .sample-plate:hover .sample::before,
+  .sample-plate:focus-within .sample::before {
+    opacity: 0.14;
+  }
+
+  /* Tissage serré, deux fils croisés. */
+  .sample[data-mat='moquette']::before {
+    background-image:
+      repeating-linear-gradient(0deg, rgb(11 22 32 / 0.28) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgb(11 22 32 / 0.2) 0 1px, transparent 1px 3px);
+  }
+
+  /* Lés larges soudés. */
+  .sample[data-mat='pvc']::before {
+    background-image:
+      repeating-linear-gradient(90deg, rgb(11 22 32 / 0.3) 0 1px, transparent 1px 34px),
+      repeating-linear-gradient(0deg, rgb(11 22 32 / 0.05) 0 2px, transparent 2px 5px);
+  }
+
+  /* Veines : trois passes obliques d'opacités décroissantes. */
+  .sample[data-mat='marbre']::before {
+    background-image:
+      linear-gradient(74deg, transparent 46%, rgb(11 22 32 / 0.26) 47%, transparent 49%),
+      linear-gradient(63deg, transparent 22%, rgb(11 22 32 / 0.16) 23%, transparent 26%),
+      linear-gradient(102deg, transparent 68%, rgb(11 22 32 / 0.12) 69%, transparent 72%),
+      linear-gradient(160deg, rgb(255 255 255 / 0.5), transparent);
+  }
+
+  /* Béton quartzé : granulat de deux calibres. */
+  .sample[data-mat='beton']::before {
+    background-image:
+      radial-gradient(rgb(11 22 32 / 0.32) 1px, transparent 1.4px),
+      radial-gradient(rgb(11 22 32 / 0.18) 1.6px, transparent 2px);
+    background-size:
+      7px 7px,
+      17px 17px;
+    background-position:
+      0 0,
+      4px 9px;
+  }
+
+  /* Carrelage : joints à 25 %. */
+  .sample[data-mat='carrelage']::before {
+    background-image:
+      repeating-linear-gradient(0deg, rgb(11 22 32 / 0.34) 0 2px, transparent 2px 25%),
+      repeating-linear-gradient(90deg, rgb(11 22 32 / 0.34) 0 2px, transparent 2px 25%);
+  }
+
+  /* Parquet : lames décalées. */
+  .sample[data-mat='parquet']::before {
+    background-image:
+      repeating-linear-gradient(0deg, rgb(11 22 32 / 0.26) 0 1px, transparent 1px 20px),
+      repeating-linear-gradient(90deg, rgb(11 22 32 / 0.14) 0 1px, transparent 1px 7px);
+  }
+
+  /* Résine : fin nuage régulier. */
+  .sample[data-mat='resine']::before {
+    background-image: radial-gradient(rgb(11 22 32 / 0.14) 0.7px, transparent 1px);
+    background-size: 5px 5px;
+  }
+
+  /* Vitrage : deux bandes de réflexion. */
+  .sample[data-mat='vitrage']::before {
+    background-image:
+      linear-gradient(118deg, transparent 30%, rgb(255 255 255 / 0.85) 34%, transparent 40%),
+      linear-gradient(118deg, transparent 58%, rgb(255 255 255 / 0.55) 61%, transparent 66%),
+      linear-gradient(200deg, rgb(37 96 232 / 0.14), transparent 60%);
+  }
+
+  /* Inox brossé : fils très fins. */
+  .sample[data-mat='inox']::before {
+    background-image:
+      repeating-linear-gradient(90deg, rgb(11 22 32 / 0.16) 0 1px, transparent 1px 2px),
+      linear-gradient(180deg, rgb(255 255 255 / 0.6), transparent 50%);
+  }
+
+  /* Linoléum : grain dense. */
+  .sample[data-mat='linoleum']::before {
+    background-image:
+      radial-gradient(rgb(11 22 32 / 0.24) 0.9px, transparent 1.2px),
+      radial-gradient(rgb(11 22 32 / 0.12) 0.6px, transparent 1px);
+    background-size:
+      4px 4px,
+      6px 6px;
+    background-position:
+      0 0,
+      2px 3px;
+  }
+
+  /* Terrazzo : éclats dispersés. */
+  .sample[data-mat='terrazzo']::before {
+    background-image:
+      radial-gradient(circle at 18% 24%, rgb(11 22 32 / 0.4) 0 3px, transparent 3px),
+      radial-gradient(circle at 62% 12%, rgb(11 22 32 / 0.28) 0 4px, transparent 4px),
+      radial-gradient(circle at 78% 58%, rgb(22 70 122 / 0.4) 0 3px, transparent 3px),
+      radial-gradient(circle at 34% 72%, rgb(11 22 32 / 0.32) 0 5px, transparent 5px),
+      radial-gradient(circle at 88% 88%, rgb(11 22 32 / 0.24) 0 2px, transparent 2px),
+      radial-gradient(circle at 8% 86%, rgb(22 70 122 / 0.3) 0 3px, transparent 3px);
+  }
+
+  /* Textile mural : croisillon oblique. */
+  .sample[data-mat='textile']::before {
+    background-image:
+      repeating-linear-gradient(45deg, rgb(11 22 32 / 0.2) 0 1px, transparent 1px 5px),
+      repeating-linear-gradient(-45deg, rgb(11 22 32 / 0.2) 0 1px, transparent 1px 5px);
+  }
+
+  /* Trame appliquée sur fond sombre — bandes denses. */
+  .hatch-dark {
+    background-image:
+      repeating-linear-gradient(122deg, rgb(246 248 251 / 0.05) 0 1px, transparent 1px 9px);
+  }
+
+  /* ---- Mesure de lecture ---------------------------------------------- */
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* ---- Ligne de registre ----------------------------------------------
+   * Les listes du site sont des lignes de registre, jamais des cartes :
+   * un filet, beaucoup d'air, un fond qui s'éclaircit et un onglet qui se
+   * déploie sur le bord gauche.
+   */
+  .ledger-row {
+    position: relative;
+    border-top: 1px solid color-mix(in srgb, var(--color-graphite) 45%, transparent);
+    transition: background-color 160ms var(--ease-out-site);
+  }
+
+  .ledger-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-ink);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 220ms var(--ease-out-site);
+  }
+
+  .ledger-row:hover,
+  .ledger-row:focus-within {
+    background-color: var(--color-white);
+  }
+
+  .ledger-row:hover::before,
+  .ledger-row:focus-within::before {
+    transform: scaleY(1);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-13);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Filet plein qui coiffe chaque section — signature structurelle du site. */
+  .rule-head {
+    border-top: 2px solid var(--color-ink);
+  }
+
+  .rule-hair {
+    border-color: color-mix(in srgb, var(--color-graphite) 45%, transparent);
+  }
+
+  /* Révélation au scroll : CSS scroll-driven, zéro JS (§8). */
+  .reveal {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    animation: site-reveal 400ms var(--ease-out-site) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@keyframes site-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * Seul moment orchestré du site : la pose de l'échantillonnier au
+ * chargement. Douze plaques en cascade, une fois. Ensuite plus rien ne bouge.
+ */
+.plate-in {
+  animation: plate-in 520ms var(--ease-out-site) both;
+}
+
+@keyframes plate-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Header compacté après 120px de scroll — scroll-driven, sans listener. */
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-compact linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
+  }
+}
+
+@keyframes header-compact {
+  from {
+    padding-block: 1.1rem;
+  }
+  to {
+    padding-block: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .plate-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

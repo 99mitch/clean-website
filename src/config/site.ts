@@ -85,6 +85,14 @@ export const site = {
   /** {{À REMPLIR}} — autorisation écrite requise avant affichage. */
   logosClients: [] as Array<{ nom: string; logo: string }>,
 
+  /** {{À REMPLIR}} — avis clients, accord écrit requis avant publication. */
+  avisClients: [] as Array<{
+    citation: string;
+    auteur: string;
+    role: string;
+    societe: string;
+  }>,
+
   /** Plaquette PDF jointe à l'accusé de réception. `null` tant qu'absente. */
   plaquetteUrl: null as string | null,
 

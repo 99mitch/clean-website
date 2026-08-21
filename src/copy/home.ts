@@ -4,7 +4,7 @@ export const home = frenchify({
   meta: {
     title: 'Entreprise de nettoyage professionnel — devis chiffré sous 24 h',
     description:
-      'Entretien régulier, remise en état, vitrerie, bio-nettoyage. Décrivez vos locaux en cinq questions, recevez une proposition chiffrée. Contrat sans engagement.',
+      'Entretien régulier, remise en état, traitement des sols, vitrerie. Décrivez vos locaux en cinq questions, recevez une proposition chiffrée. Contrat sans engagement.',
   },
 
   hero: {
@@ -50,34 +50,25 @@ export const home = frenchify({
       'remise-en-etat': 'Remise en état',
       'traitement-des-sols': 'Sols',
       vitrerie: 'Vitrerie',
-      'hygiene-3d': 'Hygiène 3D',
-      'bio-nettoyage': 'Bio-nettoyage',
       'services-associes': 'Associés',
     } as Record<string, string>,
   },
 
   services: {
     label: 'Prestations',
-    titre: 'Sept familles, un protocole écrit pour chacune.',
+    titre: 'Cinq familles, un protocole écrit pour chacune.',
     intro:
       'Chaque prestation est définie par un périmètre, une fréquence et une méthode annexés au contrat. Rien n’est laissé à l’appréciation de l’agent sur place.',
-    aside: '7 entrées',
+    aside: '5 entrées',
   },
 
-  preuve: {
-    label: 'Preuve',
-    titre: 'Ce que nos clients peuvent vérifier.',
+  retourClients: {
+    label: 'Retour clients',
+    titre: 'Ce que nos clients en disent.',
     intro:
-      'Chaque chiffre affiché ici est issu de nos relevés d’exploitation. Tant qu’une donnée n’est pas consolidée, elle n’est pas affichée.',
-    aside: 'relevés d’exploitation',
-    labels: {
-      anneeCreation: 'Année de création',
-      nbSalaries: 'Salariés en CDI',
-      nbSitesClients: 'Sites sous contrat',
-      m2TraitesAn: 'm² traités par an',
-      tauxSatisfaction: 'Satisfaction client',
-      delaiIntervention: 'Délai d’intervention',
-    },
+      'Chaque avis publié ici est signé et vérifiable. Tant qu’un avis n’est pas validé par écrit par le client concerné, il n’est pas affiché.',
+    aside: 'avis vérifiés',
+    vide: 'AVIS_CLIENTS — aucun avis validé par écrit à ce jour',
   },
 
   protocole: {
@@ -110,34 +101,6 @@ export const home = frenchify({
         texte:
           'Visites de contrôle planifiées et compte rendu écrit. Un écart constaté est corrigé, pas commenté.',
         duree: 'Tout au long du contrat',
-      },
-    ],
-  },
-
-  differences: {
-    label: 'Engagements',
-    titre: 'Ce sur quoi nous nous engageons par écrit.',
-    aside: '4 clauses',
-    points: [
-      {
-        titre: 'Contrat sans engagement de durée',
-        texte:
-          'Résiliable avec un préavis court. Nous préférons être gardés parce que le travail est bon.',
-      },
-      {
-        titre: 'Un référent joignable',
-        texte:
-          'Un interlocuteur nommé au contrat, pas un standard. Il connaît votre site et vos horaires.',
-      },
-      {
-        titre: 'Personnel déclaré et formé',
-        texte:
-          'Contrats en règle, formation aux protocoles et aux produits, équipements fournis.',
-      },
-      {
-        titre: 'Traçabilité écrite',
-        texte:
-          'Cahier de liaison, fiches de contrôle, relevés d’intervention consultables à tout moment.',
       },
     ],
   },

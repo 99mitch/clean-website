@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Ledger, LedgerEntry } from '@/components/content/Ledger';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { Matrice } from '@/components/home/Matrice';
-import { Echantillonnier } from '@/components/materiaux/Echantillonnier';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { PendingData } from '@/components/ui/PendingData';
@@ -25,51 +25,57 @@ export default async function AccueilPage() {
   return (
     <>
       {/*
-        HERO — pas d'image, pas d'effet : un échantillonnier.
-        Douze revêtements générés en CSS, chacun avec son protocole. C'est le
-        vocabulaire d'entrée du métier, et c'est ce que le visiteur reconnaît
-        avant d'avoir lu une ligne.
+        HERO — plein écran, photo en fond, texte posé sur la partie gauche.
+        Le dégradé garantit la lecture du texte sans dépendre de la zone de
+        l'image : abyss plein à gauche, transparent à droite.
       */}
-      <section className="bg-paper">
-        <Container className="pb-20 pt-12 lg:pb-28 lg:pt-16">
-          <div className="grid gap-x-12 gap-y-14 lg:grid-cols-12">
-            <div className="lg:col-span-6">
-              <p className="eyebrow border-t-2 border-ink pt-3 text-ink">
-                {home.hero.eyebrow}
-              </p>
+      <section className="on-dark relative isolate flex min-h-[100svh] items-center overflow-hidden bg-abyss text-paper">
+        <Image
+          src="/images/hero-agent-nettoyage.png"
+          alt="Agent de propreté intervenant avec une autolaveuse dans un hall tertiaire vitré"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-r from-abyss from-10% via-abyss/75 via-45% to-abyss/10"
+        />
 
-              <h1 className="mt-10 max-w-[13ch] text-40 tracking-[-0.06em] sm:text-64 lg:text-88">
-                {home.hero.titre}
-              </h1>
+        <Container className="relative py-24">
+          <div className="max-w-xl">
+            <p className="eyebrow border-t-2 border-paper pt-3 text-paper">
+              {home.hero.eyebrow}
+            </p>
 
-              <p className="measure mt-8 max-w-[44ch] text-21 text-slate">
-                {home.hero.texte}
-              </p>
+            <h1 className="mt-10 max-w-[13ch] text-40 tracking-[-0.06em] sm:text-64 lg:text-88">
+              {home.hero.titre}
+            </h1>
 
-              <div className="mt-10 flex flex-wrap gap-3">
-                <ButtonLink href="/devis" variant="devis" size="lg">
-                  {home.hero.ctaPrimaire}
-                </ButtonLink>
-                <ButtonLink href="/services" variant="outline" size="lg">
-                  {home.hero.ctaSecondaire}
-                </ButtonLink>
-              </div>
+            <p className="measure mt-8 max-w-[44ch] text-21 text-paper/80">
+              {home.hero.texte}
+            </p>
 
-              <ul className="mt-12 list-none border-t rule-hair">
-                {home.hero.garanties.map((garantie) => (
-                  <li
-                    key={garantie}
-                    className="border-b rule-hair py-3 font-mono text-13 uppercase tracking-[0.1em] text-slate"
-                  >
-                    {garantie}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <ButtonLink href="/devis" variant="devis" size="lg">
+                {home.hero.ctaPrimaire}
+              </ButtonLink>
+              <ButtonLink href="/services" variant="adaptive" size="lg">
+                {home.hero.ctaSecondaire}
+              </ButtonLink>
             </div>
 
-            <div className="lg:col-span-6">
-              <Echantillonnier />
-            </div>
+            <ul className="mt-12 list-none border-t border-paper/25">
+              {home.hero.garanties.map((garantie) => (
+                <li
+                  key={garantie}
+                  className="border-b border-paper/25 py-3 font-mono text-13 uppercase tracking-[0.1em] text-paper/70"
+                >
+                  {garantie}
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
       </section>
@@ -142,42 +148,17 @@ export default async function AccueilPage() {
         </ol>
       </Section>
 
-      {/* ---- Preuve par la donnée --------------------------------------- */}
-      <Section tone="white" labelledBy="preuve-titre">
+      {/* ---- Retour clients ---------------------------------------------- */}
+      <Section tone="white" labelledBy="retour-clients-titre">
         <SectionHead
-          id="preuve-titre"
-          label={home.preuve.label}
-          title={home.preuve.titre}
-          intro={home.preuve.intro}
-          aside={home.preuve.aside}
+          id="retour-clients-titre"
+          label={home.retourClients.label}
+          title={home.retourClients.titre}
+          intro={home.retourClients.intro}
+          aside={home.retourClients.aside}
           tone="white"
         />
-        <Chiffres />
-      </Section>
-
-      {/* ---- Engagements ------------------------------------------------ */}
-      <Section labelledBy="engagements-titre">
-        <SectionHead
-          id="engagements-titre"
-          label={home.differences.label}
-          title={home.differences.titre}
-          aside={home.differences.aside}
-        />
-        <ul className="mt-12 grid list-none border-t rule-hair sm:grid-cols-2">
-          {home.differences.points.map((point, index) => (
-            <Reveal
-              as="li"
-              key={point.titre}
-              delay={index * 50}
-              className="border-b rule-hair py-8 sm:odd:border-r sm:odd:pr-10 sm:even:pl-10"
-            >
-              <h3 className="text-21">{point.titre}</h3>
-              <p className="measure mt-3 max-w-[46ch] text-15 text-slate">
-                {point.texte}
-              </p>
-            </Reveal>
-          ))}
-        </ul>
+        <RetourClients />
       </Section>
 
       <DevisCTA />
@@ -186,42 +167,35 @@ export default async function AccueilPage() {
 }
 
 /**
- * Chiffres clés — n'affiche que ce qui a été validé par le client (§0).
- * Lignes de registre, valeur en monospace alignée à droite : le monospace
- * sur les chiffres est ce qui rend la preuve crédible (§6).
+ * Retour clients — n'affiche que des avis validés par écrit (§0). Lignes de
+ * registre : citation à gauche, signature en monospace alignée à droite.
  */
-function Chiffres() {
-  const entrees = [
-    { valeur: site.chiffres.anneeCreation, label: home.preuve.labels.anneeCreation, suffixe: '' },
-    { valeur: site.chiffres.nbSalaries, label: home.preuve.labels.nbSalaries, suffixe: '' },
-    { valeur: site.chiffres.nbSitesClients, label: home.preuve.labels.nbSitesClients, suffixe: '' },
-    { valeur: site.chiffres.m2TraitesAn, label: home.preuve.labels.m2TraitesAn, suffixe: '' },
-    { valeur: site.chiffres.tauxSatisfaction, label: home.preuve.labels.tauxSatisfaction, suffixe: ' %' },
-    { valeur: site.chiffres.delaiIntervention, label: home.preuve.labels.delaiIntervention, suffixe: ' h' },
-  ];
+function RetourClients() {
+  const avis = site.avisClients;
 
-  const disponibles = entrees.filter((entree) => entree.valeur !== null);
-
-  if (disponibles.length === 0) {
-    return (
-      <PendingData label="CHIFFRES_CLES — aucun chiffre validé" className="mt-12" />
-    );
+  if (avis.length === 0) {
+    return <PendingData label={home.retourClients.vide} className="mt-12" />;
   }
 
   return (
-    <dl className="mt-12 border-t rule-hair">
-      {disponibles.map((entree) => (
-        <div
-          key={entree.label}
-          className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-1 border-b rule-hair py-6"
+    <ul className="mt-12 list-none border-t rule-hair">
+      {avis.map((entree, index) => (
+        <Reveal
+          as="li"
+          key={entree.auteur}
+          delay={index * 50}
+          className="ledger-row grid gap-x-8 gap-y-3 py-8 pl-5 pr-2 md:grid-cols-12"
         >
-          <dt className="text-17 text-slate">{entree.label}</dt>
-          <dd className="font-mono text-28 tabular-nums text-ink lg:text-40">
-            {new Intl.NumberFormat('fr-FR').format(entree.valeur as number)}
-            {entree.suffixe}
-          </dd>
-        </div>
+          <p className="measure text-17 text-ink md:col-span-8 lg:col-span-9">
+            « {entree.citation} »
+          </p>
+          <p className="font-mono text-13 text-slate md:col-span-4 md:text-right lg:col-span-3">
+            {entree.auteur}
+            <br />
+            {entree.role}, {entree.societe}
+          </p>
+        </Reveal>
       ))}
-    </dl>
+    </ul>
   );
 }

@@ -7,8 +7,8 @@ import type { Secteur, Service } from '@/lib/content/schemas';
  * MATRICE SECTEURS × PRESTATIONS.
  *
  * Le croisement secteur × service est le cœur de la stratégie de contenu
- * (§4) : une clinique ne cherche pas « nettoyage » mais « bio-nettoyage
- * protocole DASRI ». Cette matrice le rend littéral — on lit d'un coup d'œil
+ * (§4) : un immeuble ne cherche pas « nettoyage » mais « entretien de
+ * parties communes ». Cette matrice le rend littéral — on lit d'un coup d'œil
  * ce qui s'applique à son type de site, et chaque en-tête est une entrée.
  *
  * Vrai `<table>`, en-têtes de ligne et de colonne déclarés, état de chaque

@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 /**
  * Croisement secteur × services : c'est le cœur de la longue traîne (§4).
- * Une clinique ne cherche pas « nettoyage » mais « bio-nettoyage protocole
- * DASRI » — la page doit donc parler services depuis le point de vue du secteur.
+ * Un immeuble ne cherche pas « nettoyage » mais « entretien de parties
+ * communes » — la page doit donc parler services depuis le point de vue du secteur.
  */
 export default async function SecteurPage({ params }: Params) {
   const { slug } = await params;

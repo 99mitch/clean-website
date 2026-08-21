@@ -32,8 +32,6 @@ export const prestationValues = [
   'remise-en-etat',
   'traitement-des-sols',
   'vitrerie',
-  'hygiene-3d',
-  'bio-nettoyage',
   'services-associes',
 ] as const;
 
@@ -55,13 +53,10 @@ export const prestationsParTypeLocal: Record<TypeLocal, Prestation[]> = {
     'entretien-regulier',
     'vitrerie',
     'traitement-des-sols',
-    'hygiene-3d',
     'remise-en-etat',
   ],
   medical: [
-    'bio-nettoyage',
     'entretien-regulier',
-    'hygiene-3d',
     'vitrerie',
     'traitement-des-sols',
   ],
@@ -69,13 +64,11 @@ export const prestationsParTypeLocal: Record<TypeLocal, Prestation[]> = {
     'entretien-regulier',
     'remise-en-etat',
     'traitement-des-sols',
-    'hygiene-3d',
     'services-associes',
   ],
   immeuble: [
     'entretien-regulier',
     'vitrerie',
-    'hygiene-3d',
     'remise-en-etat',
     'services-associes',
   ],

@@ -4,7 +4,7 @@ export const servicesIndex = frenchify({
   meta: {
     title: 'Prestations de nettoyage professionnel',
     description:
-      'Entretien régulier, remise en état, traitement des sols, vitrerie, hygiène 3D, bio-nettoyage et services associés. Chaque prestation a un protocole écrit.',
+      'Entretien régulier, remise en état, traitement des sols, vitrerie et services associés. Chaque prestation a un protocole écrit.',
   },
   eyebrow: 'Prestations',
   titre: 'Ce que nous faisons, et comment c\'est défini.',

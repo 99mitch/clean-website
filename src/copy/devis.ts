@@ -55,8 +55,6 @@ const steps: StepCopy[] = [
       { value: 'remise-en-etat', label: 'Remise en état', aide: 'Après travaux, avant emménagement, fin de bail' },
       { value: 'traitement-des-sols', label: 'Traitement des sols', aide: 'Décapage, protection, cristallisation, lustrage' },
       { value: 'vitrerie', label: 'Vitrerie', aide: 'Vitres, façades, verrières, accès difficiles' },
-      { value: 'hygiene-3d', label: 'Hygiène 3D', aide: 'Dératisation, désinsectisation, désinfection' },
-      { value: 'bio-nettoyage', label: 'Bio-nettoyage', aide: 'Protocole en milieu de soins, traçabilité' },
       { value: 'services-associes', label: 'Services associés', aide: 'Consommables, espaces verts, manutention' },
     ],
   },

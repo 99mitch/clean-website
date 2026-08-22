@@ -22,6 +22,36 @@ export const home = frenchify({
     ],
   },
 
+  pourquoiNous: {
+    label: 'Pourquoi nous',
+    titre: 'Ce que vous obtenez, concrètement.',
+    intro:
+      'Quatre engagements tenus au contrat, pas des adjectifs de plaquette.',
+    aside: '4 engagements',
+    points: [
+      {
+        titre: 'Disponibilité',
+        texte:
+          'Un référent joignable et des équipes mobilisables sous 24 à 48 h, y compris en dehors des horaires de bureau.',
+      },
+      {
+        titre: 'Flexibilité',
+        texte:
+          'Contrat sans engagement de durée, fréquences ajustables et prestations ponctuelles activables sur simple demande.',
+      },
+      {
+        titre: 'Efficacité',
+        texte:
+          'Un protocole écrit par revêtement et par secteur : le même résultat à chaque passage, quel que soit l’agent.',
+      },
+      {
+        titre: 'Responsabilité',
+        texte:
+          'Personnel déclaré, formé et assuré. Un écart constaté est signalé et corrigé, jamais dissimulé.',
+      },
+    ],
+  },
+
   /**
    * L'échantillonnier — pièce maîtresse du hero. Ce sont des protocoles de
    * métier standard, pas des données client (§0).

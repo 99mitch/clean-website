@@ -8,14 +8,14 @@ type Size = 'md' | 'lg';
  * Boutons rectangulaires — le dossier technique n'a pas d'angles arrondis.
  * Libellés en capitales monospace : ce sont des commandes, pas des phrases.
  *
- * `devis` est le SEUL aplat de bleu signal du site (§6) : blanc sur signal
- * = 5,4:1, conforme AA. Cibles ≥ 44px (§10).
+ * `devis` est le SEUL aplat de bleu cobalt du site (§6) : blanc sur cobalt
+ * passe largement l'AA. Pas de changement de couleur au survol. Cibles ≥ 44px (§10).
  */
 const base =
   'inline-flex min-h-11 items-center justify-center gap-3 font-mono text-13 font-medium uppercase tracking-[0.12em] transition-colors duration-150';
 
 const variants: Record<Variant, string> = {
-  devis: 'bg-signal text-white hover:bg-cobalt',
+  devis: 'bg-cobalt text-white',
   ink: 'bg-ink text-paper hover:bg-cobalt',
   outline: 'border border-ink text-ink hover:bg-ink hover:text-paper',
   adaptive: 'border border-current text-current hover:bg-current',

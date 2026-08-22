@@ -30,7 +30,7 @@ export const secteursIndex = frenchify({
   meta: {
     title: 'Secteurs d\'intervention',
     description:
-      'Bureaux, établissements de santé, industrie, copropriétés, écoles et crèches : les contraintes changent, le protocole aussi. Trouvez le vôtre.',
+      'Bureaux, établissements de santé, industrie, copropriétés, infrastructures publiques : les contraintes changent, le protocole aussi. Trouvez le vôtre.',
   },
   eyebrow: 'Secteurs',
   titre: 'Les contraintes ne sont pas les mêmes partout.',

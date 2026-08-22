@@ -8,70 +8,26 @@ export const nav = frenchify({
   openMenu: 'Ouvrir le menu',
   closeMenu: 'Fermer le menu',
   devis: 'Demander un devis',
+  contact: 'Nous contacter',
   appeler: 'Appeler',
-  /** Libellé du lien « voir toute la rubrique » en pied de menu. */
-  voirTout: 'Vue d’ensemble',
 
-  /**
-   * Trois groupes plutôt que sept liens à plat. Les deux premiers sont
-   * alimentés par le contenu MDX — un service ajouté apparaît au menu sans
-   * qu'on y touche. Le troisième est fixe : ce sont des pages uniques.
-   */
-  groupes: {
-    services: {
-      label: 'Prestations',
-      href: '/services',
-      aide: 'Ce que nous faisons, et comment c’est défini au contrat.',
-    },
-    secteurs: {
-      label: 'Secteurs',
-      href: '/secteurs',
-      aide: 'Les contraintes changent selon le type de site.',
-    },
-    entreprise: {
-      label: 'L’entreprise',
-      href: '/qui-sommes-nous',
-      aide: 'Qui intervient, sur quoi nous nous engageons, ce qu’on peut vérifier.',
-      links: [
-        { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
-        { href: '/engagements', label: 'Engagements' },
-        { href: '/engagements/certifications', label: 'Certifications' },
-        { href: '/references', label: 'Références' },
-        { href: '/blog', label: 'Ressources' },
-        { href: '/recrutement', label: 'Recrutement' },
-        { href: '/contact', label: 'Contact' },
-      ],
-    },
-  },
+  /** Liens à plat — une page par titre, aucun menu déroulant. */
+  liens: [
+    { href: '/', label: 'Accueil' },
+    { href: '/services', label: 'Prestations' },
+    { href: '/secteurs', label: 'Secteurs d’activité' },
+    { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
+  ],
 });
 
 export const footer = frenchify({
-  colonnes: [
-    {
-      titre: 'Prestations',
-      links: [
-        { href: '/services', label: 'Toutes les prestations' },
-        { href: '/secteurs', label: 'Tous les secteurs' },
-        { href: '/references', label: 'Études de cas' },
-      ],
-    },
-    {
-      titre: 'Entreprise',
-      links: [
-        { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
-        { href: '/engagements', label: 'Engagements' },
-        { href: '/engagements/certifications', label: 'Certifications' },
-        { href: '/recrutement', label: 'Recrutement' },
-        { href: '/blog', label: 'Ressources' },
-      ],
-    },
-    {
-      titre: 'Contact',
-      links: [
-        { href: '/devis', label: 'Demander un devis' },
-        { href: '/contact', label: 'Nous écrire' },
-      ],
-    },
+  /** Mêmes pages que la navbar — un pied de page dense, pas un plan de site. */
+  liens: [
+    { href: '/', label: 'Accueil' },
+    { href: '/services', label: 'Prestations' },
+    { href: '/secteurs', label: 'Secteurs d’activité' },
+    { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
+    { href: '/contact', label: 'Nous contacter' },
   ],
   legal: [
     { href: '/mentions-legales', label: 'Mentions légales' },

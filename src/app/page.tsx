@@ -80,6 +80,33 @@ export default async function AccueilPage() {
         </Container>
       </section>
 
+      {/* ---- Pourquoi nous : 4 engagements, en cartes verticales --------- */}
+      <Section labelledBy="pourquoi-nous-titre">
+        <SectionHead
+          id="pourquoi-nous-titre"
+          label={home.pourquoiNous.label}
+          title={home.pourquoiNous.titre}
+          intro={home.pourquoiNous.intro}
+          aside={home.pourquoiNous.aside}
+        />
+        <div className="mt-12 flex flex-col gap-4">
+          {home.pourquoiNous.points.map((point, index) => (
+            <Reveal
+              as="article"
+              key={point.titre}
+              delay={index * 60}
+              className="border border-ink p-8 lg:p-10"
+            >
+              <p className="font-mono text-13 text-cobalt">
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <h3 className="mt-3 text-21 lg:text-28">{point.titre}</h3>
+              <p className="measure mt-3 max-w-[60ch] text-15 text-slate">{point.texte}</p>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
       {/* ---- Matrice secteurs × prestations : le croisement (§4) --------- */}
       <Section tone="white" labelledBy="matrice-titre">
         <SectionHead
@@ -118,14 +145,14 @@ export default async function AccueilPage() {
       </Section>
 
       {/* ---- Protocole : la numérotation porte du sens ici (§6) ---------- */}
-      <Section tone="abyss" labelledBy="protocole-titre">
+      <Section tone="cobalt" labelledBy="protocole-titre">
         <SectionHead
           id="protocole-titre"
           label={home.protocole.label}
           title={home.protocole.titre}
           intro={home.protocole.intro}
           aside={home.protocole.aside}
-          tone="abyss"
+          tone="cobalt"
         />
         <ol className="mt-14 list-none border-t border-paper/25">
           {home.protocole.etapes.map((etape, index) => (

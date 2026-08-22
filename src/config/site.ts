@@ -85,8 +85,36 @@ export const site = {
   /** {{À REMPLIR}} — autorisation écrite requise avant affichage. */
   logosClients: [] as Array<{ nom: string; logo: string }>,
 
-  /** {{À REMPLIR}} — avis clients, accord écrit requis avant publication. */
-  avisClients: [] as Array<{
+  /**
+   * ⚠️ CONTENU FICTIF — demandé explicitement pour visualiser la mise en
+   * page (session du 22/08/2026), au mépris de la règle §0 du CLAUDE.md et
+   * de l'interdiction légale des faux avis clients (Code de la consommation,
+   * art. L. 111-7-2). À REMPLACER par de vrais avis, validés par écrit par
+   * chaque client, avant toute mise en production réelle.
+   */
+  avisClients: [
+    {
+      citation:
+        'Le passage est régulier et le référent répond le jour même. On n’a plus besoin de relancer.',
+      auteur: 'Camille Fabre',
+      role: 'Office manager',
+      societe: 'Groupe Meridian',
+    },
+    {
+      citation:
+        'Planning affiché, locaux poubelles impeccables : les résidents ont arrêté d’appeler le syndic pour ça.',
+      auteur: 'Karim Belhadj',
+      role: 'Gestionnaire d’immeuble',
+      societe: 'Cabinet Vasseur & Associés',
+    },
+    {
+      citation:
+        'Protocole écrit, fiches de traçabilité à jour : le dossier était prêt avant même le contrôle.',
+      auteur: 'Sophie Renard',
+      role: 'Responsable d’établissement',
+      societe: 'Cabinet médical du Belvédère',
+    },
+  ] as Array<{
     citation: string;
     auteur: string;
     role: string;

@@ -2,12 +2,13 @@ import type { ReactNode } from 'react';
 import { Container } from './Container';
 import { Reveal } from './Reveal';
 
-type Tone = 'paper' | 'white' | 'abyss';
+type Tone = 'paper' | 'white' | 'abyss' | 'cobalt';
 
 const tones: Record<Tone, string> = {
   paper: 'bg-paper text-ink',
   white: 'bg-white text-ink',
   abyss: 'on-dark hatch-dark bg-abyss text-paper',
+  cobalt: 'on-dark hatch-dark bg-cobalt text-paper',
 };
 
 export function Section({
@@ -56,7 +57,7 @@ export function SectionHead({
   id?: string;
   tone?: Tone;
 }) {
-  const dark = tone === 'abyss';
+  const dark = tone === 'abyss' || tone === 'cobalt';
   const ruleColor = dark ? 'border-paper/85' : 'border-ink';
   const dim = dark ? 'text-paper/65' : 'text-slate';
 

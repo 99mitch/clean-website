@@ -362,6 +362,22 @@
   }
 }
 
+/*
+ * Bande de la matrice secteurs × prestations : remplissage de gauche à
+ * droite, déclenché une fois à l'arrivée sur la section (IntersectionObserver
+ * dans Matrice.tsx bascule `.is-filled`) — indépendant de la position de
+ * scroll, donc toujours à la même vitesse.
+ */
+.band-fill {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s var(--ease-out-site);
+}
+
+.band-fill.is-filled {
+  transform: scaleX(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -373,7 +389,8 @@
   }
 
   .reveal,
-  .plate-in {
+  .plate-in,
+  .band-fill {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;

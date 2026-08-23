@@ -3,8 +3,6 @@ import Image from 'next/image';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { Icon } from '@/components/ui/Icon';
-import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { servicesIndex } from '@/copy/pages';
@@ -95,13 +93,6 @@ export default async function ServicesPage() {
                       className="object-cover"
                     />
                   ) : null}
-
-                  <div className="absolute left-0 top-0 flex items-center gap-3 bg-ink/85 px-4 py-3">
-                    <Icon name={service.meta.icon} size={22} className="text-paper" />
-                    <span className="font-mono text-13 text-paper">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
                 </div>
 
                 <div className={`flex flex-col justify-center gap-5 p-8 sm:p-12 ${degrade}`}>
@@ -115,14 +106,6 @@ export default async function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-
-                  <ButtonLink
-                    href={`/services/${service.meta.slug}`}
-                    variant="outline"
-                    className="mt-2 self-start"
-                  >
-                    Voir le détail
-                  </ButtonLink>
                 </div>
               </Reveal>
             );

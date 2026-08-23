@@ -99,6 +99,7 @@ export const site = {
       auteur: 'Camille Fabre',
       role: 'Office manager',
       societe: 'Groupe Meridian',
+      note: 4.5,
     },
     {
       citation:
@@ -106,6 +107,7 @@ export const site = {
       auteur: 'Karim Belhadj',
       role: 'Gestionnaire d’immeuble',
       societe: 'Cabinet Vasseur & Associés',
+      note: 4.5,
     },
     {
       citation:
@@ -113,12 +115,15 @@ export const site = {
       auteur: 'Sophie Renard',
       role: 'Responsable d’établissement',
       societe: 'Cabinet médical du Belvédère',
+      note: 4.5,
     },
   ] as Array<{
     citation: string;
     auteur: string;
     role: string;
     societe: string;
+    /** Note sur 5, par demi-point. */
+    note: number;
   }>,
 
   /** Plaquette PDF jointe à l'accusé de réception. `null` tant qu'absente. */

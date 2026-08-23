@@ -108,13 +108,13 @@ export default async function AccueilPage() {
               as="article"
               key={point.titre}
               delay={index * 60}
-              className="flex min-h-[22rem] flex-col border border-ink p-8"
+              className="flex flex-col border border-ink p-8"
             >
               <p className="font-mono text-13 text-cobalt">
                 {String(index + 1).padStart(2, '0')}
               </p>
-              <h3 className="mt-auto pt-10 text-21">{point.titre}</h3>
-              <p className="mt-3 text-15 text-slate">{point.texte}</p>
+              <h3 className="mt-6 text-21 leading-tight">{point.titre}</h3>
+              <p className="mt-4 text-15 leading-relaxed text-slate">{point.texte}</p>
             </Reveal>
           ))}
         </div>
@@ -170,35 +170,82 @@ export default async function AccueilPage() {
 }
 
 /**
- * Retour clients — n'affiche que des avis validés par écrit (§0). Lignes de
- * registre : citation à gauche, signature en monospace alignée à droite.
+ * Retour clients — n'affiche que des avis validés par écrit (§0). Trois cartes
+ * verticales : note en étoiles, citation, puis signature abrégée (prénom +
+ * initiale du nom) en monospace.
  */
 function RetourClients() {
-  const avis = site.avisClients;
+  const avis = site.avisClients.slice(0, 3);
 
   if (avis.length === 0) {
     return <PendingData label={home.retourClients.vide} className="mt-12" />;
   }
 
   return (
-    <ul className="mt-12 list-none border-t rule-hair">
+    <ul className="mt-12 grid list-none gap-4 md:grid-cols-3">
       {avis.map((entree, index) => (
         <Reveal
           as="li"
           key={entree.auteur}
-          delay={index * 50}
-          className="ledger-row grid gap-x-8 gap-y-3 py-8 pl-5 pr-2 md:grid-cols-12"
+          delay={index * 60}
+          className="flex flex-col border border-ink p-8"
         >
-          <p className="measure text-17 text-ink md:col-span-8 lg:col-span-9">
-            « {entree.citation} »
-          </p>
-          <p className="font-mono text-13 text-slate md:col-span-4 md:text-right lg:col-span-3">
-            {entree.auteur}
+          <Etoiles note={entree.note} id={`avis-${index}`} />
+          <p className="mt-6 text-17 leading-relaxed text-ink">« {entree.citation} »</p>
+          <p className="mt-auto pt-8 font-mono text-13 uppercase tracking-[0.1em] text-slate">
+            {abregerNom(entree.auteur)}
             <br />
-            {entree.role}, {entree.societe}
+            <span className="normal-case tracking-normal">{entree.role}</span>
           </p>
         </Reveal>
       ))}
     </ul>
+  );
+}
+
+/** « Camille Fabre » → « Camille F. » */
+function abregerNom(nom: string): string {
+  const [prenom, ...reste] = nom.trim().split(/\s+/);
+  const initiale = reste.at(-1)?.charAt(0);
+  return initiale ? `${prenom} ${initiale}.` : prenom;
+}
+
+/** Note sur 5 rendue en étoiles pleines / demi / vides, avec texte alternatif. */
+function Etoiles({ note, id }: { note: number; id: string }) {
+  const etoiles = Array.from({ length: 5 }, (_, i) => {
+    const reste = note - i;
+    return reste >= 1 ? 1 : reste >= 0.5 ? 0.5 : 0;
+  });
+
+  return (
+    <p className="flex items-center gap-2" aria-label={`Note : ${note} sur 5`}>
+      <span className="flex gap-0.5" aria-hidden="true">
+        {etoiles.map((valeur, i) => (
+          <svg key={i} viewBox="0 0 20 20" className="h-4 w-4 text-cobalt">
+            <defs>
+              <clipPath id={`${id}-demi-${i}`}>
+                <rect x="0" y="0" width="10" height="20" />
+              </clipPath>
+            </defs>
+            <path
+              d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8l-5.4 2.9 1.2-5.9L1.4 7.7l6-.7z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+            {valeur > 0 && (
+              <path
+                d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8l-5.4 2.9 1.2-5.9L1.4 7.7l6-.7z"
+                fill="currentColor"
+                clipPath={valeur === 0.5 ? `url(#${id}-demi-${i})` : undefined}
+              />
+            )}
+          </svg>
+        ))}
+      </span>
+      <span className="font-mono text-13 text-slate" aria-hidden="true">
+        {note.toString().replace('.', ',')}/5
+      </span>
+    </p>
   );
 }

@@ -120,6 +120,16 @@
     overflow: hidden;
   }
 
+  /* Emplacement de photo à venir (§0) : trame en diagonale, jamais d'image inventée. */
+  .placeholder-photo {
+    background-color: var(--color-mist);
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgb(11 22 32 / 0.08) 0 1px,
+      transparent 1px 12px
+    );
+  }
+
   .sample::before {
     content: '';
     position: absolute;

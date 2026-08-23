@@ -31,6 +31,18 @@ const PLAQUE_PAR_SECTEUR: Record<string, string> = {
 
 /** Photo associée à un secteur, quand elle est disponible (sinon plaque d'échantillon). */
 const PHOTO_PAR_SECTEUR: Record<string, { src: string; alt: string }> = {
+  bureaux: {
+    src: '/images/secteurs/bureaux.png',
+    alt: 'Collaboratrice travaillant à son poste dans un bureau ouvert',
+  },
+  medical: {
+    src: '/images/secteurs/medical.png',
+    alt: 'Personnel de laboratoire en blouse examinant un prélèvement',
+  },
+  industrie: {
+    src: '/images/secteurs/industrie.png',
+    alt: 'Caristes manipulant des palettes dans un entrepôt logistique',
+  },
   'immeubles-coproprietes': {
     src: '/images/secteurs/immeubles-coproprietes.png',
     alt: 'Façades d’immeubles haussmanniens en copropriété',

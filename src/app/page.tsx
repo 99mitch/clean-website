@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Ledger, LedgerEntry } from '@/components/content/Ledger';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { Matrice } from '@/components/home/Matrice';
 import { ButtonLink } from '@/components/ui/Button';
@@ -93,30 +92,6 @@ export default async function AccueilPage() {
         <Matrice services={services} secteurs={secteurs} />
       </Section>
 
-      {/* ---- Registre des prestations ----------------------------------- */}
-      <Section labelledBy="services-titre">
-        <SectionHead
-          id="services-titre"
-          label={home.services.label}
-          title={home.services.titre}
-          intro={home.services.intro}
-          aside={home.services.aside}
-        />
-        <Ledger>
-          {services.map((service, index) => (
-            <LedgerEntry
-              key={service.meta.slug}
-              href={`/services/${service.meta.slug}`}
-              titre={service.meta.title}
-              excerpt={service.meta.excerpt}
-              icon={service.meta.icon}
-              meta={service.meta.frequences.slice(0, 2)}
-              delay={index * 40}
-            />
-          ))}
-        </Ledger>
-      </Section>
-
       {/* ---- Pourquoi nous : 4 engagements, en cartes verticales --------- */}
       <Section tone="white" labelledBy="pourquoi-nous-titre">
         <SectionHead
@@ -127,19 +102,19 @@ export default async function AccueilPage() {
           aside={home.pourquoiNous.aside}
           tone="white"
         />
-        <div className="mt-12 flex flex-col gap-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {home.pourquoiNous.points.map((point, index) => (
             <Reveal
               as="article"
               key={point.titre}
               delay={index * 60}
-              className="border border-ink p-8 lg:p-10"
+              className="flex min-h-[22rem] flex-col border border-ink p-8"
             >
               <p className="font-mono text-13 text-cobalt">
                 {String(index + 1).padStart(2, '0')}
               </p>
-              <h3 className="mt-3 text-21 lg:text-28">{point.titre}</h3>
-              <p className="measure mt-3 max-w-[60ch] text-15 text-slate">{point.texte}</p>
+              <h3 className="mt-auto pt-10 text-21">{point.titre}</h3>
+              <p className="mt-3 text-15 text-slate">{point.texte}</p>
             </Reveal>
           ))}
         </div>

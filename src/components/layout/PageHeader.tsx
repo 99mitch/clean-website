@@ -18,6 +18,7 @@ export function PageHeader({
   titre,
   intro,
   breadcrumbs,
+  centre = false,
   children,
 }: {
   /** Clé de `bandeauParRubrique` — choisit le revêtement du bandeau. */
@@ -26,6 +27,8 @@ export function PageHeader({
   titre: string;
   intro?: string;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  /** Titre et intro centrés l'un sous l'autre, au lieu de la grille titre/intro. */
+  centre?: boolean;
   children?: React.ReactNode;
 }) {
   const mat = bandeauParRubrique[rubrique ?? 'entreprise'] ?? 'beton';
@@ -40,20 +43,35 @@ export function PageHeader({
           {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
         </div>
 
-        <Reveal className="mt-10 grid gap-x-10 gap-y-6 lg:grid-cols-12">
-          <h1 className="max-w-[16ch] text-40 tracking-[-0.055em] lg:col-span-7 lg:text-64">
-            {titre}
-          </h1>
+        {centre ? (
+          <Reveal className="mt-10 flex flex-col items-center text-center">
+            <h1 className="max-w-[22ch] text-40 tracking-[-0.055em] lg:text-64">{titre}</h1>
 
-          {intro ? (
-            <div className="lg:col-span-5 lg:self-end">
-              <p className="measure max-w-[46ch] text-17 text-slate">{intro}</p>
-              {children}
-            </div>
-          ) : (
-            children
-          )}
-        </Reveal>
+            {intro ? (
+              <div className="mt-6 max-w-[54ch]">
+                <p className="measure mx-auto text-17 text-slate">{intro}</p>
+                {children}
+              </div>
+            ) : (
+              children
+            )}
+          </Reveal>
+        ) : (
+          <Reveal className="mt-10 grid gap-x-10 gap-y-6 lg:grid-cols-12">
+            <h1 className="max-w-[16ch] text-40 tracking-[-0.055em] lg:col-span-7 lg:text-64">
+              {titre}
+            </h1>
+
+            {intro ? (
+              <div className="lg:col-span-5 lg:self-end">
+                <p className="measure max-w-[46ch] text-17 text-slate">{intro}</p>
+                {children}
+              </div>
+            ) : (
+              children
+            )}
+          </Reveal>
+        )}
       </Container>
     </section>
   );

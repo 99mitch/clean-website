@@ -27,7 +27,7 @@ const EXCLUE_DE_L_INDEX = 'traitement-des-sols';
 /** Photo associée à chaque prestation restante. */
 const PHOTO_PAR_SERVICE: Record<string, { src: string; alt: string }> = {
   'entretien-regulier': {
-    src: '/images/services/entretien-regulier.jpg',
+    src: '/images/services/entretien-regulier.png',
     alt: 'Agents de propreté lavant les sols d’un hall d’immeuble tertiaire',
   },
   'remise-en-etat': {

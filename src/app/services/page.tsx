@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -8,9 +9,9 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { servicesIndex } from '@/copy/pages';
 import { getServices } from '@/lib/content';
-import { materiaux } from '@/lib/materiaux';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
+import { DEGRADE_BLEU } from '@/lib/ui/degrade';
 
 export const metadata: Metadata = pageMetadata({
   title: servicesIndex.meta.title,
@@ -25,19 +26,30 @@ export const metadata: Metadata = pageMetadata({
  */
 const EXCLUE_DE_L_INDEX = 'traitement-des-sols';
 
-/** Revêtement de l'échantillonnier associé à chaque prestation restante. */
-const PLAQUE_PAR_SERVICE: Record<string, string> = {
-  'entretien-regulier': 'moquette',
-  'remise-en-etat': 'beton',
-  vitrerie: 'vitrage',
-  'services-associes': 'resine',
+/** Photo associée à chaque prestation restante. */
+const PHOTO_PAR_SERVICE: Record<string, { src: string; alt: string }> = {
+  'entretien-regulier': {
+    src: '/images/services/entretien-regulier.jpg',
+    alt: 'Agents de propreté lavant les sols d’un hall d’immeuble tertiaire',
+  },
+  'remise-en-etat': {
+    src: '/images/services/remise-en-etat.jpg',
+    alt: 'Agent effectuant une injection-extraction de moquette après travaux',
+  },
+  vitrerie: {
+    src: '/images/services/vitrerie.jpg',
+    alt: 'Agent nettoyant une vitre extérieure à la raclette',
+  },
+  'services-associes': {
+    src: '/images/services/services-associes.jpg',
+    alt: 'Agent balayant des gravats sur un chantier en fin de travaux',
+  },
 };
 
 export default async function ServicesPage() {
   const services = (await getServices()).filter(
     (service) => service.meta.slug !== EXCLUE_DE_L_INDEX,
   );
-  const nomMateriau = new Map(materiaux.map((materiau) => [materiau.mat, materiau.nom]));
 
   return (
     <>
@@ -57,7 +69,8 @@ export default async function ServicesPage() {
         <div className="flex flex-col gap-6">
           {services.map((service, index) => {
             const inversee = index % 2 === 1;
-            const mat = PLAQUE_PAR_SERVICE[service.meta.slug] ?? materiaux[0].mat;
+            const photo = PHOTO_PAR_SERVICE[service.meta.slug];
+            const degrade = DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3];
 
             return (
               <Reveal
@@ -67,33 +80,37 @@ export default async function ServicesPage() {
                 className="grid overflow-hidden border border-ink lg:grid-cols-2"
               >
                 <div
-                  className={`sample-plate relative flex min-h-[16rem] flex-col justify-between border-ink p-10 sm:p-12 lg:min-h-[26rem] ${
+                  className={`relative min-h-[16rem] border-ink lg:min-h-[26rem] ${
                     inversee
                       ? 'border-b lg:order-2 lg:border-b-0 lg:border-l'
                       : 'border-b lg:border-b-0 lg:border-r'
                   }`}
                 >
-                  <span className="sample absolute inset-0" data-mat={mat} aria-hidden="true" />
+                  {photo ? (
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  ) : null}
 
-                  <div className="relative z-10 flex items-start justify-between">
-                    <Icon name={service.meta.icon} size={28} className="text-ink" />
-                    <span className="font-mono text-13 text-slate">
+                  <div className="absolute left-0 top-0 flex items-center gap-3 bg-ink/85 px-4 py-3">
+                    <Icon name={service.meta.icon} size={22} className="text-paper" />
+                    <span className="font-mono text-13 text-paper">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </div>
-
-                  <span className="relative z-10 font-mono text-13 uppercase tracking-[0.14em] text-ink">
-                    {nomMateriau.get(mat)}
-                  </span>
                 </div>
 
-                <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
+                <div className={`flex flex-col justify-center gap-5 p-8 sm:p-12 ${degrade}`}>
                   <h2 className="text-28 tracking-[-0.04em] lg:text-40">{service.meta.title}</h2>
-                  <p className="measure text-15 text-slate lg:text-17">{service.meta.excerpt}</p>
+                  <p className="measure text-15 opacity-80 lg:text-17">{service.meta.excerpt}</p>
 
-                  <ul className="mt-1 flex list-none flex-col gap-2 border-t border-ink/15 pt-4">
+                  <ul className="mt-1 flex list-none flex-col gap-2 border-t border-current/15 pt-4">
                     {service.meta.prestations.slice(0, 4).map((prestation) => (
-                      <li key={prestation} className="measure text-15 text-ink">
+                      <li key={prestation} className="measure text-15 opacity-90">
                         {prestation}
                       </li>
                     ))}

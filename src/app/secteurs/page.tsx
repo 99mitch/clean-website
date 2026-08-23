@@ -59,6 +59,7 @@ export default async function SecteursPage() {
                 as="article"
                 key={secteur.meta.slug}
                 delay={index * 60}
+                direction={inversee ? 'right' : 'left'}
                 className="grid overflow-hidden border border-ink lg:grid-cols-2"
               >
                 <div

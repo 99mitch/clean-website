@@ -10,16 +10,21 @@ export function Reveal({
   className = '',
   delay,
   as: Tag = 'div',
+  direction = 'up',
 }: {
   children: ReactNode;
   className?: string;
   /** Décalage en ms, pour un effet d'escalier sur une liste. */
   delay?: number;
   as?: 'div' | 'li' | 'article' | 'header' | 'section';
+  /** Sens de l'entrée : montée (défaut), ou glissement latéral discret. */
+  direction?: 'up' | 'left' | 'right';
 }) {
+  const modifier = direction === 'up' ? '' : ` reveal-${direction}`;
+
   return (
     <Tag
-      className={`reveal ${className}`}
+      className={`reveal${modifier} ${className}`}
       style={delay ? { animationDelay: `${delay}ms` } : undefined}
     >
       {children}

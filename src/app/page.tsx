@@ -18,6 +18,18 @@ export const metadata: Metadata = pageMetadata({
   path: '/',
 });
 
+/**
+ * Dégradé des quatre cartes « Pourquoi nous » : du bleu clair (mist) au cobalt
+ * plein, via des mélanges des tokens. Texte encre sur les deux premières,
+ * papier sur les deux dernières (contraste ≥ 4,5:1 vérifié).
+ */
+const DEGRADE_POURQUOI = [
+  'bg-mist text-ink',
+  'bg-[color-mix(in_oklab,var(--color-cobalt)_35%,var(--color-mist))] text-ink',
+  'bg-[color-mix(in_oklab,var(--color-cobalt)_75%,var(--color-mist))] text-paper',
+  'bg-cobalt text-paper',
+] as const;
+
 export default async function AccueilPage() {
   const [services, secteurs] = await Promise.all([getServices(), getSecteurs()]);
 
@@ -108,13 +120,13 @@ export default async function AccueilPage() {
               as="article"
               key={point.titre}
               delay={index * 60}
-              className="flex flex-col border border-ink p-8"
+              className={`flex flex-col p-8 ${DEGRADE_POURQUOI[index] ?? DEGRADE_POURQUOI[3]}`}
             >
-              <p className="font-mono text-13 text-cobalt">
+              <p className="font-mono text-13 opacity-70">
                 {String(index + 1).padStart(2, '0')}
               </p>
               <h3 className="mt-6 text-21 leading-tight">{point.titre}</h3>
-              <p className="mt-4 text-15 leading-relaxed text-slate">{point.texte}</p>
+              <p className="mt-4 text-15 leading-relaxed opacity-80">{point.texte}</p>
             </Reveal>
           ))}
         </div>

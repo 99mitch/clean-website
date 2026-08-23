@@ -47,6 +47,10 @@ const PHOTO_PAR_SECTEUR: Record<string, { src: string; alt: string }> = {
     src: '/images/secteurs/immeubles-coproprietes.png',
     alt: 'Façades d’immeubles haussmanniens en copropriété',
   },
+  'infrastructures-publiques': {
+    src: '/images/secteurs/infrastructures-publiques.png',
+    alt: 'Cour intérieure d’un établissement recevant du public',
+  },
 };
 
 export default async function SecteursPage() {

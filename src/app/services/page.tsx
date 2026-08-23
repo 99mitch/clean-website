@@ -31,15 +31,15 @@ const PHOTO_PAR_SERVICE: Record<string, { src: string; alt: string }> = {
     alt: 'Agents de propreté lavant les sols d’un hall d’immeuble tertiaire',
   },
   'remise-en-etat': {
-    src: '/images/services/remise-en-etat.jpg',
+    src: '/images/services/remise-en-etat.png',
     alt: 'Agent effectuant une injection-extraction de moquette après travaux',
   },
   vitrerie: {
-    src: '/images/services/vitrerie.jpg',
+    src: '/images/services/vitrerie.png',
     alt: 'Agent nettoyant une vitre extérieure à la raclette',
   },
   'services-associes': {
-    src: '/images/services/services-associes.jpg',
+    src: '/images/services/services-associes.png',
     alt: 'Agent balayant des gravats sur un chantier en fin de travaux',
   },
 };

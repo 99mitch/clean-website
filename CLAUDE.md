@@ -183,7 +183,7 @@ L'échantillonnier occupe la moitié du hero d'accueil. Il se rejoue ailleurs : 
 **Deuxième pièce structurante : la matrice secteurs × prestations** (`src/components/home/Matrice.tsx`). Le croisement du §4 rendu littéral, en vrai `<table>` avec en-têtes de ligne et de colonne cliquables.
 
 ### Formes et listes
-- **Rayon 0 partout**, sauf 2px sur les champs de saisie. Ni pilule, ni verre, ni halo, ni dégradé de fond, ni ombre décorative.
+- **Coins arrondis sur les cartes** (`rounded-card`, 16px) et les étiquettes (`rounded-chip`, 6px) — demande client du 25/09/2026. 2px sur les champs de saisie, 0 ailleurs. Ni pilule, ni verre, ni halo, ni ombre décorative.
 - **Aucune carte.** Les listes sont des **lignes de registre** (`.ledger-row`) : pleine largeur, filet d'un pixel, colonne de données en monospace à droite, onglet d'encre qui se déploie au survol et au focus.
 - Filet plein 2px en tête de chaque section et de chaque page — c'est la structure qui tient le site ensemble.
 - Trois fonds seulement : papier (courant), blanc (plan qui remonte), abyss (bandes denses).

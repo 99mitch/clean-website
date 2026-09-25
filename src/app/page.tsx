@@ -109,7 +109,7 @@ export default async function AccueilPage() {
               as="article"
               key={point.titre}
               delay={index * 60}
-              className={`flex flex-col p-8 ${DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3]}`}
+              className={`flex flex-col rounded-card p-8 ${DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3]}`}
             >
               <p className="font-mono text-13 opacity-70">
                 {String(index + 1).padStart(2, '0')}
@@ -189,7 +189,7 @@ function RetourClients() {
           as="li"
           key={entree.auteur}
           delay={index * 60}
-          className="flex flex-col border border-ink p-8"
+          className="flex flex-col rounded-card border border-ink p-8"
         >
           <Etoiles note={entree.note} id={`avis-${index}`} />
           <p className="mt-6 text-17 leading-relaxed text-ink">« {entree.citation} »</p>

@@ -89,7 +89,7 @@ export default async function SecteursPage() {
                 key={secteur.meta.slug}
                 delay={index * 60}
                 direction={inversee ? 'right' : 'left'}
-                className="grid overflow-hidden border border-ink lg:grid-cols-2"
+                className="grid overflow-hidden rounded-card border border-ink lg:grid-cols-2"
               >
                 {photo ? (
                   <div

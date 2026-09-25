@@ -36,10 +36,22 @@ export default async function QuiSommesNousPage() {
       />
 
       <Section>
+        <Reveal>
+          <p className="measure text-21 text-ink">{copy.presentation}</p>
+        </Reveal>
+
         <PlaceholderImage
-          label="Photo — équipe ou atelier"
-          className="aspect-[21/9] w-full border border-ink"
+          label={copy.photo}
+          className="mt-14 aspect-[21/9] w-full overflow-hidden rounded-card border border-ink"
         />
+
+        <Reveal className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-14">
+          {copy.histoire.map((paragraphe) => (
+            <p key={paragraphe.slice(0, 32)} className="text-17 text-slate">
+              {paragraphe}
+            </p>
+          ))}
+        </Reveal>
       </Section>
 
       <Section tone="white">
@@ -54,7 +66,7 @@ export default async function QuiSommesNousPage() {
                 key={section.titre}
                 delay={index * 60}
                 direction={inversee ? 'right' : 'left'}
-                className="grid overflow-hidden border border-ink lg:grid-cols-2"
+                className="grid overflow-hidden rounded-card border border-ink lg:grid-cols-2"
               >
                 <PlaceholderImage
                   label={`Photo — ${section.titre}`}
@@ -90,7 +102,7 @@ export default async function QuiSommesNousPage() {
         ) : (
           <ul className="mt-12 grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {equipe.map((membre, index) => (
-              <Reveal as="li" key={membre.meta.slug} delay={index * 60} className="border border-ink">
+              <Reveal as="li" key={membre.meta.slug} delay={index * 60} className="overflow-hidden rounded-card border border-ink">
                 <PlaceholderImage
                   label={`Photo — ${membre.meta.nom}`}
                   className="aspect-square w-full border-b border-ink"

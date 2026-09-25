@@ -34,6 +34,13 @@ export const serviceSchema = z.object({
   secteurs: z.array(slug).default([]),
   /** Liste concrète de ce qui est fait, pas des adjectifs. */
   prestations: z.array(z.string().min(10)).min(3),
+  /**
+   * Regroupement facultatif des prestations par famille. S'il est présent,
+   * l'encart de la fiche l'affiche à la place de la liste à plat.
+   */
+  familles: z
+    .array(z.object({ titre: z.string().min(3), items: z.array(z.string().min(10)).min(1) }))
+    .optional(),
   frequences: z.array(z.enum(frequenceValues)).min(1),
   /** Clé d'option du parcours devis pré-cochée depuis cette page. */
   devisPrestation: z.string().optional(),

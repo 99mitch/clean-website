@@ -75,7 +75,7 @@ export default async function ServicesPage() {
                 as="article"
                 key={service.meta.slug}
                 delay={index * 60}
-                className="grid overflow-hidden border border-ink lg:grid-cols-2"
+                className="grid overflow-hidden rounded-card border border-ink lg:grid-cols-2"
               >
                 <div
                   className={`relative min-h-[16rem] border-ink lg:min-h-[26rem] ${

@@ -9,9 +9,9 @@ export const home = frenchify({
 
   hero: {
     eyebrow: 'Propreté industrielle et services associés',
-    titre: 'On ne vend pas de la propreté. On vend un état vérifiable.',
+    titre: 'La propreté se voit. La nôtre se prouve.',
     texte:
-      'Vous décrivez vos locaux en cinq questions. Vous recevez un prix, un protocole écrit et une date de démarrage. Pas une brochure.',
+      'Vous décrivez vos locaux en cinq questions. On vous répond avec un prix, un protocole et une date. Pas avec une brochure.',
     ctaPrimaire: 'Demander un devis',
     ctaSecondaire: 'Voir les prestations',
     /** Trois engagements, affichés en filet sous le titre. */
@@ -24,9 +24,8 @@ export const home = frenchify({
 
   pourquoiNous: {
     label: 'Pourquoi nous',
-    titre: 'Ce que vous obtenez, concrètement.',
-    intro:
-      'Quatre engagements tenus au contrat, pas des adjectifs de plaquette.',
+    titre: 'Notre différence repose sur quatre piliers.',
+    intro: 'Quatre engagements tenus au contrat, pas de simples adjectifs.',
     aside: '4 engagements',
     points: [
       {
@@ -65,9 +64,9 @@ export const home = frenchify({
 
   matrice: {
     label: 'Croisement',
-    titre: 'Ce qui s’applique à votre type de site.',
+    titre: 'Adapté à votre site, pas à un standard.',
     intro:
-      'Un bloc opératoire, un atelier et un hall d’immeuble n’appellent ni les mêmes produits, ni les mêmes horaires, ni les mêmes preuves. Chaque en-tête est une entrée.',
+      'Un bloc opératoire, un atelier, un hall d’immeuble : ni les mêmes produits, ni les mêmes horaires, mais la même rigueur. Chaque en-tête ouvre sur un protocole différent.',
     aside: 'secteurs × prestations',
     colonneSecteur: 'Secteur',
     propose: 'prestation proposée',
@@ -103,7 +102,7 @@ export const home = frenchify({
 
   protocole: {
     label: 'Méthode',
-    titre: 'Comment se déroule une mise en place.',
+    titre: 'De la première question à la première intervention.',
     intro:
       'Quatre étapes, des délais annoncés, un référent unique du premier appel jusqu’au contrôle qualité.',
     aside: '4 étapes',

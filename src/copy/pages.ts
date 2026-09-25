@@ -1,3 +1,4 @@
+import { site } from '@/config/site';
 import { frenchify } from '@/lib/typo';
 
 export const servicesIndex = frenchify({
@@ -33,9 +34,9 @@ export const secteursIndex = frenchify({
       'Bureaux, établissements de santé, industrie, copropriétés, infrastructures publiques : les contraintes changent, le protocole aussi. Trouvez le vôtre.',
   },
   eyebrow: 'Secteurs',
-  titre: 'Les contraintes ne sont pas les mêmes partout.',
+  titre: 'Chaque lieu a ses propres contraintes.',
   intro:
-    'Un bloc opératoire, un atelier et un hall d\'immeuble n\'appellent ni les mêmes produits, ni les mêmes horaires, ni les mêmes preuves de traçabilité.',
+    'Une école, un atelier, un hall d\'immeuble : chacun impose ses produits, ses horaires — et sa propre traçabilité.',
 });
 
 export const secteurPage = frenchify({
@@ -84,9 +85,15 @@ export const quiSommesNous = frenchify({
       'Notre organisation, notre encadrement et notre politique RH : ce qui explique la stabilité des équipes sur vos sites, et donc la qualité du service.',
   },
   eyebrow: 'L\'entreprise',
-  titre: 'Une entreprise de services jugée sur la stabilité de ses équipes.',
+  titre: 'Nos équipes restent. Notre qualité aussi.',
   intro:
-    'La propreté est un métier de main-d\'œuvre. La qualité que vous constatez sur site dépend d\'abord des conditions de travail de la personne qui intervient.',
+    'On ne nettoie pas avec des produits. On nettoie avec des gens. Leur condition de travail, c\'est votre qualité de service.',
+  presentation: `${site.nom}, situé en plein cœur du 14e arrondissement de Paris, est une entreprise exigeante avec comme mot d'ordre la preuve vérifiable, que ce soit pour ses clients ou ses collaborateurs. Cette exigence assure un protocole écrit et mesurable pour chaque intervention, quel que soit le lieu ou l'urgence de la demande. ${site.nom} intervient dans toute la région Île-de-France.`,
+  photo: 'Photo — équipe ou atelier',
+  histoire: [
+    `${site.nom}, qui depuis sa création s'appuie sur son équipe commerciale et son personnel d'exploitation pour assurer un partenariat positif avec tous les interlocuteurs rencontrés durant la réalisation des divers marchés qui lui ont été confiés, a développé au fil de ses missions une connaissance approfondie des sites similaires, lui permettant aujourd'hui de calculer au plus juste, pour chaque établissement, une étude méthodique adaptée à sa particularité.`,
+    `Forte de cette expérience, ${site.nom} souhaite accompagner chaque client dans ses projets en construisant un partenariat solide, afin que le nettoyage ne soit plus une préoccupation mais le résultat d'un protocole tenu et vérifié.`,
+  ],
   sections: [
     {
       titre: 'Une organisation à taille humaine',

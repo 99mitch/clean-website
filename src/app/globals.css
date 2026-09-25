@@ -4,9 +4,9 @@
    SPOWCLEAN — système visuel « ÉCHANTILLONNIER »
 
    Registre : dossier technique. Le site parle la langue du métier — les
-   revêtements. Aucune photographie, aucune icône décorative, aucune carte
-   arrondie : des filets, des plans d'échantillons générés en CSS, et de la
-   donnée en monospace.
+   revêtements. Des filets, des plans d'échantillons générés en CSS, et de
+   la donnée en monospace. Les cartes ont les coins arrondis (demande client
+   du 25/09/2026).
 
    Fond : papier froid. Bandes denses : bleu abyssal. Un seul bleu signal.
    ========================================================================== */
@@ -47,8 +47,8 @@
   --text-88--line-height: 0.94;
 
   /* ---- Formes ---------------------------------------------------------- */
-  /* Un dossier technique n'a pas d'angles arrondis. 2px sur les contrôles de
-     formulaire pour ne pas paraître cassé ; rien ailleurs. */
+  /* 2px sur les contrôles de formulaire ; `rounded-card` sur les cartes et
+     panneaux, `rounded-chip` sur les étiquettes. Rien d'autre n'est arrondi. */
   --radius: 0px;
   --radius-xs: 2px;
   --radius-sm: 2px;
@@ -57,6 +57,8 @@
   --radius-xl: 0px;
   --radius-2xl: 0px;
   --radius-3xl: 0px;
+  --radius-card: 1rem;
+  --radius-chip: 0.375rem;
 
   --ease-out-site: cubic-bezier(0.2, 0.7, 0.2, 1);
 }

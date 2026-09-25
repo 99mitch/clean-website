@@ -67,23 +67,25 @@ export default async function ServicePage({ params }: Params) {
             <Reveal className="border-t-2 border-ink pt-6">
               <Icon name={meta.icon} size={28} className="text-cobalt" />
               <h2 className="mt-6 text-21">{servicePage.prestationsTitre}</h2>
-              <ul className="mt-5 space-y-3">
-                {meta.prestations.map((prestation) => (
-                  <li
-                    key={prestation}
-                    className="relative pl-6 text-15 text-slate before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-3 before:bg-graphite"
-                  >
-                    {prestation}
-                  </li>
-                ))}
-              </ul>
+              {meta.familles ? (
+                meta.familles.map((famille) => (
+                  <div key={famille.titre} className="mt-6">
+                    <h3 className="font-mono text-13 uppercase tracking-[0.1em] text-ink">
+                      {famille.titre}
+                    </h3>
+                    <ListePrestations items={famille.items} />
+                  </div>
+                ))
+              ) : (
+                <ListePrestations items={meta.prestations} />
+              )}
 
               <h2 className="mt-10 text-21">{servicePage.frequencesTitre}</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {meta.frequences.map((frequence) => (
                   <li
                     key={frequence}
-                    className="border border-graphite/60 px-3 py-1 font-mono text-13 text-slate"
+                    className="rounded-chip border border-graphite/60 px-3 py-1 font-mono text-13 text-slate"
                   >
                     {servicePage.frequenceLabels[frequence] ?? frequence}
                   </li>
@@ -126,5 +128,20 @@ export default async function ServicePage({ params }: Params) {
       />
       <JsonLd data={breadcrumbLd(fil)} />
     </>
+  );
+}
+
+function ListePrestations({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-5 space-y-3">
+      {items.map((prestation) => (
+        <li
+          key={prestation}
+          className="relative pl-6 text-15 text-slate before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-3 before:bg-graphite"
+        >
+          {prestation}
+        </li>
+      ))}
+    </ul>
   );
 }

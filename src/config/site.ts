@@ -15,8 +15,8 @@ export const site = {
   /** Baseline courte, affichée sous le logo dans le footer. */
   baseline: 'Propreté industrielle & services associés',
 
-  /** {{À REMPLIR}} — ex. « Île-de-France, rayon 50 km autour de Paris » */
-  zoneIntervention: null as string | null,
+  /** Validé par le client (dossier du 25/09/2026). */
+  zoneIntervention: 'Île-de-France' as string | null,
   /** {{À REMPLIR}} */
   adresseSiege: null as {
     rue: string;

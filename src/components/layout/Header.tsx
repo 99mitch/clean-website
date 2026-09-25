@@ -78,7 +78,7 @@ function MobileMenu() {
 
       <nav
         aria-label={nav.primaryLabel}
-        className="absolute right-0 top-[calc(100%+0.75rem)] w-[min(20rem,calc(100vw-3rem))] border border-ink bg-white p-4"
+        className="absolute right-0 top-[calc(100%+0.75rem)] w-[min(20rem,calc(100vw-3rem))] rounded-card border border-ink bg-white p-4"
       >
         <ul className="list-none">
           {nav.liens.map((lien) => (

@@ -17,6 +17,25 @@ export const site = {
 
   /** Validé par le client (dossier du 25/09/2026). */
   zoneIntervention: 'Île-de-France' as string | null,
+  /**
+   * Localisation du siège, validée par le client (dossier du 25/09/2026) :
+   * « en plein cœur du 14e arrondissement de Paris ». La rue reste à
+   * renseigner dans `adresseSiege`.
+   */
+  localisation: {
+    quartier: '14e arrondissement',
+    ville: 'Paris',
+    codePostal: '75014',
+    region: 'Île-de-France',
+    pays: 'FR',
+  },
+  /**
+   * Présentation factuelle de l'entreprise, en une phrase : sert au JSON-LD,
+   * à `llms.txt` et aux descriptions par défaut. Rien qui ne soit dans le
+   * dossier client.
+   */
+  description:
+    'Entreprise de nettoyage professionnel basée à Paris 14e, intervenant dans toute l’Île-de-France : entretien régulier, remise en état, vitrerie et services associés, avec un protocole écrit et vérifiable pour chaque intervention.',
   /** {{À REMPLIR}} */
   adresseSiege: null as {
     rue: string;

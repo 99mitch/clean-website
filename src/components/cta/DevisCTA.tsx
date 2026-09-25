@@ -31,7 +31,7 @@ export function DevisCTA({
       <Container className="py-20 lg:py-24">
         <Reveal className="grid gap-10 border-t-2 border-paper/80 pt-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-paper/50">{cta.eyebrow}</p>
+            <p className="eyebrow text-paper/70">{cta.eyebrow}</p>
             <h2 className="mt-6 max-w-[18ch] text-28 lg:text-40">
               {titre ?? cta.titre}
             </h2>
@@ -39,7 +39,7 @@ export function DevisCTA({
 
           <div className="flex flex-col justify-end lg:col-span-5">
             <p className="max-w-[42ch] text-17 text-paper/70">{cta.texte}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
               <ButtonLink href={href} variant="devis" size="lg">
                 {cta.bouton}
               </ButtonLink>

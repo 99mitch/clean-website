@@ -2,9 +2,9 @@ import { frenchify } from '@/lib/typo';
 
 export const home = frenchify({
   meta: {
-    title: 'Entreprise de nettoyage professionnel — devis chiffré sous 24 h',
+    title: 'Entreprise de nettoyage à Paris et en Île-de-France',
     description:
-      'Entretien régulier, remise en état, traitement des sols, vitrerie. Décrivez vos locaux en cinq questions, recevez une proposition chiffrée. Contrat sans engagement.',
+      'Nettoyage de bureaux, copropriétés, sites industriels et lieux publics en Île-de-France. Cinq questions : un prix, un protocole et une date.',
   },
 
   hero: {

@@ -53,6 +53,7 @@ export const errors = frenchify({
   notFoundTexte:
     'Le lien est peut-être obsolète. Les prestations et les secteurs sont accessibles depuis le menu.',
   notFoundAction: 'Voir les prestations',
+  notFoundAccueil: 'Retour à l\'accueil',
   genericTitre: 'Une erreur est survenue',
   genericTexte:
     'La page n\'a pas pu s\'afficher. Réessayez ; si le problème persiste, contactez-nous directement.',

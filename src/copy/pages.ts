@@ -3,9 +3,9 @@ import { frenchify } from '@/lib/typo';
 
 export const servicesIndex = frenchify({
   meta: {
-    title: 'Prestations de nettoyage professionnel',
+    title: 'Prestations de nettoyage professionnel à Paris',
     description:
-      'Entretien régulier, remise en état, traitement des sols, vitrerie et services associés. Chaque prestation a un protocole écrit.',
+      'Entretien régulier, remise en état, vitrerie et services associés à Paris et en Île-de-France. Chaque prestation suit un protocole écrit et vérifiable.',
   },
   eyebrow: 'Prestations',
   titre: 'Ce que nous faisons, et comment c\'est défini.',
@@ -29,9 +29,9 @@ export const servicePage = frenchify({
 
 export const secteursIndex = frenchify({
   meta: {
-    title: 'Secteurs d\'intervention',
+    title: 'Secteurs d\'intervention en Île-de-France',
     description:
-      'Bureaux, établissements de santé, industrie, copropriétés, infrastructures publiques : les contraintes changent, le protocole aussi. Trouvez le vôtre.',
+      'Bureaux, santé, industrie, copropriétés et bâtiments publics en Île-de-France : chaque lieu a ses contraintes, son protocole et sa traçabilité.',
   },
   eyebrow: 'Secteurs',
   titre: 'Chaque lieu a ses propres contraintes.',
@@ -80,9 +80,9 @@ export const blogIndex = frenchify({
 
 export const quiSommesNous = frenchify({
   meta: {
-    title: 'Qui sommes-nous',
+    title: 'Entreprise de nettoyage à Paris 14e : qui sommes-nous',
     description:
-      'Notre organisation, notre encadrement et notre politique RH : ce qui explique la stabilité des équipes sur vos sites, et donc la qualité du service.',
+      'Entreprise de nettoyage basée à Paris 14e, active dans toute l\'Île-de-France : des équipes stables et un protocole écrit pour chaque intervention.',
   },
   eyebrow: 'L\'entreprise',
   titre: 'Nos équipes restent. Notre qualité aussi.',

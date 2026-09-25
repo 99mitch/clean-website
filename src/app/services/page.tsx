@@ -7,6 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { servicesIndex } from '@/copy/pages';
 import { getServices } from '@/lib/content';
+import { PHOTO_PAR_SERVICE } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { DEGRADE_BLEU } from '@/lib/ui/degrade';
@@ -23,26 +24,6 @@ export const metadata: Metadata = pageMetadata({
  * fiche reste accessible en direct, elle n'apparaît juste plus ici.
  */
 const EXCLUE_DE_L_INDEX = 'traitement-des-sols';
-
-/** Photo associée à chaque prestation restante. */
-const PHOTO_PAR_SERVICE: Record<string, { src: string; alt: string }> = {
-  'entretien-regulier': {
-    src: '/images/services/entretien-regulier.png',
-    alt: 'Agents de propreté lavant les sols d’un hall d’immeuble tertiaire',
-  },
-  'remise-en-etat': {
-    src: '/images/services/remise-en-etat.png',
-    alt: 'Agent effectuant une injection-extraction de moquette après travaux',
-  },
-  vitrerie: {
-    src: '/images/services/vitrerie.png',
-    alt: 'Agent nettoyant une vitre extérieure à la raclette',
-  },
-  'services-associes': {
-    src: '/images/services/services-associes.png',
-    alt: 'Agent balayant des gravats sur un chantier en fin de travaux',
-  },
-};
 
 export default async function ServicesPage() {
   const services = (await getServices()).filter(

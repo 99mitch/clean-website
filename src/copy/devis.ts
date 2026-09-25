@@ -69,7 +69,7 @@ const steps: StepCopy[] = [
 export const devis = frenchify({
   steps,
   meta: {
-    title: 'Demander un devis de nettoyage — réponse chiffrée',
+    title: 'Devis de nettoyage en ligne à Paris',
     description:
       'Cinq questions sur vos locaux, votre surface et votre fréquence. Vous recevez une proposition chiffrée avec le protocole d\'intervention détaillé.',
   },

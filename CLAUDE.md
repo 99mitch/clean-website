@@ -251,6 +251,11 @@ Budgets, vérifiés en CI, build en échec si dépassement :
 - `sitemap.ts` et `robots.ts` dynamiques. Canoniques absolues.
 - Cibles prioritaires : `entreprise de nettoyage {{VILLE}}`, `propreté industrielle {{RÉGION}}`, `nettoyage bureaux {{VILLE}}`, `bionettoyage clinique {{RÉGION}}`, `société de nettoyage copropriété {{VILLE}}`.
 - Pages locales : ne créer une page ville que s'il existe du contenu réellement spécifique (références locales, délai d'intervention). Pas de doorway pages dupliquées.
+- Titres : `pageMetadata()` ajoute « — {nom} » via le gabarit du layout, et le retire de lui-même au-delà de 65 caractères. L'accueil passe `brand: true` (le gabarit ne s'applique pas à la page racine).
+- Images de partage : générées au build par `src/lib/seo/og.tsx` (1200 × 630, polices TTF statiques dans `src/fonts/og/`). Image par défaut à la racine, image dédiée pour `/services/[slug]`, `/secteurs/[slug]`, `/blog/[slug]`. Les photos viennent de `src/lib/photos.ts`, source unique partagée avec les pages et le sitemap.
+- Icônes : `src/app/icon.svg` est la source ; `favicon.ico`, `apple-icon.png` et `public/icon-*.png` / `logo.png` en sont des rendus — les régénérer si la marque change. Manifeste : `src/app/manifest.ts`.
+- GEO : `/llms.txt` et `/llms-full.txt` (générés depuis le contenu MDX et `src/copy/`), robots des moteurs IA autorisés explicitement dans `robots.ts`. JSON-LD : graphe `LocalBusiness` + `WebSite` sur toutes les pages (`organisationGraph`), `Service` sur les fiches prestation et secteur.
+- Variables d'environnement SEO : `NEXT_PUBLIC_SITE_URL` (domaine canonique — sinon URL de prod Vercel), `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`.
 - Analytics : Vercel Analytics + Plausible (sans cookie, donc pas de bandeau de consentement à gérer en V1). Événements suivis : `devis_step_{n}`, `devis_submit`, `tel_click`, `plaquette_download`.
 
 ---

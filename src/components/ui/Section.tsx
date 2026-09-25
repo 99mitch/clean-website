@@ -28,7 +28,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`${tones[tone]} py-20 lg:py-28 ${className}`}
+      className={`${tones[tone]} py-14 sm:py-20 lg:py-28 ${className}`}
     >
       <Container>{children}</Container>
     </section>
@@ -59,7 +59,7 @@ export function SectionHead({
 }) {
   const dark = tone === 'abyss' || tone === 'cobalt';
   const ruleColor = dark ? 'border-paper/85' : 'border-ink';
-  const dim = dark ? 'text-paper/65' : 'text-slate';
+  const dim = dark ? 'text-paper/75' : 'text-slate';
 
   return (
     <Reveal>

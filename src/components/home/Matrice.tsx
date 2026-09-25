@@ -51,75 +51,120 @@ export function Matrice({
   }, []);
 
   return (
-    <div ref={rootRef} className="mt-12 overflow-x-auto">
-      <table className="w-full min-w-[52rem] border-collapse text-left">
-        <caption className="sr-only">{copy.resume}</caption>
-
-        <thead>
-          <tr>
-            <th
-              scope="col"
-              className="w-[22%] border-b-2 border-b-ink border-r border-r-graphite/45 pb-3 pr-4 align-bottom"
-            >
-              <span className="eyebrow text-cobalt">{copy.colonneSecteur}</span>
-            </th>
-            {services.map((service) => (
-              <th
-                key={service.meta.slug}
-                scope="col"
-                className="border-b-2 border-ink px-2 pb-3 align-bottom"
+    <div ref={rootRef} className="mt-10 sm:mt-12">
+      {/*
+        Mobile : une fiche par secteur, les prestations en étiquettes pleines
+        (proposée) ou filetées (non proposée). Le tableau prend le relais dès
+        qu'il tient sans défilement horizontal.
+      */}
+      <ul className="list-none border-t-2 border-ink md:hidden">
+        {secteurs.map((secteur) => {
+          const proposes = new Set(secteur.meta.services);
+          return (
+            <li key={secteur.meta.slug} className="border-b rule-hair py-5">
+              <Link
+                href={`/secteurs/${secteur.meta.slug}`}
+                className="flex min-h-11 items-center text-17 font-semibold tracking-[-0.02em] text-cobalt"
               >
-                <Link
-                  href={`/services/${service.meta.slug}`}
-                  className="block font-mono text-13 leading-tight text-cobalt hover:text-ink"
-                >
-                  {copy.abrev[service.meta.slug] ?? service.meta.title}
-                </Link>
-              </th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {secteurs.map((secteur) => {
-            const proposes = new Set(secteur.meta.services);
-            return (
-              <tr key={secteur.meta.slug} className="border-b rule-hair">
-                <th
-                  scope="row"
-                  className="border-r border-r-graphite/45 py-5 pr-4 align-middle font-normal"
-                >
-                  <Link
-                    href={`/secteurs/${secteur.meta.slug}`}
-                    className="text-17 font-semibold tracking-[-0.02em] text-cobalt lg:text-21"
-                  >
-                    {secteur.meta.title}
-                  </Link>
-                </th>
-
+                {secteur.meta.title}
+              </Link>
+              <ul className="mt-2 flex list-none flex-wrap gap-2">
                 {services.map((service) => {
                   const propose = proposes.has(service.meta.slug);
                   return (
-                    <td key={service.meta.slug} className="px-2 py-5 align-middle">
-                      <span
-                        className={
-                          propose
-                            ? `band-fill block h-6 w-full rounded-sm bg-cobalt ${rempli ? 'is-filled' : ''}`
-                            : 'block h-6 w-full rounded-sm border border-graphite/45 bg-transparent'
-                        }
-                      >
-                        <span className="sr-only">
-                          {propose ? copy.propose : copy.nonPropose}
-                        </span>
+                    <li
+                      key={service.meta.slug}
+                      className={`relative inline-flex min-h-8 items-center rounded-chip border px-2.5 font-mono text-13 ${
+                        propose
+                          ? 'border-cobalt bg-cobalt text-white'
+                          : 'border-graphite/60 text-slate line-through decoration-graphite'
+                      }`}
+                    >
+                      {copy.abrev[service.meta.slug] ?? service.meta.title}
+                      <span className="sr-only">
+                        {' — '}
+                        {propose ? copy.propose : copy.nonPropose}
                       </span>
-                    </td>
+                    </li>
                   );
                 })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
+
+      {/* `relative` : contient les libellés sr-only (position absolue). */}
+      <div className="relative hidden md:block">
+        <table className="w-full table-fixed border-collapse text-left">
+          <caption className="sr-only">{copy.resume}</caption>
+
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                className="w-[26%] border-b-2 border-b-ink border-r border-r-graphite/45 pb-3 pr-4 align-bottom lg:w-[22%]"
+              >
+                <span className="eyebrow text-cobalt">{copy.colonneSecteur}</span>
+              </th>
+              {services.map((service) => (
+                <th
+                  key={service.meta.slug}
+                  scope="col"
+                  className="border-b-2 border-ink px-2 pb-3 align-bottom"
+                >
+                  <Link
+                    href={`/services/${service.meta.slug}`}
+                    className="block font-mono text-13 leading-tight text-cobalt hover:text-ink"
+                  >
+                    {copy.abrev[service.meta.slug] ?? service.meta.title}
+                  </Link>
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {secteurs.map((secteur) => {
+              const proposes = new Set(secteur.meta.services);
+              return (
+                <tr key={secteur.meta.slug} className="border-b rule-hair">
+                  <th
+                    scope="row"
+                    className="border-r border-r-graphite/45 py-5 pr-4 align-middle font-normal"
+                  >
+                    <Link
+                      href={`/secteurs/${secteur.meta.slug}`}
+                      className="text-17 font-semibold tracking-[-0.02em] text-cobalt lg:text-21"
+                    >
+                      {secteur.meta.title}
+                    </Link>
+                  </th>
+
+                  {services.map((service) => {
+                    const propose = proposes.has(service.meta.slug);
+                    return (
+                      <td key={service.meta.slug} className="px-2 py-5 align-middle">
+                        <span
+                          className={
+                            propose
+                              ? `band-fill block h-6 w-full rounded-sm bg-cobalt ${rempli ? 'is-filled' : ''}`
+                              : 'block h-6 w-full rounded-sm border border-graphite/45 bg-transparent'
+                          }
+                        >
+                          <span className="sr-only">
+                            {propose ? copy.propose : copy.nonPropose}
+                          </span>
+                        </span>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -78,7 +78,7 @@ export default async function QuiSommesNousPage() {
                 />
 
                 <div className={`flex flex-col justify-center gap-4 p-8 sm:p-12 ${degrade}`}>
-                  <p className="font-mono text-13 opacity-70">
+                  <p className="font-mono text-13 opacity-80">
                     {String(index + 1).padStart(2, '0')}
                   </p>
                   <h2 className="text-28 tracking-[-0.04em]">{section.titre}</h2>

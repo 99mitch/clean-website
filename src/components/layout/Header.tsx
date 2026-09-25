@@ -6,10 +6,12 @@ import { site, telHref } from '@/config/site';
 import { nav } from '@/copy/common';
 import { Logo } from './Logo';
 import { NavAutoClose } from './NavAutoClose';
+import { NavLink } from './NavLink';
 
 /**
  * Bandeau de tête — sticky, compacté après 120px de scroll (§6).
- * Liens à plat, une page par titre : pas de menu déroulant.
+ * Liens à plat, une page par titre : pas de menu déroulant. La page courante
+ * est signalée par `aria-current` (voir NavLink).
  */
 export function Header() {
   const tel = telHref();
@@ -26,12 +28,12 @@ export function Header() {
             <ul className="flex items-center">
               {nav.liens.map((lien) => (
                 <li key={lien.href}>
-                  <Link
+                  <NavLink
                     href={lien.href}
-                    className="flex min-h-11 items-center px-4 font-mono text-13 uppercase tracking-[0.12em] text-slate hover:text-ink"
+                    className="flex min-h-11 items-center border-b-2 border-transparent px-4 font-mono text-13 uppercase tracking-[0.12em] text-slate hover:text-ink aria-[current]:border-ink aria-[current]:text-ink xl:px-5"
                   >
                     {lien.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -48,9 +50,11 @@ export function Header() {
                 {site.telephone}
               </a>
             ) : null}
-            <ButtonLink href="/contact" variant="devis" className="hidden sm:inline-flex">
-              {nav.contact}
-            </ButtonLink>
+            <div className="hidden sm:block">
+              <ButtonLink href="/contact" variant="devis">
+                {nav.contact}
+              </ButtonLink>
+            </div>
             <MobileMenu />
           </div>
         </div>
@@ -64,15 +68,16 @@ export function Header() {
 
 function MobileMenu() {
   return (
-    <details data-nav-menu className="relative lg:hidden">
+    <details data-nav-menu className="group relative lg:hidden">
       <summary
-        className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center border border-ink px-3 [&::-webkit-details-marker]:hidden"
+        className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-chip border border-ink px-3 [&::-webkit-details-marker]:hidden"
         aria-label={nav.openMenu}
       >
-        <span aria-hidden="true" className="flex flex-col gap-[5px]">
-          <span className="block h-px w-5 bg-ink" />
-          <span className="block h-px w-5 bg-ink" />
-          <span className="block h-px w-5 bg-ink" />
+        {/* Trois traits qui se croisent à l'ouverture : l'état se lit sans texte. */}
+        <span aria-hidden="true" className="relative block h-3 w-5">
+          <span className="absolute left-0 top-0 block h-px w-5 bg-ink transition-transform duration-200 group-open:top-1.5 group-open:rotate-45" />
+          <span className="absolute left-0 top-1.5 block h-px w-5 bg-ink transition-opacity duration-150 group-open:opacity-0" />
+          <span className="absolute left-0 top-3 block h-px w-5 bg-ink transition-transform duration-200 group-open:top-1.5 group-open:-rotate-45" />
         </span>
       </summary>
 
@@ -83,9 +88,12 @@ function MobileMenu() {
         <ul className="list-none">
           {nav.liens.map((lien) => (
             <li key={lien.href} className="border-b rule-hair">
-              <Link href={lien.href} className="flex min-h-11 items-center text-17 text-ink">
+              <NavLink
+                href={lien.href}
+                className="flex min-h-12 items-center text-17 text-ink aria-[current]:font-semibold aria-[current]:text-cobalt"
+              >
                 {lien.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
           <li>

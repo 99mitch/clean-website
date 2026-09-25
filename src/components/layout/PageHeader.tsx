@@ -37,15 +37,15 @@ export function PageHeader({
     <section className="bg-paper">
       <BandeauSurface mat={mat} />
 
-      <Container className="pb-16 pt-10 lg:pb-24 lg:pt-14">
+      <Container className="pb-4 pt-8 sm:pb-8 sm:pt-10 lg:pb-12 lg:pt-14">
         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-t-2 border-ink pt-3">
           <p className="eyebrow text-ink">{label}</p>
           {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
         </div>
 
         {centre ? (
-          <Reveal className="mt-10 flex flex-col items-center text-center">
-            <h1 className="max-w-[22ch] text-40 tracking-[-0.055em] lg:text-64">{titre}</h1>
+          <Reveal className="mt-8 flex flex-col items-center text-center sm:mt-10">
+            <h1 className="max-w-[22ch] text-40 tracking-[-0.055em] break-words hyphens-auto sm:hyphens-none lg:text-64">{titre}</h1>
 
             {intro ? (
               <div className="mt-6 max-w-[54ch]">
@@ -57,8 +57,8 @@ export function PageHeader({
             )}
           </Reveal>
         ) : (
-          <Reveal className="mt-10 grid gap-x-10 gap-y-6 lg:grid-cols-12">
-            <h1 className="max-w-[16ch] text-40 tracking-[-0.055em] lg:col-span-7 lg:text-64">
+          <Reveal className="mt-8 grid gap-x-10 gap-y-6 sm:mt-10 lg:grid-cols-12">
+            <h1 className="max-w-[16ch] text-40 tracking-[-0.055em] break-words hyphens-auto sm:hyphens-none lg:col-span-7 lg:text-64">
               {titre}
             </h1>
 

@@ -15,7 +15,7 @@ export function Footer() {
   const annee = new Date().getFullYear();
 
   return (
-    <footer className="on-dark bg-cobalt pb-24 text-paper sm:pb-0">
+    <footer className="on-dark bg-cobalt pb-[calc(4.5rem+env(safe-area-inset-bottom))] text-paper sm:pb-0">
       {/*
         Vague de transition — sur le modèle Haikei (SVG statique, sans
         dépendance réseau) : le fond de la bande reprend la couleur de ce qui
@@ -40,11 +40,11 @@ export function Footer() {
         <div className="grid gap-12 border-t-2 border-paper/80 pt-8 sm:grid-cols-2">
           <div>
             <Logo tone="paper" />
-            <p className="mt-5 max-w-[30ch] text-15 text-paper/65">{site.baseline}</p>
+            <p className="mt-5 max-w-[30ch] text-15 text-paper/80">{site.baseline}</p>
 
             <dl className="mt-10 border-t border-paper/20">
               <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/45">{footer.zoneLabel}</dt>
+                <dt className="eyebrow text-paper/70">{footer.zoneLabel}</dt>
                 <dd className="mt-1">
                   {site.zoneIntervention ? (
                     <span className="text-15 text-paper/85">{site.zoneIntervention}</span>
@@ -53,32 +53,35 @@ export function Footer() {
                   )}
                 </dd>
               </div>
-              <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/45">{footer.contactLabel}</dt>
-                <dd className="mt-1 space-y-1">
-                  {tel ? (
-                    <a
-                      href={tel}
-                      data-analytics="tel_click"
-                      className="block font-mono text-15 text-paper/85 hover:text-paper"
-                    >
-                      {site.telephone}
-                    </a>
-                  ) : (
-                    <PendingData label="TELEPHONE" />
-                  )}
-                  {site.emailContact ? (
-                    <a
-                      href={`mailto:${site.emailContact}`}
-                      className="block font-mono text-15 text-paper/85 hover:text-paper"
-                    >
-                      {site.emailContact}
-                    </a>
-                  ) : (
-                    <PendingData label="EMAIL_CONTACT" />
-                  )}
-                </dd>
-              </div>
+              {/* Masqué en production tant qu'aucune coordonnée n'est validée (§0). */}
+              {tel || site.emailContact || process.env.NODE_ENV !== 'production' ? (
+                <div className="border-b border-paper/20 py-3">
+                  <dt className="eyebrow text-paper/70">{footer.contactLabel}</dt>
+                  <dd className="mt-1 space-y-1">
+                    {tel ? (
+                      <a
+                        href={tel}
+                        data-analytics="tel_click"
+                        className="block font-mono text-15 text-paper/85 hover:text-paper"
+                      >
+                        {site.telephone}
+                      </a>
+                    ) : (
+                      <PendingData label="TELEPHONE" />
+                    )}
+                    {site.emailContact ? (
+                      <a
+                        href={`mailto:${site.emailContact}`}
+                        className="block font-mono text-15 text-paper/85 hover:text-paper"
+                      >
+                        {site.emailContact}
+                      </a>
+                    ) : (
+                      <PendingData label="EMAIL_CONTACT" />
+                    )}
+                  </dd>
+                </div>
+              ) : null}
             </dl>
           </div>
 
@@ -98,9 +101,9 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-paper/20 pt-6 font-mono text-13 text-paper/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-paper/20 pt-6 font-mono text-13 text-paper/75 sm:flex-row sm:items-center sm:justify-between">
           <p>{footer.copyright(annee, site.nom)}</p>
-          <ul className="flex list-none flex-wrap gap-x-6">
+          <ul className="flex list-none flex-wrap gap-x-6 gap-y-0">
             {footer.legal.map((link) => (
               <li key={link.href}>
                 <Link

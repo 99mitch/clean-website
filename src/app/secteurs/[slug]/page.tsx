@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Ledger, LedgerEntry } from '@/components/content/Ledger';
 import { Mdx } from '@/components/content/Mdx';
@@ -10,7 +11,8 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHead } from '@/components/ui/Section';
 import { secteurPage } from '@/copy/pages';
 import { getSecteur, getSecteurs, servicesForSecteur } from '@/lib/content';
-import { breadcrumbLd, faqLd } from '@/lib/seo/jsonld';
+import { PHOTO_PAR_SECTEUR } from '@/lib/photos';
+import { breadcrumbLd, faqLd, secteurLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
 
 type Params = { params: Promise<{ slug: string }> };
@@ -44,6 +46,7 @@ export default async function SecteurPage({ params }: Params) {
   if (!secteur) notFound();
 
   const services = await servicesForSecteur(slug);
+  const photo = PHOTO_PAR_SECTEUR[slug];
   const { meta } = secteur;
 
   const fil = [
@@ -63,6 +66,20 @@ export default async function SecteurPage({ params }: Params) {
       />
 
       <Section>
+        {photo ? (
+          <div className="relative mb-12 aspect-[4/3] overflow-hidden rounded-card border border-ink sm:aspect-[21/9] lg:mb-16">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(min-width: 1320px) 1240px, (min-width: 1024px) calc(100vw - 80px), calc(100vw - 48px)"
+              className="object-cover"
+            />
+          </div>
+        ) : null}
+
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Mdx source={secteur.body} />
@@ -126,6 +143,18 @@ export default async function SecteurPage({ params }: Params) {
       <DevisCTA secteur={meta.slug} />
 
       <JsonLd data={breadcrumbLd(fil)} />
+      <JsonLd
+        data={secteurLd({
+          name: meta.title,
+          description: meta.excerpt,
+          url: `/secteurs/${slug}`,
+          services: services.map((service) => ({
+            title: service.meta.title,
+            slug: service.meta.slug,
+          })),
+          image: photo?.src,
+        })}
+      />
       <JsonLd data={faqLd(meta.faq)} />
     </>
   );

@@ -10,6 +10,7 @@ import { Section, SectionHead } from '@/components/ui/Section';
 import { site } from '@/config/site';
 import { home } from '@/copy/home';
 import { getSecteurs, getServices } from '@/lib/content';
+import { PHOTO_HERO } from '@/lib/photos';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { DEGRADE_BLEU } from '@/lib/ui/degrade';
 
@@ -17,6 +18,7 @@ export const metadata: Metadata = pageMetadata({
   title: home.meta.title,
   description: home.meta.description,
   path: '/',
+  brand: true,
 });
 
 export default async function AccueilPage() {
@@ -31,10 +33,10 @@ export default async function AccueilPage() {
       */}
       <section className="on-dark relative isolate flex min-h-[100svh] items-center overflow-hidden bg-abyss text-paper">
         <Image
-          src="/images/hero-agent-nettoyage.png"
-          alt="Agent de propreté intervenant avec une autolaveuse dans un hall tertiaire vitré"
+          src={PHOTO_HERO.src}
+          alt={PHOTO_HERO.alt}
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
@@ -57,7 +59,7 @@ export default async function AccueilPage() {
               {home.hero.texte}
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 grid gap-3 sm:flex sm:flex-wrap">
               <ButtonLink href="/devis" variant="devis" size="lg">
                 {home.hero.ctaPrimaire}
               </ButtonLink>
@@ -111,7 +113,7 @@ export default async function AccueilPage() {
               delay={index * 60}
               className={`flex flex-col rounded-card p-8 ${DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3]}`}
             >
-              <p className="font-mono text-13 opacity-70">
+              <p className="font-mono text-13 opacity-80">
                 {String(index + 1).padStart(2, '0')}
               </p>
               <h3 className="mt-6 text-21 leading-tight">{point.titre}</h3>
@@ -139,12 +141,12 @@ export default async function AccueilPage() {
               delay={index * 60}
               className="grid gap-x-8 gap-y-3 border-b border-paper/20 py-8 md:grid-cols-12"
             >
-              <span className="font-mono text-13 text-paper/45 md:col-span-1">
+              <span className="font-mono text-13 text-paper/70 md:col-span-1">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <h3 className="text-21 text-paper md:col-span-3">{etape.titre}</h3>
               <p className="text-15 text-paper/70 md:col-span-5">{etape.texte}</p>
-              <p className="font-mono text-13 text-paper/50 md:col-span-3 md:text-right">
+              <p className="font-mono text-13 text-paper/75 md:col-span-3 md:text-right">
                 {etape.duree}
               </p>
             </Reveal>
@@ -219,7 +221,7 @@ function Etoiles({ note, id }: { note: number; id: string }) {
   });
 
   return (
-    <p className="flex items-center gap-2" aria-label={`Note : ${note} sur 5`}>
+    <p className="flex items-center gap-2" role="img" aria-label={`Note : ${String(note).replace('.', ',')} sur 5`}>
       <span className="flex gap-0.5" aria-hidden="true">
         {etoiles.map((valeur, i) => (
           <svg key={i} viewBox="0 0 20 20" className="h-4 w-4 text-cobalt">

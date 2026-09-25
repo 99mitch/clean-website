@@ -7,9 +7,11 @@ import localFont from 'next/font/local';
 
 export const bricolage = localFont({
   src: [
+    // Seule la graisse 800 sert (titres, logo) : figée à l'export, l'axe de
+    // taille optique reste variable. Moitié moins lourd que la variable complète.
     {
-      path: '../fonts/BricolageGrotesque-400800.woff2',
-      weight: '400 800',
+      path: '../fonts/BricolageGrotesque-800.woff2',
+      weight: '800',
       style: 'normal',
     },
   ],
@@ -40,7 +42,9 @@ export const plexMono = localFont({
   ],
   variable: '--font-plex-mono',
   display: 'swap',
-  preload: true,
+  // Pas de préchargement : le monospace ne porte jamais le LCP, et libérer la
+  // bande passante au chargement profite à l'image et au titre du hero.
+  preload: false,
   fallback: ['ui-monospace', 'monospace'],
 });
 

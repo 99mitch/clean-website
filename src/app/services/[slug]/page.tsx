@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Ledger, LedgerEntry } from '@/components/content/Ledger';
 import { Mdx } from '@/components/content/Mdx';
@@ -10,6 +11,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHead } from '@/components/ui/Section';
 import { servicePage } from '@/copy/pages';
 import { getService, getServices, secteursForService } from '@/lib/content';
+import { PHOTO_PAR_SERVICE } from '@/lib/photos';
 import { breadcrumbLd, serviceLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
 
@@ -39,6 +41,7 @@ export default async function ServicePage({ params }: Params) {
   if (!service) notFound();
 
   const secteurs = await secteursForService(slug);
+  const photo = PHOTO_PAR_SERVICE[slug];
   const { meta } = service;
 
   const fil = [
@@ -58,6 +61,20 @@ export default async function ServicePage({ params }: Params) {
       />
 
       <Section>
+        {photo ? (
+          <div className="relative mb-12 aspect-[4/3] overflow-hidden rounded-card border border-ink sm:aspect-[21/9] lg:mb-16">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(min-width: 1320px) 1240px, (min-width: 1024px) calc(100vw - 80px), calc(100vw - 48px)"
+              className="object-cover"
+            />
+          </div>
+        ) : null}
+
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Mdx source={service.body} />
@@ -124,6 +141,8 @@ export default async function ServicePage({ params }: Params) {
           name: meta.title,
           description: meta.excerpt,
           url: `/services/${slug}`,
+          prestations: meta.prestations,
+          image: photo?.src,
         })}
       />
       <JsonLd data={breadcrumbLd(fil)} />

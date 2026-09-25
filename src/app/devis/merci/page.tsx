@@ -21,7 +21,7 @@ export default function MerciPage() {
   const delai = site.delaiReponseHeuresOuvrees;
 
   return (
-    <div className="py-20 lg:py-28">
+    <div className="py-14 sm:py-20 lg:py-28">
       <Container>
         <Reveal className="max-w-[60ch]">
           <p className="eyebrow text-slate">{copy.merci.eyebrow}</p>
@@ -37,7 +37,7 @@ export default function MerciPage() {
           <ol className="mt-6 space-y-4">
             {copy.merci.etapes.map((etape, index) => (
               <li key={etape} className="flex gap-4">
-                <span className="font-mono text-13 text-signal">
+                <span className="font-mono text-13 text-cobalt">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span className="text-17 text-slate">{etape}</span>
@@ -45,7 +45,7 @@ export default function MerciPage() {
             ))}
           </ol>
 
-          <div className="mt-12 flex flex-wrap gap-4">
+          <div className="mt-12 grid gap-3 sm:flex sm:flex-wrap">
             <ButtonLink href="/" variant="ink">
               {copy.merci.retour}
             </ButtonLink>

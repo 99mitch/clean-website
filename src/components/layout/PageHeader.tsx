@@ -19,6 +19,7 @@ export function PageHeader({
   intro,
   breadcrumbs,
   centre = false,
+  entonnoir = false,
   children,
 }: {
   /** Clé de `bandeauParRubrique` — choisit le revêtement du bandeau. */
@@ -29,6 +30,11 @@ export function PageHeader({
   breadcrumbs?: Array<{ name: string; url: string }>;
   /** Titre et intro centrés l'un sous l'autre, au lieu de la grille titre/intro. */
   centre?: boolean;
+  /**
+   * Titre, intro et `children` centrés en entonnoir : chaque bloc est plus
+   * étroit que celui du dessus (titre > intro > texte).
+   */
+  entonnoir?: boolean;
   children?: React.ReactNode;
 }) {
   const mat = bandeauParRubrique[rubrique ?? 'entreprise'] ?? 'beton';
@@ -43,7 +49,25 @@ export function PageHeader({
           {breadcrumbs ? <Breadcrumbs items={breadcrumbs} /> : null}
         </div>
 
-        {centre ? (
+        {entonnoir ? (
+          <Reveal className="mt-8 flex flex-col items-center text-center sm:mt-10 lg:mt-14">
+            <h1 className="max-w-[60rem] text-40 tracking-[-0.055em] text-balance break-words hyphens-auto sm:hyphens-none lg:text-88 lg:tracking-[-0.07em]">
+              {titre}
+            </h1>
+
+            {intro ? (
+              <p className="mt-6 max-w-[72%] text-17 text-pretty text-ink sm:text-balance sm:max-w-[min(40rem,88%)] sm:text-21 lg:mt-8">
+                {intro}
+              </p>
+            ) : null}
+
+            {children ? (
+              <div className="mt-5 max-w-[62%] text-15 text-pretty text-slate sm:max-w-[min(28rem,76%)] lg:mt-6 lg:text-17">
+                {children}
+              </div>
+            ) : null}
+          </Reveal>
+        ) : centre ? (
           <Reveal className="mt-8 flex flex-col items-center text-center sm:mt-10">
             <h1 className="max-w-[22ch] text-40 tracking-[-0.055em] break-words hyphens-auto sm:hyphens-none lg:text-64">{titre}</h1>
 

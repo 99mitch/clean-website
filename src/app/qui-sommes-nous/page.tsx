@@ -33,16 +33,15 @@ export default async function QuiSommesNousPage() {
         titre={copy.titre}
         intro={copy.intro}
         breadcrumbs={fil}
-      />
+        entonnoir
+      >
+        <p>{copy.presentation}</p>
+      </PageHeader>
 
       <Section>
-        <Reveal>
-          <p className="measure text-21 text-ink">{copy.presentation}</p>
-        </Reveal>
-
         <PlaceholderImage
           label={copy.photo}
-          className="mt-14 aspect-[21/9] w-full overflow-hidden rounded-card border border-ink"
+          className="aspect-[21/9] w-full overflow-hidden rounded-card border border-ink"
         />
 
         <Reveal className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-14">

@@ -43,9 +43,9 @@ export const cta = frenchify({
   eyebrow: 'Passer à l\'action',
   titre: 'Dites-nous ce qu\'il y a à nettoyer, on chiffre.',
   texte:
-    'Cinq questions, moins de deux minutes. Vous recevez une proposition chiffrée, pas une brochure.',
+    'Cinq questions, moins de deux minutes. Vous recevez une proposition claire, pas une brochure.',
   bouton: 'Demander un devis',
-  secondaire: 'Nous écrire',
+  secondaire: 'Nous contacter',
 });
 
 export const errors = frenchify({

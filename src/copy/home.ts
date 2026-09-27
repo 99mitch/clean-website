@@ -16,7 +16,7 @@ export const home = frenchify({
     ctaSecondaire: 'Voir les prestations',
     /** Trois engagements, affichés en filet sous le titre. */
     garanties: [
-      'Réponse chiffrée',
+      'Réponse claire',
       'Contrat sans engagement',
       'Référent nommé au contrat',
     ],
@@ -94,7 +94,7 @@ export const home = frenchify({
     label: 'Retour clients',
     titre: 'Ce que nos clients en disent.',
     intro:
-      'Chaque avis publié ici est signé et vérifiable. Tant qu’un avis n’est pas validé par écrit par le client concerné, il n’est pas affiché.',
+      'Tant qu’un avis n’est pas validé par écrit par le client concerné, il n’est pas affiché.',
     aside: 'avis vérifiés',
     vide: 'AVIS_CLIENTS : aucun avis validé par écrit à ce jour',
   },

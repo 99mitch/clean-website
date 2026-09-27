@@ -51,8 +51,8 @@ export function Header() {
               </a>
             ) : null}
             <div className="hidden sm:block">
-              <ButtonLink href="/contact" variant="devis">
-                {nav.contact}
+              <ButtonLink href="/devis" variant="devis">
+                {nav.devis}
               </ButtonLink>
             </div>
             <MobileMenu />
@@ -98,10 +98,10 @@ function MobileMenu() {
           ))}
           <li>
             <Link
-              href="/contact"
+              href="/devis"
               className="flex min-h-11 items-center font-mono text-13 uppercase tracking-[0.12em] text-cobalt"
             >
-              {nav.contact}
+              {nav.devis}
             </Link>
           </li>
         </ul>

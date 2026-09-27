@@ -118,7 +118,7 @@ export const site = {
       auteur: 'Camille Fabre',
       role: 'Office manager',
       societe: 'Groupe Meridian',
-      note: 4.5,
+      note: 4,
     },
     {
       citation:
@@ -126,7 +126,7 @@ export const site = {
       auteur: 'Karim Belhadj',
       role: 'Gestionnaire d’immeuble',
       societe: 'Cabinet Vasseur & Associés',
-      note: 4.5,
+      note: 5,
     },
     {
       citation:

@@ -18,7 +18,9 @@ const variants: Record<Variant, string> = {
   devis: 'bg-cobalt text-white',
   ink: 'bg-ink text-paper hover:bg-cobalt',
   outline: 'border border-ink text-ink hover:bg-ink hover:text-paper',
-  adaptive: 'border border-current text-current hover:bg-current',
+  /** Contour clair sur fond sombre ; au survol, le bouton se remplit de papier. */
+  adaptive:
+    'border border-current text-current hover:border-paper hover:bg-paper hover:text-abyss focus-visible:bg-paper focus-visible:text-abyss',
   ghost:
     'border-b border-current pb-1 text-ink hover:text-signal min-h-11 px-0',
 };

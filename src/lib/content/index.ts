@@ -61,6 +61,18 @@ async function loadCollection<S extends z.ZodType>(
 }
 
 export const getServices = cache(() => loadCollection('services', serviceSchema));
+
+/**
+ * Écartée des listes (index des prestations, matrice de l'accueil) :
+ * `{{CONFIRMER LA LISTE RÉELLE}}` (§4 CLAUDE.md) — le dossier client ne la
+ * mentionne pas. La fiche reste accessible en direct.
+ */
+const SERVICE_HORS_LISTES = 'traitement-des-sols';
+
+/** Prestations affichées dans les listes : toutes, sauf celle écartée. */
+export const getServicesListes = cache(async () =>
+  (await getServices()).filter((service) => service.meta.slug !== SERVICE_HORS_LISTES),
+);
 export const getSecteurs = cache(() => loadCollection('secteurs', secteurSchema));
 export const getReferences = cache(() =>
   loadCollection('references', referenceSchema),

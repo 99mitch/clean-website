@@ -15,7 +15,6 @@ export const servicesIndex = frenchify({
 
 export const servicePage = frenchify({
   eyebrow: 'Prestation',
-  prestationsTitre: 'Ce qui est inclus',
   frequencesTitre: 'Fréquences proposées',
   secteursTitre: 'Secteurs concernés',
   frequenceLabels: {
@@ -116,9 +115,6 @@ export const quiSommesNous = frenchify({
         'Visites de contrôle planifiées, compte rendu remis au client, écarts corrigés au passage suivant. Un constat sans correction n\'est pas un contrôle.',
     },
   ],
-  equipeTitre: 'L\'encadrement',
-  equipeIntro:
-    'Les personnes que vous aurez en face de vous, du premier appel au contrôle qualité.',
 });
 
 export const engagementsPage = frenchify({

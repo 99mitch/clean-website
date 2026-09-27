@@ -77,9 +77,8 @@ export const home = frenchify({
     abrev: {
       'entretien-regulier': 'Entretien',
       'remise-en-etat': 'Remise en état',
-      'traitement-des-sols': 'Sols',
       vitrerie: 'Vitrerie',
-      'services-associes': 'Associés',
+      'services-associes': 'Services associés',
     } as Record<string, string>,
   },
 

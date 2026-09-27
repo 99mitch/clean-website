@@ -9,7 +9,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHead } from '@/components/ui/Section';
 import { site } from '@/config/site';
 import { home } from '@/copy/home';
-import { getSecteurs, getServices } from '@/lib/content';
+import { getSecteurs, getServicesListes } from '@/lib/content';
 import { PHOTO_HERO } from '@/lib/photos';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { DEGRADE_BLEU } from '@/lib/ui/degrade';
@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function AccueilPage() {
-  const [services, secteurs] = await Promise.all([getServices(), getSecteurs()]);
+  const [services, secteurs] = await Promise.all([getServicesListes(), getSecteurs()]);
 
   return (
     <>

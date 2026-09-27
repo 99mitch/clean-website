@@ -6,7 +6,7 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { servicesIndex } from '@/copy/pages';
-import { getServices } from '@/lib/content';
+import { getServicesListes } from '@/lib/content';
 import { PHOTO_PAR_SERVICE } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
@@ -19,16 +19,8 @@ export const metadata: Metadata = pageMetadata({
   keywords: ['prestations nettoyage', 'entreprise de propreté', 'nettoyage professionnel'],
 });
 
-/**
- * Écartée de l'index : `{{CONFIRMER LA LISTE RÉELLE}}` (§4 CLAUDE.md) — la
- * fiche reste accessible en direct, elle n'apparaît juste plus ici.
- */
-const EXCLUE_DE_L_INDEX = 'traitement-des-sols';
-
 export default async function ServicesPage() {
-  const services = (await getServices()).filter(
-    (service) => service.meta.slug !== EXCLUE_DE_L_INDEX,
-  );
+  const services = await getServicesListes();
 
   return (
     <>

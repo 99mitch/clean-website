@@ -29,7 +29,6 @@ export const frequenceValues = [
 export const prestationValues = [
   'entretien-regulier',
   'remise-en-etat',
-  'traitement-des-sols',
   'vitrerie',
   'services-associes',
 ] as const;
@@ -44,20 +43,17 @@ export const prestationsParTypeLocal: Record<TypeLocal, Prestation[]> = {
   bureaux: [
     'entretien-regulier',
     'vitrerie',
-    'traitement-des-sols',
     'remise-en-etat',
     'services-associes',
   ],
   commerce: [
     'entretien-regulier',
     'vitrerie',
-    'traitement-des-sols',
     'remise-en-etat',
   ],
   industriel: [
     'entretien-regulier',
     'remise-en-etat',
-    'traitement-des-sols',
     'services-associes',
   ],
   immeuble: [

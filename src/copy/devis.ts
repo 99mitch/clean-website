@@ -52,7 +52,6 @@ const steps: StepCopy[] = [
     options: [
       { value: 'entretien-regulier', label: 'Entretien régulier', aide: 'Sols, sanitaires, poussières, déchets' },
       { value: 'remise-en-etat', label: 'Remise en état', aide: 'Après travaux, avant emménagement, fin de bail' },
-      { value: 'traitement-des-sols', label: 'Traitement des sols', aide: 'Décapage, protection, cristallisation, lustrage' },
       { value: 'vitrerie', label: 'Vitrerie', aide: 'Vitres, façades, verrières, accès difficiles' },
       { value: 'services-associes', label: 'Services associés', aide: 'Consommables, espaces verts, manutention' },
     ],

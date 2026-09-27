@@ -84,10 +84,10 @@ export const home = frenchify({
 
   services: {
     label: 'Prestations',
-    titre: 'Cinq familles, un protocole écrit pour chacune.',
+    titre: 'Quatre familles, un protocole écrit pour chacune.',
     intro:
       'Chaque prestation est définie par un périmètre, une fréquence et une méthode annexés au contrat. Rien n’est laissé à l’appréciation de l’agent sur place.',
-    aside: '5 entrées',
+    aside: '4 entrées',
   },
 
   retourClients: {

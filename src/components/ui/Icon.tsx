@@ -39,7 +39,7 @@ const paths: Record<IconKey, React.ReactNode> = {
       <path d="M6 7h5" />
     </>
   ),
-  // Traitement des sols : couches successives (décapage, émulsion, lustrage).
+  // Couches successives, comme un revêtement de sol.
   floor: (
     <>
       <path d="M2 8l10-5 10 5-10 5z" />

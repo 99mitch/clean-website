@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Mdx } from '@/components/content/Mdx';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -70,15 +71,9 @@ export default async function ServicesPage() {
 
                 <div className={`flex flex-col justify-center gap-5 p-8 sm:p-12 ${degrade}`}>
                   <h2 className="text-28 tracking-[-0.04em] lg:text-40">{service.meta.title}</h2>
-                  <p className="measure text-15 opacity-80 lg:text-17">{service.meta.excerpt}</p>
-
-                  <ul className="mt-1 flex list-none flex-col gap-2 border-t border-current/15 pt-4">
-                    {service.meta.prestations.slice(0, 4).map((prestation) => (
-                      <li key={prestation} className="measure text-15 opacity-90">
-                        {prestation}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="border-t border-current/15">
+                    <Mdx source={service.body} tone="inherit" />
+                  </div>
                 </div>
               </Reveal>
             );

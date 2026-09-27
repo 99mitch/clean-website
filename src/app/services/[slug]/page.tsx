@@ -56,7 +56,6 @@ export default async function ServicePage({ params }: Params) {
         rubrique="services"
         label={servicePage.eyebrow}
         titre={meta.title}
-        intro={meta.excerpt}
         breadcrumbs={fil}
       />
 

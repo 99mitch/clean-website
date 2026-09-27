@@ -61,7 +61,6 @@ export default async function SecteurPage({ params }: Params) {
         rubrique="secteurs"
         label={secteurPage.eyebrow}
         titre={meta.title}
-        intro={meta.excerpt}
         breadcrumbs={fil}
       />
 

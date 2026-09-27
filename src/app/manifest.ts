@@ -4,7 +4,7 @@ import { site } from '@/config/site';
 /** Manifeste web : nom, couleurs et icônes pour l'ajout à l'écran d'accueil. */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.nom} — ${site.baseline}`,
+    name: `${site.nom} | ${site.baseline}`,
     short_name: site.nom,
     description: site.description,
     lang: 'fr',

@@ -66,14 +66,15 @@ export default async function SecteurPage({ params }: Params) {
 
       <Section>
         {photo ? (
-          <div className="relative mb-12 aspect-[4/3] overflow-hidden rounded-card border border-ink sm:aspect-[21/9] lg:mb-16">
+          <div className="relative mb-12 aspect-[3/2] w-full max-w-[36rem] overflow-hidden rounded-card border border-ink lg:mb-16">
             <Image
               src={photo.src}
               alt={photo.alt}
               fill
               loading="eager"
               fetchPriority="high"
-              sizes="(min-width: 1320px) 1240px, (min-width: 1024px) calc(100vw - 80px), calc(100vw - 48px)"
+              quality={90}
+              sizes="(min-width: 640px) 576px, calc(100vw - 48px)"
               className="object-cover"
             />
           </div>

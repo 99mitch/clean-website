@@ -104,7 +104,7 @@ export default async function OffrePage({ params }: Params) {
         <div className="mt-12">
           {site.emailContact ? (
             <ButtonLink
-              href={`mailto:${site.emailContact}?subject=Candidature — ${meta.title}`}
+              href={`mailto:${site.emailContact}?subject=Candidature : ${meta.title}`}
               variant="devis"
               size="lg"
             >

@@ -42,7 +42,7 @@ const steps: StepCopy[] = [
       { value: '2-3-par-semaine', label: '2 à 3 fois par semaine' },
       { value: 'hebdomadaire', label: 'Hebdomadaire' },
       { value: 'mensuel', label: 'Mensuel' },
-      { value: 'ponctuel', label: 'Ponctuel — une intervention unique' },
+      { value: 'ponctuel', label: 'Ponctuel (une intervention unique)' },
     ],
   },
   {

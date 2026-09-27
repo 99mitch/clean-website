@@ -20,7 +20,7 @@ export function Header() {
     <header className="site-header sticky top-0 z-50 border-b border-ink bg-paper/95 py-4 backdrop-blur-sm">
       <Container>
         <div className="flex items-center justify-between gap-6">
-          <Link href="/" className="shrink-0" aria-label={`${site.nom} — accueil`}>
+          <Link href="/" className="shrink-0" aria-label={`${site.nom}, retour à l’accueil`}>
             <Logo />
           </Link>
 

@@ -41,7 +41,7 @@ async function loadCollection<S extends z.ZodType>(
       const parsed = schema.safeParse(data);
       if (!parsed.success) {
         throw new Error(
-          `Frontmatter invalide — content/${dir}/${file}\n${JSON.stringify(
+          `Frontmatter invalide : content/${dir}/${file}\n${JSON.stringify(
             parsed.error.issues,
             null,
             2,

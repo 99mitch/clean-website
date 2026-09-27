@@ -37,7 +37,7 @@ export function DevisInterne({
     ['Société', lead.societe],
     ['Contact', lead.nom],
     ['Email', lead.email],
-    ['Téléphone', lead.telephone || '—'],
+    ['Téléphone', lead.telephone || 'Non renseigné'],
     ['Code postal', lead.codePostal],
     ['Reçu le', recu],
   ];

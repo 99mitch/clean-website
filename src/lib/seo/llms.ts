@@ -104,7 +104,7 @@ export async function llmsFullTxt(): Promise<string> {
 
   for (const s of services) {
     blocs.push(
-      `## Prestation — ${s.meta.title}`,
+      `## Prestation : ${s.meta.title}`,
       '',
       `Source : ${absoluteUrl(`/services/${s.meta.slug}`)}`,
       '',
@@ -121,7 +121,7 @@ export async function llmsFullTxt(): Promise<string> {
 
   for (const s of secteurs) {
     blocs.push(
-      `## Secteur — ${s.meta.title}`,
+      `## Secteur : ${s.meta.title}`,
       '',
       `Source : ${absoluteUrl(`/secteurs/${s.meta.slug}`)}`,
       '',
@@ -139,7 +139,7 @@ export async function llmsFullTxt(): Promise<string> {
 
   for (const a of articles) {
     blocs.push(
-      `## Ressource — ${a.meta.title}`,
+      `## Ressource : ${a.meta.title}`,
       '',
       `Source : ${absoluteUrl(`/blog/${a.meta.slug}`)} (${a.meta.date})`,
       '',

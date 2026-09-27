@@ -187,7 +187,7 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
 
       {/* Annonce du changement d'étape (§10). */}
       <p aria-live="polite" className="sr-only">
-        {copy.progression.etape(step, TOTAL_STEPS)} — {stepCopy.titre}
+        {copy.progression.etape(step, TOTAL_STEPS)} : {stepCopy.titre}
       </p>
 
       <div

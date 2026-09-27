@@ -18,8 +18,8 @@ const verificationBing = process.env.BING_SITE_VERIFICATION;
 export const metadata: Metadata = {
   metadataBase: new URL(site.domaine),
   title: {
-    default: `${site.nom} — Entreprise de nettoyage à Paris et en Île-de-France`,
-    template: `%s — ${site.nom}`,
+    default: `${site.nom} | Entreprise de nettoyage à Paris et en Île-de-France`,
+    template: `%s | ${site.nom}`,
   },
   description: home.meta.description,
   applicationName: site.nom,

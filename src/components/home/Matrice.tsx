@@ -82,7 +82,7 @@ export function Matrice({
                     >
                       {copy.abrev[service.meta.slug] ?? service.meta.title}
                       <span className="sr-only">
-                        {' — '}
+                        {', '}
                         {propose ? copy.propose : copy.nonPropose}
                       </span>
                     </li>

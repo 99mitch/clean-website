@@ -27,7 +27,7 @@ export const mentions = frenchify({
     {
       titre: 'Propriété intellectuelle',
       paragraphes: [
-        'L’ensemble des contenus de ce site — textes, visuels, identité graphique, code — est protégé par le droit de la propriété intellectuelle. Toute reproduction, même partielle, est soumise à autorisation écrite préalable.',
+        'L’ensemble des contenus de ce site (textes, visuels, identité graphique, code) est protégé par le droit de la propriété intellectuelle. Toute reproduction, même partielle, est soumise à autorisation écrite préalable.',
         'Les marques et logos éventuellement cités appartiennent à leurs titulaires respectifs.',
       ],
     },
@@ -80,7 +80,7 @@ export const confidentialite = frenchify({
       paragraphes: [
         'Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition, ainsi que d’un droit à la portabilité de vos données.',
         'Ces droits s’exercent par email ou par courrier auprès de l’éditeur, aux coordonnées figurant dans les mentions légales. Une réponse vous est apportée dans un délai d’un mois.',
-        'En cas de désaccord persistant, vous pouvez saisir la CNIL — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, www.cnil.fr.',
+        'En cas de désaccord persistant, vous pouvez saisir la CNIL : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, www.cnil.fr.',
       ],
     },
     {
@@ -128,7 +128,7 @@ export const accessibilite = frenchify({
     {
       titre: 'Voies de recours',
       paragraphes: [
-        'Si un signalement reste sans réponse satisfaisante, vous pouvez saisir le Défenseur des droits — formulaire en ligne sur defenseurdesdroits.fr, ou courrier gratuit sans affranchissement à Défenseur des droits, Libre réponse 71120, 75342 Paris Cedex 07.',
+        'Si un signalement reste sans réponse satisfaisante, vous pouvez saisir le Défenseur des droits : formulaire en ligne sur defenseurdesdroits.fr, ou courrier gratuit sans affranchissement à Défenseur des droits, Libre réponse 71120, 75342 Paris Cedex 07.',
       ],
     },
   ] as Bloc[],

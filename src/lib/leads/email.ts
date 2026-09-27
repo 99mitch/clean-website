@@ -43,7 +43,7 @@ export const emailAdapter: LeadAdapter = {
         from,
         to,
         replyTo: donnees.email,
-        subject: `Devis — ${donnees.societe} (${donnees.codePostal})`,
+        subject: `Devis : ${donnees.societe} (${donnees.codePostal})`,
         react: DevisInterne({
           lead: donnees,
           recu: lead.recu,
@@ -77,7 +77,7 @@ export const emailAdapter: LeadAdapter = {
     const envoi = await resend.emails.send({
       from,
       to,
-      subject: `${lead.type === 'contact' ? 'Message' : 'Candidature'} — ${site.nom}`,
+      subject: `${lead.type === 'contact' ? 'Nouveau message' : 'Nouvelle candidature'} via ${site.nom}`,
       text: `${texte}\n\nReçu le ${lead.recu}`,
     });
     if (envoi.error) throw new Error(envoi.error.message);

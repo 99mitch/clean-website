@@ -3,7 +3,7 @@ import { blogIndex } from '@/copy/pages';
 import { getArticle, getArticles } from '@/lib/content';
 import { OG_CONTENT_TYPE, OG_SIZE, renderOg } from '@/lib/seo/og';
 
-export const alt = `Article sur la propreté professionnelle — ${site.nom}`;
+export const alt = `Article sur la propreté professionnelle, par ${site.nom}`;
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

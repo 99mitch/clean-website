@@ -57,7 +57,7 @@ export const home = frenchify({
    */
   echantillonnier: {
     titre: 'Échantillonnier',
-    compte: (n: number) => `${n} revêtements — ${n} protocoles`,
+    compte: (n: number) => `${n} revêtements, ${n} protocoles`,
     note:
       'La première question d’une visite technique n’est pas « quelle surface » mais « quel revêtement ». Le protocole, le produit et la machine en découlent.',
   },
@@ -96,7 +96,7 @@ export const home = frenchify({
     intro:
       'Chaque avis publié ici est signé et vérifiable. Tant qu’un avis n’est pas validé par écrit par le client concerné, il n’est pas affiché.',
     aside: 'avis vérifiés',
-    vide: 'AVIS_CLIENTS — aucun avis validé par écrit à ce jour',
+    vide: 'AVIS_CLIENTS : aucun avis validé par écrit à ce jour',
   },
 
   protocole: {

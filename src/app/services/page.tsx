@@ -49,27 +49,33 @@ export default async function ServicesPage() {
                 as="article"
                 key={service.meta.slug}
                 delay={index * 60}
-                className="grid overflow-hidden rounded-card border border-ink lg:grid-cols-2"
+                className={`grid overflow-hidden rounded-card border border-ink lg:grid-cols-2 ${degrade}`}
               >
+                {/*
+                  Photo encadrée à sa taille d'origine (≈ 550 px) plutôt
+                  qu'étirée sur toute la hauteur du bloc : les sources sont
+                  petites, les agrandir les rend floues.
+                */}
                 <div
-                  className={`relative min-h-[16rem] border-ink lg:min-h-[26rem] ${
-                    inversee
-                      ? 'border-b lg:order-2 lg:border-b-0 lg:border-l'
-                      : 'border-b lg:border-b-0 lg:border-r'
+                  className={`flex items-center p-5 pb-0 sm:p-8 sm:pb-0 lg:p-10 ${
+                    inversee ? 'lg:order-2 lg:pl-0' : 'lg:pr-0'
                   }`}
                 >
                   {photo ? (
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                    />
+                    <div className="relative mx-auto aspect-[3/2] w-full max-w-[34rem] overflow-hidden rounded-chip border border-ink/20">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        quality={90}
+                        sizes="(min-width: 1024px) 544px, calc(100vw - 64px)"
+                        className="object-cover"
+                      />
+                    </div>
                   ) : null}
                 </div>
 
-                <div className={`flex flex-col justify-center gap-5 p-8 sm:p-12 ${degrade}`}>
+                <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
                   <h2 className="text-28 tracking-[-0.04em] lg:text-40">{service.meta.title}</h2>
                   <div className="border-t border-current/15">
                     <Mdx source={service.body} tone="inherit" />

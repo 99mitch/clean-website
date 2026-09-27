@@ -4,7 +4,7 @@ import { getSecteur, getSecteurs } from '@/lib/content';
 import { PHOTO_PAR_SECTEUR } from '@/lib/photos';
 import { OG_CONTENT_TYPE, OG_SIZE, renderOg } from '@/lib/seo/og';
 
-export const alt = `Nettoyage professionnel par secteur d’activité — ${site.nom}`;
+export const alt = `Nettoyage professionnel par secteur d’activité, par ${site.nom}`;
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

@@ -75,7 +75,9 @@ export function DevisAccuse({
           <Hr style={{ borderColor: '#7A8794', opacity: 0.3, margin: '24px 0' }} />
 
           <Text style={{ fontSize: '12px', color: '#7A8794' }}>
-            {site.nom} — {site.baseline}
+            {site.nom}
+            <br />
+            {site.baseline}
           </Text>
         </Container>
       </Body>

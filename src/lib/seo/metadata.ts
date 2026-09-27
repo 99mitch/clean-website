@@ -36,7 +36,7 @@ export function pageMetadata(input: {
 }): Metadata {
   const url = absoluteUrl(input.path);
   const title = fr(input.title);
-  const avecMarque = `${title} — ${site.nom}`;
+  const avecMarque = `${title} | ${site.nom}`;
   // Au-delà d’environ 65 caractères, Google tronque : on sacrifie la marque
   // (qu'il ajoute souvent de lui-même) plutôt que la fin du titre.
   const titre =

@@ -121,7 +121,7 @@ export function serviceLd(input: {
     hasOfferCatalog: input.prestations?.length
       ? {
           '@type': 'OfferCatalog',
-          name: `${input.name} — ce qui est inclus`,
+          name: `${input.name} : ce qui est inclus`,
           itemListElement: input.prestations.map((prestation) => ({
             '@type': 'Offer',
             itemOffered: { '@type': 'Service', name: prestation },
@@ -142,7 +142,7 @@ export function secteurLd(input: {
   return compact({
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: `Nettoyage professionnel — ${input.name}`,
+    name: `Nettoyage professionnel : ${input.name}`,
     description: input.description,
     url: absoluteUrl(input.url),
     serviceType: 'Nettoyage professionnel',

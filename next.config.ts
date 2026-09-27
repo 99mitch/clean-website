@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   images: {
     // AVIF puis WebP (§8).
     formats: ['image/avif', 'image/webp'],
+    // 90 pour les photos de prestations et de secteurs, dont les sources sont petites.
+    qualities: [75, 90],
   },
 
   poweredByHeader: false,

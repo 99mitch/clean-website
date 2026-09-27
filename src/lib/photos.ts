@@ -34,10 +34,6 @@ export const PHOTO_PAR_SECTEUR: Record<string, Photo> = {
     src: '/images/secteurs/bureaux.png',
     alt: 'Collaboratrice travaillant à son poste dans un bureau ouvert',
   },
-  medical: {
-    src: '/images/secteurs/medical.png',
-    alt: 'Personnel de laboratoire en blouse examinant un prélèvement',
-  },
   industrie: {
     src: '/images/secteurs/industrie.png',
     alt: 'Caristes manipulant des palettes dans un entrepôt logistique',

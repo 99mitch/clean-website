@@ -12,19 +12,18 @@ import { materiaux } from '@/lib/materiaux';
 import { PHOTO_PAR_SECTEUR } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
-import { DEGRADE_BLEU } from '@/lib/ui/degrade';
+import { degradeBleu } from '@/lib/ui/degrade';
 
 export const metadata: Metadata = pageMetadata({
   title: secteursIndex.meta.title,
   description: secteursIndex.meta.description,
   path: '/secteurs',
-  keywords: ['nettoyage par secteur', 'propreté bureaux', 'nettoyage industriel', 'bionettoyage'],
+  keywords: ['nettoyage par secteur', 'propreté bureaux', 'nettoyage industriel'],
 });
 
 /** Revêtement de l'échantillonnier associé à chaque secteur. */
 const PLAQUE_PAR_SECTEUR: Record<string, string> = {
   bureaux: 'moquette',
-  medical: 'resine',
   industrie: 'beton',
   'immeubles-coproprietes': 'carrelage',
   'infrastructures-publiques': 'terrazzo',
@@ -54,7 +53,7 @@ export default async function SecteursPage() {
           {secteurs.map((secteur, index) => {
             const inversee = index % 2 === 1;
             const mat = PLAQUE_PAR_SECTEUR[secteur.meta.slug] ?? materiaux[0].mat;
-            const degrade = DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3];
+            const degrade = degradeBleu(index, secteurs.length);
             const photo = PHOTO_PAR_SECTEUR[secteur.meta.slug];
             const bordures = inversee
               ? 'border-b lg:order-2 lg:border-b-0 lg:border-l'

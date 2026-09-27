@@ -16,7 +16,6 @@ const steps: StepCopy[] = [
     options: [
       { value: 'bureaux', label: 'Bureaux', aide: 'Tertiaire, open space, sièges sociaux' },
       { value: 'commerce', label: 'Commerce', aide: 'Boutique, showroom, restauration' },
-      { value: 'medical', label: 'Établissement de santé', aide: 'Cabinet, clinique, EHPAD, laboratoire' },
       { value: 'industriel', label: 'Site industriel', aide: 'Atelier, entrepôt, logistique' },
       { value: 'immeuble', label: 'Immeuble / copropriété', aide: 'Parties communes, syndic, résidence' },
       { value: 'autre', label: 'Autre', aide: 'École, crèche, salle de sport, lieu de culte…' },

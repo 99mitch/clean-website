@@ -1,4 +1,4 @@
-# CLAUDE.md — Site SPOWCLEAN · Propreté industrielle & services associés
+# CLAUDE.md — Site clean-bureau · Propreté industrielle & services associés
 
 Fichier de contexte pour Claude Code. Lis-le entièrement avant toute modification.
 Objectif du dépôt : un site vitrine B2B haute performance dont le seul KPI est **le nombre de demandes de devis qualifiées**.
@@ -11,7 +11,7 @@ Ces valeurs sont référencées partout dans le code (`src/config/site.ts`). Tan
 
 | Clé | Valeur | Statut |
 |---|---|---|
-| `NOM_ENTREPRISE` | {{À REMPLIR}} | ❌ |
+| `NOM_ENTREPRISE` | clean-bureau | ✅ |
 | `ZONE_INTERVENTION` | {{ex. Île-de-France, rayon 50 km autour de Paris}} | ❌ |
 | `ADRESSE_SIEGE` | {{À REMPLIR}} | ❌ |
 | `TELEPHONE` | {{format +33 1 XX XX XX XX}} | ❌ |

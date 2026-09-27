@@ -1,4 +1,4 @@
-# SPOWCLEAN — site vitrine B2B
+# clean-bureau — site vitrine B2B
 
 Site vitrine de propreté industrielle. **KPI unique : le nombre de demandes de
 devis qualifiées.** Le brief complet est dans [`CLAUDE.md`](./CLAUDE.md) ; ce

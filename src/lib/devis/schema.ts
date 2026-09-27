@@ -5,7 +5,6 @@ import { z } from 'zod';
 export const typeLocalValues = [
   'bureaux',
   'commerce',
-  'medical',
   'industriel',
   'immeuble',
   'autre',
@@ -54,11 +53,6 @@ export const prestationsParTypeLocal: Record<TypeLocal, Prestation[]> = {
     'vitrerie',
     'traitement-des-sols',
     'remise-en-etat',
-  ],
-  medical: [
-    'entretien-regulier',
-    'vitrerie',
-    'traitement-des-sols',
   ],
   industriel: [
     'entretien-regulier',

@@ -11,7 +11,7 @@ export type Pending = null;
 
 export const site = {
   /** {{À REMPLIR}} */
-  nom: 'SPOWCLEAN',
+  nom: 'clean-bureau',
   /** Baseline courte, affichée sous le logo dans le footer. */
   baseline: 'Propreté industrielle & services associés',
 
@@ -60,7 +60,7 @@ export const site = {
   },
 
   /**
-   * {{À REMPLIR}} — ex. https://spowclean.fr
+   * {{À REMPLIR}} — ex. https://clean-bureau.fr
    *
    * Sert aux canoniques, au sitemap et au JSON-LD. Tant que le domaine
    * définitif n'est pas connu, on retombe sur l'URL de production Vercel

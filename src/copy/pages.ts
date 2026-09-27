@@ -31,7 +31,7 @@ export const secteursIndex = frenchify({
   meta: {
     title: 'Secteurs d\'intervention en Île-de-France',
     description:
-      'Bureaux, santé, industrie, copropriétés et bâtiments publics en Île-de-France : chaque lieu a ses contraintes, son protocole et sa traçabilité.',
+      'Bureaux, industrie, copropriétés et bâtiments publics en Île-de-France : chaque lieu a ses contraintes, son protocole et sa traçabilité.',
   },
   eyebrow: 'Secteurs',
   titre: 'Chaque lieu a ses propres contraintes.',

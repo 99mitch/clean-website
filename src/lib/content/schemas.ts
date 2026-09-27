@@ -61,7 +61,6 @@ export const secteurSchema = z.object({
   devisTypeLocal: z.enum([
     'bureaux',
     'commerce',
-    'medical',
     'industriel',
     'immeuble',
     'autre',

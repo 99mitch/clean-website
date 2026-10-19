@@ -9,7 +9,13 @@
  * rubrique sans photo affiche une plaque d'échantillon. N'ajouter ici que des
  * photos de l'équipe réelle en intervention.
  */
-export type Photo = { src: string; alt: string };
+export type Photo = {
+  src: string;
+  alt: string;
+  /** Dimensions du fichier source : l'image est affichée dans ses proportions. */
+  width?: number;
+  height?: number;
+};
 
 export const PHOTO_HERO: Photo = {
   src: '/images/hero-agent-nettoyage.png',
@@ -34,18 +40,26 @@ export const PHOTO_PAR_SERVICE: Record<string, Photo> = {
 export const PHOTO_PAR_SECTEUR: Record<string, Photo> = {
   bureaux: {
     src: '/images/secteurs/bureaux.png',
+    width: 677,
+    height: 596,
     alt: 'Collaboratrice travaillant à son poste dans un bureau ouvert',
   },
   industrie: {
     src: '/images/secteurs/industrie.png',
+    width: 655,
+    height: 577,
     alt: 'Caristes manipulant des palettes dans un entrepôt logistique',
   },
   'immeubles-coproprietes': {
     src: '/images/secteurs/immeubles-coproprietes.png',
+    width: 574,
+    height: 357,
     alt: 'Façades d’immeubles haussmanniens en copropriété',
   },
   'infrastructures-publiques': {
     src: '/images/secteurs/infrastructures-publiques.png',
+    width: 679,
+    height: 624,
     alt: 'Cour intérieure d’un établissement recevant du public',
   },
 };

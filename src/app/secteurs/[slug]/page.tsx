@@ -66,7 +66,15 @@ export default async function SecteurPage({ params }: Params) {
 
       <Section>
         {photo ? (
-          <div className="relative mb-12 aspect-[3/2] w-full max-w-[56rem] overflow-hidden rounded-card border border-ink sm:aspect-[16/9] lg:mb-16">
+          // Centrée, dans les proportions du fichier source et à sa largeur
+          // réelle au plus : ni recadrage, ni agrandissement flou.
+          <div
+            className="relative mx-auto mb-12 w-full overflow-hidden rounded-card border border-ink lg:mb-16"
+            style={{
+              aspectRatio: photo.width && photo.height ? `${photo.width} / ${photo.height}` : '4 / 3',
+              maxWidth: `min(100%, ${photo.width ?? 704}px)`,
+            }}
+          >
             <Image
               src={photo.src}
               alt={photo.alt}
@@ -74,7 +82,7 @@ export default async function SecteurPage({ params }: Params) {
               loading="eager"
               fetchPriority="high"
               quality={90}
-              sizes="(min-width: 960px) 896px, calc(100vw - 48px)"
+              sizes="(min-width: 768px) 704px, calc(100vw - 48px)"
               className="object-cover"
             />
           </div>

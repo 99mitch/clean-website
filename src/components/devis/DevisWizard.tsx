@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -30,28 +30,34 @@ export type DevisPrefill = {
   draft: DevisDraft;
   /** Étapes déjà renseignées par l'URL, donc sautées (§7). */
   skip: number[];
+  /** Étape demandée par `?step=`, validée côté serveur. */
+  step?: number;
   origine?: string;
 };
 
 export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const [draft, setDraft] = useState<DevisDraft>(prefill.draft);
-  const [step, setStep] = useState(1);
+  // Étape connue dès le rendu serveur : le parcours figure dans le HTML
+  // initial au lieu d'attendre le JavaScript (audit du 27/09/2026).
+  const [step, setStep] = useState(
+    () => prefill.step ?? firstOpenStep(prefill.draft, new Set(prefill.skip)),
+  );
   const [stepError, setStepError] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const renderedAt = useRef(0);
+  const honeypot = useRef<HTMLInputElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const hydrated = useRef(false);
 
   const skipped = useMemo(() => new Set(prefill.skip), [prefill.skip]);
 
-  /* ---- Réhydratation : sessionStorage puis ?step= (§7) ----------------
+  /* ---- Réhydratation : sessionStorage (§7) ---------------------------
    * sessionStorage est un système externe, indisponible au rendu serveur :
-   * la synchronisation ne peut donc se faire qu'après montage. L'effet ne
-   * s'exécute qu'une fois, il n'y a pas de cascade de rendus.
+   * la synchronisation ne peut donc se faire qu'après montage. L'étape, elle,
+   * vient de `?step=` et est résolue côté serveur.
    */
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -68,14 +74,7 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
     } catch {
       // Un sessionStorage indisponible ne doit pas bloquer le parcours.
     }
-
-    const fromUrl = Number(searchParams.get('step'));
-    const target =
-      Number.isFinite(fromUrl) && fromUrl >= 1 && fromUrl <= TOTAL_STEPS
-        ? fromUrl
-        : firstOpenStep(prefill.draft, skipped);
-    setStep(target);
-  }, [prefill.draft, searchParams, skipped]);
+  }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   /* ---- Persistance ---------------------------------------------------- */
@@ -92,14 +91,14 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
       const clamped = Math.min(Math.max(target, 1), TOTAL_STEPS);
       setStep(clamped);
       setStepError(null);
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(window.location.search);
       params.set('step', String(clamped));
       router.replace(`/devis?${params.toString()}`, { scroll: false });
       track(`devis_step_${clamped as 1 | 2 | 3 | 4 | 5}`);
       // Le titre de l'étape reçoit le focus : la navigation clavier suit.
       window.requestAnimationFrame(() => headingRef.current?.focus());
     },
-    [router, searchParams],
+    [router],
   );
 
   const next = useCallback(
@@ -142,7 +141,7 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
         body: JSON.stringify({
           ...draft,
           ...values,
-          societeWeb: '',
+          societeWeb: honeypot.current?.value ?? '',
           renderedAt: renderedAt.current,
           origine: prefill.origine,
         }),
@@ -460,11 +459,12 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
               </div>
 
               {/* Honeypot — invisible pour l'humain, laissé au robot (§7). */}
-              <div aria-hidden="true" className="absolute left-[-9999px]">
-                <label htmlFor="societeWeb">{copy.champs.honeypot}</label>
+              <div aria-hidden="true" inert className="absolute left-[-9999px] h-px w-px overflow-hidden">
+                <label htmlFor="devis-hp">{copy.champs.honeypot}</label>
                 <input
-                  id="societeWeb"
-                  name="societeWeb"
+                  ref={honeypot}
+                  id="devis-hp"
+                  name="hp"
                   type="text"
                   tabIndex={-1}
                   autoComplete="off"

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Mdx } from '@/components/content/Mdx';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { servicesIndex } from '@/copy/pages';
@@ -11,7 +11,19 @@ import { getServices } from '@/lib/content';
 import { PHOTO_PAR_SERVICE } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
+import { materiaux } from '@/lib/materiaux';
 import { DEGRADE_BLEU } from '@/lib/ui/degrade';
+
+/**
+ * Plaque d'échantillon affichée quand une prestation n'a pas de photo
+ * réelle : mieux vaut un revêtement qu'une image sans rapport (audit).
+ */
+const PLAQUE_PAR_SERVICE: Record<string, string> = {
+  'entretien-regulier': 'pvc',
+  'remise-en-etat': 'beton',
+  vitrerie: 'vitrage',
+  'services-associes': 'inox',
+};
 
 export const metadata: Metadata = pageMetadata({
   title: servicesIndex.meta.title,
@@ -72,13 +84,18 @@ export default async function ServicesPage() {
                         className="object-cover"
                       />
                     </div>
-                  ) : null}
+                  ) : (
+                    <Plaque mat={PLAQUE_PAR_SERVICE[service.meta.slug] ?? materiaux[0].mat} />
+                  )}
                 </div>
 
                 <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
                   <h2 className="text-28 tracking-[-0.04em] lg:text-40">{service.meta.title}</h2>
-                  <div className="border-t border-current/15">
-                    <Mdx source={service.body} tone="inherit" />
+                  <p className="border-t border-current/15 pt-5 text-17">{service.meta.excerpt}</p>
+                  <div>
+                    <ButtonLink href={`/services/${service.meta.slug}`} variant="adaptive">
+                      {servicesIndex.voir}
+                    </ButtonLink>
                   </div>
                 </div>
               </Reveal>
@@ -96,5 +113,17 @@ export default async function ServicesPage() {
         ])}
       />
     </>
+  );
+}
+
+function Plaque({ mat }: { mat: string }) {
+  const nom = materiaux.find((materiau) => materiau.mat === mat)?.nom;
+  return (
+    <div className="sample-plate relative mx-auto flex aspect-[3/2] w-full max-w-[34rem] items-end overflow-hidden rounded-chip border border-ink/20 p-6">
+      <span className="sample absolute inset-0" data-mat={mat} aria-hidden="true" />
+      <span className="relative z-10 font-mono text-13 uppercase tracking-[0.14em] text-ink">
+        {nom}
+      </span>
+    </div>
   );
 }

@@ -10,8 +10,13 @@
 export type Pending = null;
 
 export const site = {
-  /** {{À REMPLIR}} */
-  nom: 'clean-bureau',
+  /**
+   * Nom dans le texte courant, les titres et le JSON-LD. Audit du 27/09/2026 :
+   * « clean-bureau » en début de phrase passe pour une faute.
+   */
+  nom: 'Clean Bureau',
+  /** Graphie du logo, seul endroit où le nom reste en minuscules. */
+  logo: 'clean-bureau',
   /** Baseline courte, affichée sous le logo dans le footer. */
   baseline: 'Propreté industrielle & services associés',
 
@@ -45,8 +50,15 @@ export const site = {
   } | null,
   /** {{À REMPLIR}} — format +33 1 XX XX XX XX */
   telephone: null as string | null,
-  /** {{À REMPLIR}} */
+  /** {{À REMPLIR}} — adresse sur le domaine (contact@clean-bureau.fr), pas une adresse Gmail. */
   emailContact: null as string | null,
+  /** {{À REMPLIR}} — ex. « Du lundi au vendredi, 8 h – 18 h ». Alimente aussi `openingHours` du JSON-LD. */
+  horaires: null as string | null,
+  /**
+   * {{À REMPLIR}} — horaires au format schema.org (ex. « Mo-Fr 08:00-18:00 »).
+   * Laisser `null` tant que `horaires` n'est pas validé.
+   */
+  horairesSchema: null as string | null,
 
   /** {{À REMPLIR}} — mentions légales */
   legal: {
@@ -88,6 +100,19 @@ export const site = {
   },
 
   /**
+   * Promesse de délai UNIQUE, reprise à l'identique partout (accueil,
+   * méthode, secteurs, page merci). Audit du 27/09/2026 : trois promesses
+   * contradictoires cohabitaient (24-48 h, J+2 puis 48 h, 24 h).
+   * ⚠️ Formulation proposée par l'audit — à confirmer par le client : ne
+   * l'afficher que s'il peut la tenir à coup sûr.
+   */
+  delais: {
+    devis: '48 h',
+    visite: '72 h',
+    urgence: '24 h',
+  },
+
+  /**
    * Délai de réponse annoncé dans l'accusé de réception du devis (§7).
    * `null` → l'accusé reste volontairement muet sur le délai.
    */
@@ -103,6 +128,9 @@ export const site = {
 
   /** {{À REMPLIR}} — autorisation écrite requise avant affichage. */
   logosClients: [] as Array<{ nom: string; logo: string }>,
+
+  /** {{À REMPLIR}} — lien public vers la fiche Google Business Profile (avis). */
+  avisGoogleUrl: null as string | null,
 
   /**
    * ⚠️ CONTENU FICTIF — demandé explicitement pour visualiser la mise en
@@ -143,6 +171,12 @@ export const site = {
     societe: string;
     /** Note sur 5, par demi-point. */
     note: number;
+    /** Type de site, ex. « Plateau de bureaux, 1 200 m² ». Facultatif. */
+    site?: string;
+    /** Mois de l'avis, ex. « mars 2026 ». Facultatif. */
+    date?: string;
+    /** Provenance vérifiable, ex. « Avis Google ». Facultatif. */
+    source?: string;
   }>,
 
   /** Plaquette PDF jointe à l'accusé de réception. `null` tant qu'absente. */
@@ -155,6 +189,17 @@ export const site = {
 /** Téléphone au format `tel:` (E.164 approximé par suppression des espaces). */
 export function telHref(): string | null {
   return site.telephone ? `tel:${site.telephone.replace(/[^\d+]/g, '')}` : null;
+}
+
+/**
+ * Adresse affichable : la rue si elle est renseignée, sinon ce qui est validé
+ * (code postal, ville, arrondissement). Jamais vide, jamais inventée.
+ */
+export function adresseLignes(): [string, string] | [string] {
+  const a = site.adresseSiege;
+  if (a) return [a.rue, `${a.codePostal} ${a.ville}`];
+  const l = site.localisation;
+  return [`${l.codePostal} ${l.ville} (${l.quartier})`];
 }
 
 /** URL absolue — canoniques, sitemap, JSON-LD, Open Graph. */

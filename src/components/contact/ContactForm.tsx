@@ -11,6 +11,7 @@ import { contactFormSchema, type ContactFormValues } from '@/lib/contact/schema'
 
 export function ContactForm() {
   const renderedAt = useRef(0);
+  const honeypot = useRef<HTMLInputElement>(null);
   const [etat, setEtat] = useState<'idle' | 'envoi' | 'ok' | 'erreur'>('idle');
 
   // Horodatage du rendu, base du contrôle anti-spam des 3 secondes (§7).
@@ -40,7 +41,7 @@ export function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...values,
-          societeWeb: '',
+          societeWeb: honeypot.current?.value ?? '',
           renderedAt: renderedAt.current,
         }),
       });
@@ -156,9 +157,9 @@ export function ContactForm() {
       </div>
 
       {/* Honeypot */}
-      <div aria-hidden="true" className="absolute left-[-9999px]">
-        <label htmlFor="contact-societeWeb">{devis.champs.honeypot}</label>
-        <input id="contact-societeWeb" name="societeWeb" type="text" tabIndex={-1} autoComplete="off" />
+      <div aria-hidden="true" inert className="absolute left-[-9999px] h-px w-px overflow-hidden">
+        <label htmlFor="contact-hp">{devis.champs.honeypot}</label>
+        <input ref={honeypot} id="contact-hp" name="hp" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {etat === 'erreur' ? (

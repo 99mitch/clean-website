@@ -2,6 +2,11 @@
  * Photographies du site, chemin et texte alternatif. Partagées entre les
  * pages et les images de partage (Open Graph) : une photo ajoutée ici apparaît
  * aux deux endroits.
+ *
+ * Audit du 27/09/2026 : les photos sans rapport avec la page (gravats pour
+ * « Services associés », employée de bureau, caristes) ont été retirées. Une
+ * rubrique sans photo affiche une plaque d'échantillon. N'ajouter ici que des
+ * photos de l'équipe réelle en intervention.
  */
 export type Photo = { src: string; alt: string };
 
@@ -23,21 +28,9 @@ export const PHOTO_PAR_SERVICE: Record<string, Photo> = {
     src: '/images/services/vitrerie.png',
     alt: 'Agent nettoyant une vitre extérieure à la raclette',
   },
-  'services-associes': {
-    src: '/images/services/services-associes.png',
-    alt: 'Agent balayant des gravats sur un chantier en fin de travaux',
-  },
 };
 
 export const PHOTO_PAR_SECTEUR: Record<string, Photo> = {
-  bureaux: {
-    src: '/images/secteurs/bureaux.png',
-    alt: 'Collaboratrice travaillant à son poste dans un bureau ouvert',
-  },
-  industrie: {
-    src: '/images/secteurs/industrie.png',
-    alt: 'Caristes manipulant des palettes dans un entrepôt logistique',
-  },
   'immeubles-coproprietes': {
     src: '/images/secteurs/immeubles-coproprietes.png',
     alt: 'Façades d’immeubles haussmanniens en copropriété',

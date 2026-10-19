@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Mdx } from '@/components/content/Mdx';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { ButtonLink } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
@@ -104,8 +104,11 @@ export default async function SecteursPage() {
 
                 <div className="flex flex-col justify-center gap-5 p-8 sm:p-12">
                   <h2 className="text-28 tracking-[-0.04em] lg:text-40">{secteur.meta.title}</h2>
-                  <div className="border-t border-current/15">
-                    <Mdx source={secteur.body} tone="inherit" />
+                  <p className="border-t border-current/15 pt-5 text-17">{secteur.meta.excerpt}</p>
+                  <div>
+                    <ButtonLink href={`/secteurs/${secteur.meta.slug}`} variant="adaptive">
+                      {secteursIndex.voir}
+                    </ButtonLink>
                   </div>
                 </div>
               </Reveal>

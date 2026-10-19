@@ -185,24 +185,43 @@ function RetourClients() {
   }
 
   return (
-    <ul className="mt-12 grid list-none gap-4 md:grid-cols-3">
-      {avis.map((entree, index) => (
-        <Reveal
-          as="li"
-          key={entree.auteur}
-          delay={index * 60}
-          className="flex flex-col rounded-card border border-ink p-8"
-        >
-          <Etoiles note={entree.note} id={`avis-${index}`} />
-          <p className="mt-6 text-17 leading-relaxed text-ink">« {entree.citation} »</p>
-          <p className="mt-auto pt-8 font-mono text-13 uppercase tracking-[0.1em] text-slate">
-            {abregerNom(entree.auteur)}
-            <br />
-            <span className="normal-case tracking-normal">{entree.role}</span>
-          </p>
-        </Reveal>
-      ))}
-    </ul>
+    <>
+      <ul className="mt-12 grid list-none gap-4 md:grid-cols-3">
+        {avis.map((entree, index) => (
+          <Reveal
+            as="li"
+            key={entree.auteur}
+            delay={index * 60}
+            className="flex flex-col rounded-card border border-ink p-8"
+          >
+            <Etoiles note={entree.note} id={`avis-${index}`} />
+            <p className="mt-6 text-17 leading-relaxed text-ink">« {entree.citation} »</p>
+            <p className="mt-auto pt-8 font-mono text-13 uppercase tracking-[0.1em] text-slate">
+              {abregerNom(entree.auteur)}
+              <br />
+              <span className="normal-case tracking-normal">
+                {[entree.role, entree.site].filter(Boolean).join(' · ')}
+              </span>
+              {entree.date || entree.source ? (
+                <>
+                  <br />
+                  <span className="normal-case tracking-normal">
+                    {[entree.source, entree.date].filter(Boolean).join(', ')}
+                  </span>
+                </>
+              ) : null}
+            </p>
+          </Reveal>
+        ))}
+      </ul>
+      {site.avisGoogleUrl ? (
+        <p className="mt-8">
+          <ButtonLink href={site.avisGoogleUrl} variant="outline">
+            {home.retourClients.google}
+          </ButtonLink>
+        </p>
+      ) : null}
+    </>
   );
 }
 

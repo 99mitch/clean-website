@@ -24,6 +24,10 @@ export function pageMetadata(input: {
   title: string;
   description: string;
   path: string;
+  /**
+   * Conservés dans le contenu comme mémo de ciblage, mais plus émis en
+   * `<meta name="keywords">` : Google les ignore (audit du 27/09/2026).
+   */
   keywords?: string[];
   noindex?: boolean;
   type?: 'website' | 'article';
@@ -51,7 +55,6 @@ export function pageMetadata(input: {
   return {
     title: titre,
     description,
-    keywords: input.keywords,
     alternates: { canonical: url },
     // Absent plutôt qu'`undefined` : sinon la directive du layout serait écrasée.
     ...(input.noindex ? { robots: { index: false, follow: false } } : {}),

@@ -11,6 +11,7 @@ export const servicesIndex = frenchify({
   titre: 'Ce que nous faisons, et comment c\'est défini.',
   intro:
     'Chaque prestation repose sur un protocole écrit, une fréquence et un périmètre annexés au contrat. Rien n\'est laissé à l\'appréciation de l\'agent sur place.',
+  voir: 'Détail de la prestation',
 });
 
 export const servicePage = frenchify({
@@ -36,6 +37,7 @@ export const secteursIndex = frenchify({
   titre: 'Chaque lieu a ses propres contraintes.',
   intro:
     'Une école, un atelier, un hall d\'immeuble : chacun impose ses produits, ses horaires et sa propre traçabilité.',
+  voir: 'Détail du secteur',
 });
 
 export const secteurPage = frenchify({
@@ -71,7 +73,7 @@ export const blogIndex = frenchify({
   eyebrow: 'Ressources',
   titre: 'Ce qu\'il faut savoir avant d\'acheter de la propreté.',
   intro:
-    'Des articles écrits par ceux qui exploitent les contrats, pour ceux qui les achètent. Pas de contenu de remplissage.',
+    'Des articles écrits par ceux qui exploitent les contrats, pour ceux qui les achètent.',
   vide: 'Les premiers articles arrivent prochainement.',
   lire: 'Lire l\'article',
   par: 'Par',
@@ -87,17 +89,32 @@ export const quiSommesNous = frenchify({
   titre: 'Nos équipes restent. Notre qualité aussi.',
   intro:
     'On ne nettoie pas avec des produits. On nettoie avec des gens. Leur condition de travail, c\'est votre qualité de service.',
-  presentation: `${site.nom}, situé en plein cœur du 14e arrondissement de Paris, est une entreprise exigeante avec comme mot d'ordre la preuve vérifiable, que ce soit pour ses clients ou ses collaborateurs. Cette exigence assure un protocole écrit et mesurable pour chaque intervention, quel que soit le lieu ou l'urgence de la demande. ${site.nom} intervient dans toute la région Île-de-France.`,
-  photo: 'Photo : équipe ou atelier',
+  /**
+   * Texte proposé par l'audit du 27/09/2026. Les chiffres ne s'insèrent que
+   * lorsqu'ils sont validés dans `site.chiffres` (§0) : sinon, la phrase reste
+   * vraie sans eux.
+   */
+  presentation: `${site.nom} est une entreprise de propreté${site.chiffres.anneeCreation ? ` fondée en ${site.chiffres.anneeCreation} et` : ''} installée dans le 14e arrondissement de Paris. Nous intervenons dans toute l'Île-de-France${site.chiffres.nbSitesClients ? ` pour ${site.chiffres.nbSitesClients} clients` : ''} : bureaux, copropriétés, sites industriels et bâtiments publics.`,
+  photo: 'Photo : équipe en intervention',
   histoire: [
-    `${site.nom}, qui depuis sa création s'appuie sur son équipe commerciale et son personnel d'exploitation pour assurer un partenariat positif avec tous les interlocuteurs rencontrés durant la réalisation des divers marchés qui lui ont été confiés, a développé au fil de ses missions une connaissance approfondie des sites similaires, lui permettant aujourd'hui de calculer au plus juste, pour chaque établissement, une étude méthodique adaptée à sa particularité.`,
-    `Forte de cette expérience, ${site.nom} souhaite accompagner chaque client dans ses projets en construisant un partenariat solide, afin que le nettoyage ne soit plus une préoccupation mais le résultat d'un protocole tenu et vérifié.`,
+    `Nos${site.chiffres.nbSalaries ? ` ${site.chiffres.nbSalaries}` : ''} agents sont recrutés en priorité en CDI et formés en continu. Une équipe stable connaît vos locaux, vos accès et vos contraintes. C'est ce qui garantit le même résultat, semaine après semaine.`,
+    'Chaque intervention suit un protocole écrit, propre à votre site. Chaque passage est daté et documenté. Si un écart est constaté, il est signalé et corrigé.',
+    'Notre objectif : que le nettoyage ne soit plus un sujet pour vous.',
   ],
+  chiffresTitre: 'En chiffres',
+  chiffres: {
+    anneeCreation: 'Année de création',
+    nbSalaries: 'Agents',
+    nbSitesClients: 'Sites clients',
+    m2TraitesAn: 'm² entretenus par an',
+    tauxSatisfaction: 'Clients satisfaits',
+  } as Record<string, string>,
+  sectionsTitre: 'Comment nous travaillons',
   sections: [
     {
       titre: 'Une organisation à taille humaine',
       texte:
-        'Un référent nommé par contrat, un encadrement de proximité et des équipes stables. Vous parlez à quelqu\'un qui connaît votre site, pas à un standard.',
+        'Un référent nommé par contrat, un encadrement de proximité et des équipes stables. Vous parlez à quelqu\'un qui connaît votre site.',
     },
     {
       titre: 'Le recrutement avant tout',
@@ -124,7 +141,7 @@ export const engagementsPage = frenchify({
       'Réduction des produits chimiques, gestion des déchets, conditions de travail et insertion : ce sur quoi nous nous engageons, et comment c\'est vérifiable.',
   },
   eyebrow: 'Engagements',
-  titre: 'Des engagements vérifiables, pas une charte décorative.',
+  titre: 'Des engagements que vous pouvez vérifier.',
   intro:
     'Un engagement qui ne se mesure pas n\'en est pas un. Voici ce que nous tenons, et comment vous pouvez le contrôler.',
   blocs: [
@@ -183,9 +200,9 @@ export const recrutementPage = frenchify({
       'Nous recrutons des agents de propreté et des chefs d\'équipe. Horaires regroupés, CDI dès que possible, formation avant la première intervention.',
   },
   eyebrow: 'Recrutement',
-  titre: 'On recrute des gens qu\'on garde.',
+  titre: 'Nous recrutons des gens que nous gardons.',
   intro:
-    'Le turnover est le premier problème de ce métier. Nous le traitons par les horaires, le contrat et l\'encadrement, pas par des affiches.',
+    'Le turnover est le premier problème de ce métier. Nous le traitons par les horaires, le contrat et l\'encadrement.',
   ceQueNousOffrons: 'Ce que nous proposons',
   offres: 'Offres en cours',
   offresVides:
@@ -194,7 +211,7 @@ export const recrutementPage = frenchify({
   spontaneeTexte:
     'Décrivez votre expérience et vos disponibilités. Nous répondons à toutes les candidatures, y compris négativement.',
   points: [
-    'Des horaires regroupés, pas éclatés sur toute la journée entre trois sites.',
+    'Des horaires regroupés, plutôt qu\'éclatés sur la journée entre trois sites.',
     'Un CDI dès que la charge le permet, et un temps partiel choisi si vous le préférez.',
     'Une formation aux protocoles et à la sécurité avant votre première intervention.',
     'Un chef d\'équipe joignable, qui passe sur site et connaît votre poste.',
@@ -220,6 +237,9 @@ export const contactPage = frenchify({
     'Le formulaire de contact sert aux questions. Pour obtenir une proposition chiffrée, le parcours de devis pose les cinq questions dont nous avons besoin.',
   versDevis: 'Demander un devis chiffré',
   coordonneesTitre: 'Coordonnées',
+  zone: 'Zone d\'intervention : Paris et Île-de-France',
+  formulaireDirect:
+    'Le formulaire arrive directement à notre équipe. Pour un prix, le devis en cinq questions est plus rapide.',
   formulaireTitre: 'Nous écrire',
   champs: {
     nom: 'Nom et prénom',
@@ -237,6 +257,7 @@ export const contactPage = frenchify({
     'Suivi d\'un contrat en cours',
     'Facturation',
     'Recrutement',
+    'Données personnelles',
     'Autre',
   ],
   envoyer: 'Envoyer le message',

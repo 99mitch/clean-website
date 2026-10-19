@@ -1,21 +1,42 @@
+import { site } from '@/config/site';
 import { frenchify } from '@/lib/typo';
 
-type Bloc = { titre: string; paragraphes: string[]; champs?: string[] };
+type Bloc = {
+  titre: string;
+  paragraphes: string[];
+  champs?: string[];
+  liens?: Array<{ href: string; label: string }>;
+};
+
+/**
+ * Canal d'exercice des droits RGPD. Audit du 27/09/2026 : la politique
+ * renvoyait aux coordonnées des mentions légales, alors vides — personne ne
+ * pouvait exercer ses droits. Le formulaire de contact fonctionne toujours ;
+ * l'email et le courrier s'ajoutent dès qu'ils sont renseignés.
+ */
+const courrier =
+  site.legal.raisonSociale && site.adresseSiege
+    ? `${site.legal.raisonSociale}, ${site.adresseSiege.rue}, ${site.adresseSiege.codePostal} ${site.adresseSiege.ville}`
+    : null;
+const canauxDroits = [
+  site.emailContact ? `écrivez à ${site.emailContact}` : null,
+  courrier ? `écrivez par courrier à ${courrier}` : null,
+  'utilisez le formulaire de contact, sujet « Données personnelles »',
+].filter(Boolean);
 
 export const mentions = frenchify({
   blocs: [
     {
       titre: 'Éditeur du site',
       paragraphes: [
-        'Le présent site est édité par la société identifiée ci-dessous. Les informations légales sont mises à jour à chaque modification statutaire.',
+        `Le présent site est édité par ${site.nom}, entreprise de propreté installée à Paris (${site.localisation.codePostal}).`,
       ],
-      champs: ['RAISON_SOCIALE', 'FORME_JURIDIQUE', 'CAPITAL', 'ADRESSE_SIEGE', 'SIRET', 'RCS', 'TVA', 'TELEPHONE', 'EMAIL_CONTACT'],
+      champs: ['RAISON_SOCIALE', 'FORME_JURIDIQUE', 'CAPITAL', 'ADRESSE_SIEGE', 'RCS', 'SIRET', 'TVA', 'TELEPHONE', 'EMAIL_CONTACT'],
+      liens: [{ href: '/contact', label: 'Nous écrire via le formulaire de contact' }],
     },
     {
       titre: 'Directeur de la publication',
-      paragraphes: [
-        'Le directeur de la publication est le représentant légal de la société éditrice.',
-      ],
+      paragraphes: [],
       champs: ['DIRECTEUR_PUBLICATION'],
     },
     {
@@ -43,7 +64,7 @@ export const mentions = frenchify({
 
 export const confidentialite = frenchify({
   intro:
-    'Cette politique décrit les données collectées via ce site, leur usage et vos droits. Elle est rédigée pour être lue, pas pour être opposée.',
+    'Cette politique décrit, en termes simples, les données collectées via ce site, leur usage et vos droits.',
   blocs: [
     {
       titre: 'Données collectées',
@@ -79,9 +100,10 @@ export const confidentialite = frenchify({
       titre: 'Vos droits',
       paragraphes: [
         'Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition, ainsi que d’un droit à la portabilité de vos données.',
-        'Ces droits s’exercent par email ou par courrier auprès de l’éditeur, aux coordonnées figurant dans les mentions légales. Une réponse vous est apportée dans un délai d’un mois.',
+        `Pour exercer vos droits, ${canauxDroits.join(', ou ')}. Nous vous répondons sous un mois.`,
         'En cas de désaccord persistant, vous pouvez saisir la CNIL : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, www.cnil.fr.',
       ],
+      liens: [{ href: '/contact', label: 'Exercer mes droits via le formulaire' }],
     },
     {
       titre: 'Sécurité',

@@ -1,8 +1,12 @@
+import { site } from '@/config/site';
 import { frenchify } from '@/lib/typo';
+
+const { delais } = site;
 
 export const home = frenchify({
   meta: {
-    title: 'Entreprise de nettoyage à Paris et en Île-de-France',
+    // 48 caractères : avec « | Clean Bureau », le titre reste sous les 65 (audit).
+    title: 'Entreprise de nettoyage à Paris et Île-de-France',
     description:
       'Nettoyage de bureaux, copropriétés, sites industriels et lieux publics en Île-de-France. Cinq questions : un prix, un protocole et une date.',
   },
@@ -10,14 +14,15 @@ export const home = frenchify({
   hero: {
     eyebrow: 'Propreté industrielle et services associés',
     titre: 'La propreté se voit. La nôtre se prouve.',
+    /** Sous-titre visible : porte les mots-clés absents du H1 (audit). */
     texte:
-      'Vous décrivez vos locaux en cinq questions. On vous répond avec un prix, un protocole et une date. Pas avec une brochure.',
+      'Entreprise de nettoyage de bureaux, copropriétés et sites industriels à Paris et en Île-de-France. Vous décrivez vos locaux en cinq questions, nous vous répondons avec un prix, un protocole et une date.',
     ctaPrimaire: 'Demander un devis',
     ctaSecondaire: 'Voir les prestations',
     /** Trois engagements, affichés en filet sous le titre. */
     garanties: [
-      'Réponse claire',
-      'Contrat sans engagement',
+      `Devis sous ${delais.devis}`,
+      'Contrat sans engagement de durée',
       'Référent nommé au contrat',
     ],
   },
@@ -25,13 +30,13 @@ export const home = frenchify({
   pourquoiNous: {
     label: 'Pourquoi nous',
     titre: 'Notre différence repose sur quatre piliers.',
-    intro: 'Quatre engagements tenus au contrat, pas de simples adjectifs.',
+    intro: 'Quatre engagements, tous écrits dans le contrat.',
     aside: '4 engagements',
     points: [
       {
         titre: 'Disponibilité',
         texte:
-          'Un référent joignable et des équipes mobilisables sous 24 à 48 h, y compris en dehors des horaires de bureau.',
+          `Un référent joignable, un devis sous ${delais.devis} et une intervention d'urgence sous ${delais.urgence}, y compris en dehors des horaires de bureau.`,
       },
       {
         titre: 'Flexibilité',
@@ -46,7 +51,7 @@ export const home = frenchify({
       {
         titre: 'Responsabilité',
         texte:
-          'Personnel déclaré, formé et assuré. Un écart constaté est signalé et corrigé, jamais dissimulé.',
+          'Personnel déclaré, formé et assuré. Produits écolabellisés dès qu’un équivalent existe. Un écart constaté est signalé, puis corrigé.',
       },
     ],
   },
@@ -64,9 +69,9 @@ export const home = frenchify({
 
   matrice: {
     label: 'Croisement',
-    titre: 'Adapté à votre site, pas à un standard.',
+    titre: 'Un protocole par type de site.',
     intro:
-      'Un bloc opératoire, un atelier, un hall d’immeuble : ni les mêmes produits, ni les mêmes horaires, mais la même rigueur. Chaque en-tête ouvre sur un protocole différent.',
+      'Un plateau de bureaux, un atelier, un hall d’immeuble : ni les mêmes produits, ni les mêmes horaires, mais la même rigueur. Chaque en-tête ouvre sur un protocole différent.',
     aside: 'secteurs × prestations',
     colonneSecteur: 'Secteur',
     propose: 'prestation proposée',
@@ -97,6 +102,7 @@ export const home = frenchify({
       'Tant qu’un avis n’est pas validé par écrit par le client concerné, il n’est pas affiché.',
     aside: 'avis vérifiés',
     vide: 'AVIS_CLIENTS : aucun avis validé par écrit à ce jour',
+    google: 'Tous nos avis sur Google',
   },
 
   protocole: {
@@ -107,27 +113,27 @@ export const home = frenchify({
     aside: '4 étapes',
     etapes: [
       {
-        titre: 'Visite technique',
+        titre: 'Devis chiffré',
         texte:
-          'Relevé des surfaces, des revêtements et des contraintes d’accès. Sur site, avec le responsable des lieux.',
-        duree: 'J+2 après votre demande',
+          'À partir de vos cinq réponses : un premier prix, le périmètre et les fréquences proposées.',
+        duree: `Sous ${delais.devis}`,
       },
       {
-        titre: 'Proposition chiffrée',
+        titre: 'Visite technique',
         texte:
-          'Un cahier des charges lisible : périmètre, fréquences, produits, matériel, prix. Pas de ligne « divers ».',
-        duree: '48 h après la visite',
+          'Relevé des surfaces, des revêtements et des accès, sur site avec le responsable des lieux. Le cahier des charges suit : périmètre, fréquences, produits, matériel, prix. Aucune ligne « divers ».',
+        duree: `Sous ${delais.visite}`,
       },
       {
         titre: 'Mise en place',
         texte:
           'Équipe nommée, remplaçants identifiés, cahier de liaison ouvert dès la première intervention.',
-        duree: 'À la date convenue',
+        duree: `À la date convenue · urgence sous ${delais.urgence}`,
       },
       {
         titre: 'Contrôle qualité',
         texte:
-          'Visites de contrôle planifiées et compte rendu écrit. Un écart constaté est corrigé, pas commenté.',
+          'Visites de contrôle planifiées et compte rendu écrit. Un écart constaté est corrigé au passage suivant.',
         duree: 'Tout au long du contrat',
       },
     ],

@@ -1,3 +1,4 @@
+import { site } from '@/config/site';
 import { frenchify } from '@/lib/typo';
 
 type StepOption = { value: string; label: string; aide?: string };
@@ -76,7 +77,7 @@ export const devis = frenchify({
     eyebrow: 'Devis',
     titre: 'Cinq questions, une réponse chiffrée.',
     texte:
-      'Pas de formulaire fourre-tout. On demande exactement ce qu\'il faut pour vous répondre avec un prix, et rien de plus.',
+      `Nous posons uniquement les questions nécessaires pour vous répondre avec un prix, sous ${site.delais.devis}.`,
   },
 
   progression: {
@@ -96,7 +97,7 @@ export const devis = frenchify({
     telephone: {
       label: 'Téléphone',
       optionnel: 'facultatif',
-      aide: 'Uniquement si vous préférez qu\'on vous appelle.',
+      aide: 'Uniquement si vous préférez que nous vous appelions.',
     },
     codePostal: { label: 'Code postal du site', placeholder: '' },
     message: {
@@ -126,6 +127,14 @@ export const devis = frenchify({
     reseauSecours: 'Nous joindre autrement',
   },
 
+  /** Contact de secours, visible sous le parcours (audit du 27/09/2026). */
+  secours: {
+    texte: 'Un problème avec le formulaire ? Décrivez vos locaux par message, nous vous répondons de la même façon.',
+    lien: 'Nous écrire',
+    sansJs:
+      'Ce parcours nécessite JavaScript. Vous pouvez aussi nous décrire vos locaux depuis la page Contact.',
+  },
+
   recap: {
     titre: 'Vos réponses',
     modifier: 'Modifier',
@@ -138,16 +147,16 @@ export const devis = frenchify({
         'Votre demande de devis a bien été enregistrée. Un accusé de réception vient de vous être envoyé par email.',
     },
     eyebrow: 'Demande enregistrée',
-    titre: 'C\'est reçu. On revient vers vous avec un chiffre.',
+    titre: 'C\'est reçu. Nous revenons vers vous avec un chiffre.',
     texte:
       'Un accusé de réception vient de partir par email. Si vous ne le voyez pas, vérifiez les indésirables.',
     delai: (heures: number) =>
       `Notre réponse vous parviendra sous ${heures} heures ouvrées.`,
     suite: 'Et ensuite',
     etapes: [
-      'Nous relisons votre demande et préparons les questions manquantes.',
-      'Nous convenons d\'une visite technique sur site, ou d\'un échange téléphonique si le périmètre est simple.',
-      'Vous recevez une proposition chiffrée avec le protocole détaillé.',
+      `Sous ${site.delais.devis} : un premier chiffrage établi à partir de vos réponses.`,
+      `Sous ${site.delais.visite} : une visite technique sur site, ou un échange téléphonique si le périmètre est simple.`,
+      'Ensuite : le cahier des charges définitif, avec le protocole détaillé.',
     ],
     retour: 'Retour à l\'accueil',
     lire: 'Lire nos ressources en attendant',

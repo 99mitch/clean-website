@@ -60,6 +60,7 @@ export function organisationGraph(
     image: absoluteUrl('/opengraph-image'),
     telephone: site.telephone,
     email: site.emailContact,
+    openingHours: site.horairesSchema,
     vatID: site.legal.tva,
     address: adresse(),
     areaServed: zonesDesservies(),

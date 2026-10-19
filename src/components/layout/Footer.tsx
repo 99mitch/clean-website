@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { PendingData } from '@/components/ui/PendingData';
-import { site, telHref } from '@/config/site';
+import { adresseLignes, site, telHref } from '@/config/site';
 import { footer, nav } from '@/copy/common';
 import { Logo } from './Logo';
 
@@ -44,44 +44,57 @@ export function Footer() {
 
             <dl className="mt-10 border-t border-paper/20">
               <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/70">{footer.zoneLabel}</dt>
+                <dt className="eyebrow text-paper/70">{footer.siegeLabel}</dt>
                 <dd className="mt-1">
-                  {site.zoneIntervention ? (
-                    <span className="text-15 text-paper/85">{site.zoneIntervention}</span>
-                  ) : (
-                    <PendingData label="ZONE_INTERVENTION" />
-                  )}
+                  <address className="text-15 not-italic text-paper/85">
+                    {adresseLignes().map((ligne) => (
+                      <span key={ligne} className="block">
+                        {ligne}
+                      </span>
+                    ))}
+                  </address>
+                  {site.horaires ? (
+                    <span className="mt-1 block text-15 text-paper/85">{site.horaires}</span>
+                  ) : null}
                 </dd>
               </div>
-              {/* Masqué en production tant qu'aucune coordonnée n'est validée (§0). */}
-              {tel || site.emailContact || process.env.NODE_ENV !== 'production' ? (
-                <div className="border-b border-paper/20 py-3">
-                  <dt className="eyebrow text-paper/70">{footer.contactLabel}</dt>
-                  <dd className="mt-1 space-y-1">
-                    {tel ? (
-                      <a
-                        href={tel}
-                        data-analytics="tel_click"
-                        className="block font-mono text-15 text-paper/85 hover:text-paper"
-                      >
-                        {site.telephone}
-                      </a>
-                    ) : (
-                      <PendingData label="TELEPHONE" />
-                    )}
-                    {site.emailContact ? (
-                      <a
-                        href={`mailto:${site.emailContact}`}
-                        className="block font-mono text-15 text-paper/85 hover:text-paper"
-                      >
-                        {site.emailContact}
-                      </a>
-                    ) : (
-                      <PendingData label="EMAIL_CONTACT" />
-                    )}
-                  </dd>
-                </div>
-              ) : null}
+              <div className="border-b border-paper/20 py-3">
+                <dt className="eyebrow text-paper/70">{footer.zoneLabel}</dt>
+                <dd className="mt-1 text-15 text-paper/85">{footer.zone}</dd>
+              </div>
+              <div className="border-b border-paper/20 py-3">
+                <dt className="eyebrow text-paper/70">{footer.contactLabel}</dt>
+                <dd className="mt-1 space-y-1">
+                  {tel ? (
+                    <a
+                      href={tel}
+                      data-analytics="tel_click"
+                      className="block font-mono text-15 text-paper/85 hover:text-paper"
+                    >
+                      {site.telephone}
+                    </a>
+                  ) : (
+                    <PendingData label="TELEPHONE" />
+                  )}
+                  {site.emailContact ? (
+                    <a
+                      href={`mailto:${site.emailContact}`}
+                      className="block font-mono text-15 text-paper/85 hover:text-paper"
+                    >
+                      {site.emailContact}
+                    </a>
+                  ) : (
+                    <PendingData label="EMAIL_CONTACT" />
+                  )}
+                  {/* Toujours un moyen de nous joindre, même sans coordonnées validées. */}
+                  <Link
+                    href="/contact"
+                    className="inline-flex min-h-11 items-center text-15 text-paper/85 underline underline-offset-4 hover:text-paper"
+                  >
+                    {footer.ecrire}
+                  </Link>
+                </dd>
+              </div>
             </dl>
           </div>
 

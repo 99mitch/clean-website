@@ -18,7 +18,7 @@ export function Logo({ tone = 'ink' }: { tone?: 'ink' | 'paper' }) {
           tone === 'paper' ? 'text-paper' : 'text-ink'
         }`}
       >
-        {site.nom}
+        {site.logo}
       </span>
     </span>
   );

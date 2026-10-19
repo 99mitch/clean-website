@@ -1,3 +1,4 @@
+import { site } from '@/config/site';
 import { frenchify } from '@/lib/typo';
 
 /** Aucune chaîne en dur dans un composant (§11) — tout passe par ici. */
@@ -27,6 +28,8 @@ export const footer = frenchify({
     { href: '/services', label: 'Prestations' },
     { href: '/secteurs', label: 'Secteurs d’activité' },
     { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
+    { href: '/blog', label: 'Ressources' },
+    { href: '/recrutement', label: 'Nous rejoindre' },
     { href: '/contact', label: 'Nous contacter' },
   ],
   legal: [
@@ -35,15 +38,18 @@ export const footer = frenchify({
     { href: '/accessibilite', label: 'Accessibilité' },
   ],
   zoneLabel: 'Zone d\'intervention',
+  zone: 'Paris et Île-de-France',
+  siegeLabel: 'Siège',
   contactLabel: 'Contact',
+  ecrire: 'Formulaire de contact',
   copyright: (annee: number, nom: string) => `© ${annee} ${nom}`,
 });
 
 export const cta = frenchify({
   eyebrow: 'Passer à l\'action',
-  titre: 'Dites-nous ce qu\'il y a à nettoyer, on chiffre.',
+  titre: 'Dites-nous ce qu\'il y a à nettoyer, nous chiffrons.',
   texte:
-    'Cinq questions, moins de deux minutes. Vous recevez une proposition claire, pas une brochure.',
+    `Cinq questions, moins de deux minutes. Vous recevez une proposition chiffrée sous ${site.delais.devis}.`,
   bouton: 'Demander un devis',
   secondaire: 'Nous contacter',
 });

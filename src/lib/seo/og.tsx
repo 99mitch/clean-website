@@ -122,7 +122,7 @@ export async function renderOg({
           {/* Marque */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <Plaque />
-            <span style={{ fontFamily: 'Bricolage', fontSize: 34, letterSpacing: -2 }}>{site.nom}</span>
+            <span style={{ fontFamily: 'Bricolage', fontSize: 34, letterSpacing: -2 }}>{site.logo}</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>

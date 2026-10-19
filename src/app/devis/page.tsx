@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
+import Link from 'next/link';
 import { DevisWizard, type DevisPrefill } from '@/components/devis/DevisWizard';
 import { Container } from '@/components/ui/Container';
+import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
+import { site, telHref } from '@/config/site';
 import { devis as copy } from '@/copy/devis';
 import { getSecteur, getService } from '@/lib/content';
-import type { Prestation, TypeLocal } from '@/lib/devis/schema';
+import { TOTAL_STEPS, type Prestation, type TypeLocal } from '@/lib/devis/schema';
 import { pageMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = pageMetadata({
@@ -53,11 +55,19 @@ async function resolvePrefill(
     .filter(Boolean)
     .join(' ');
 
-  return { draft, skip, origine: origine || undefined };
+  const step = Number(first(params.step));
+
+  return {
+    draft,
+    skip,
+    origine: origine || undefined,
+    step: Number.isInteger(step) && step >= 1 && step <= TOTAL_STEPS ? step : undefined,
+  };
 }
 
 export default async function DevisPage({ searchParams }: Search) {
   const prefill = await resolvePrefill(searchParams);
+  const tel = telHref();
 
   return (
     <div className="py-14 lg:py-20">
@@ -69,9 +79,39 @@ export default async function DevisPage({ searchParams }: Search) {
         </Reveal>
 
         <div className="mt-16 max-w-4xl">
-          <Suspense fallback={null}>
-            <DevisWizard prefill={prefill} />
-          </Suspense>
+          <noscript>
+            <p className="mb-8 border-l-2 border-ink bg-mist/60 p-5 text-17">
+              {copy.secours.sansJs}{' '}
+              <Link href="/contact" className="text-cobalt underline underline-offset-4">
+                {copy.secours.lien}
+              </Link>
+            </p>
+          </noscript>
+          <DevisWizard prefill={prefill} />
+        </div>
+
+        {/* Toujours une issue si le parcours ne fonctionne pas sur un appareil. */}
+        <div className="mt-16 max-w-4xl border-t border-graphite/45 pt-6">
+          <p className="text-15 text-slate">{copy.secours.texte}</p>
+          <div className="mt-3 flex flex-wrap gap-x-8">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center gap-2 text-15 text-cobalt underline underline-offset-4 hover:text-signal"
+            >
+              <Icon name="mail" size={18} />
+              {copy.secours.lien}
+            </Link>
+            {tel ? (
+              <a
+                href={tel}
+                data-analytics="tel_click"
+                className="inline-flex min-h-11 items-center gap-2 text-15 text-cobalt hover:text-signal"
+              >
+                <Icon name="phone" size={18} />
+                {site.telephone}
+              </a>
+            ) : null}
+          </div>
         </div>
       </Container>
     </div>

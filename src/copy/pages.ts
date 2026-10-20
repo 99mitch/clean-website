@@ -95,7 +95,6 @@ export const quiSommesNous = frenchify({
    * vraie sans eux.
    */
   presentation: `${site.nom} est une entreprise de propreté${site.chiffres.anneeCreation ? ` fondée en ${site.chiffres.anneeCreation} et` : ''} installée dans le 14e arrondissement de Paris. Nous intervenons dans toute l'Île-de-France${site.chiffres.nbSitesClients ? ` pour ${site.chiffres.nbSitesClients} clients` : ''} : bureaux, copropriétés, sites industriels et bâtiments publics.`,
-  photo: 'Photo : équipe en intervention',
   histoire: [
     `Nos${site.chiffres.nbSalaries ? ` ${site.chiffres.nbSalaries}` : ''} agents sont recrutés en priorité en CDI et formés en continu. Une équipe stable connaît vos locaux, vos accès et vos contraintes. C'est ce qui garantit le même résultat, semaine après semaine.`,
     'Chaque intervention suit un protocole écrit, propre à votre site. Chaque passage est daté et documenté. Si un écart est constaté, il est signalé et corrigé.',

@@ -41,7 +41,7 @@ export const home = frenchify({
       {
         titre: 'Flexibilité',
         texte:
-          'Contrat sans engagement de durée, fréquences ajustables et prestations ponctuelles activables sur simple demande.',
+          'Contrat sans engagement de durée, résiliable avec un préavis d’un mois. Fréquences ajustables et prestations ponctuelles sur simple demande.',
       },
       {
         titre: 'Efficacité',

@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { DevisCTA } from '@/components/cta/DevisCTA';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { PlaceholderImage } from '@/components/ui/PlaceholderImage';
 import { PendingData } from '@/components/ui/PendingData';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHead } from '@/components/ui/Section';
 import { site } from '@/config/site';
 import { quiSommesNous as copy } from '@/copy/pages';
+import { PHOTO_EQUIPE } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
 
@@ -18,8 +19,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /**
- * Page courte, lue d'un trait : titre, slogan, photo, puis le texte en
- * entonnoir — chaque bloc plus étroit que celui du dessus, tout centré.
+ * Page courte, lue d'un trait : titre, slogan, photo de l'équipe, chiffres
+ * clés, puis la méthode. Le texte de présentation reste dans `llms.txt`.
  */
 export default function QuiSommesNousPage() {
   const fil = [
@@ -39,19 +40,18 @@ export default function QuiSommesNousPage() {
       />
 
       <Section className="pt-6! sm:pt-8! lg:pt-10!">
-        <PlaceholderImage
-          label={copy.photo}
-          className="mx-auto aspect-[16/9] w-full max-w-[48rem] overflow-hidden rounded-card border border-ink"
-        />
-
-        <Reveal className="mx-auto mt-12 flex max-w-[92%] flex-col gap-6 text-center text-pretty sm:max-w-[min(28rem,76%)] lg:mt-16">
-          <p className="text-17 text-ink">{copy.presentation}</p>
-          {copy.histoire.map((paragraphe) => (
-            <p key={paragraphe.slice(0, 32)} className="text-15 text-slate lg:text-17">
-              {paragraphe}
-            </p>
-          ))}
-        </Reveal>
+        {/* Photo à sa largeur réelle (640 px) au plus : pas d'agrandissement flou. */}
+        <div className="relative mx-auto aspect-[640/427] w-full max-w-[40rem] overflow-hidden rounded-card border border-ink">
+          <Image
+            src={PHOTO_EQUIPE.src}
+            alt={PHOTO_EQUIPE.alt}
+            fill
+            preload
+            quality={90}
+            sizes="(min-width: 688px) 640px, calc(100vw - 48px)"
+            className="object-cover"
+          />
+        </div>
 
         <Chiffres />
       </Section>

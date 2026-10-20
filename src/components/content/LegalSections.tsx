@@ -11,7 +11,7 @@ type Bloc = {
 };
 
 const LIBELLES: Record<string, string> = {
-  RAISON_SOCIALE: 'Raison sociale',
+  RAISON_SOCIALE: 'Dénomination',
   FORME_JURIDIQUE: 'Forme juridique',
   CAPITAL: 'Capital social',
   ADRESSE_SIEGE: 'Siège social',

@@ -41,33 +41,38 @@ export const site = {
    */
   description:
     'Entreprise de nettoyage professionnel basée à Paris 14e, intervenant dans toute l’Île-de-France : entretien régulier, remise en état, vitrerie et services associés, avec un protocole écrit et vérifiable pour chaque intervention.',
-  /** {{À REMPLIR}} */
-  adresseSiege: null as {
+  /** Validé par le client (21/10/2026). */
+  adresseSiege: {
+    rue: '11 rue Pauly',
+    codePostal: '75014',
+    ville: 'Paris',
+    pays: 'France',
+  } as {
     rue: string;
     codePostal: string;
     ville: string;
     pays: string;
   } | null,
-  /** {{À REMPLIR}} — format +33 1 XX XX XX XX */
-  telephone: null as string | null,
-  /** {{À REMPLIR}} — adresse sur le domaine (contact@clean-bureau.fr), pas une adresse Gmail. */
-  emailContact: null as string | null,
-  /** {{À REMPLIR}} — ex. « Du lundi au vendredi, 8 h – 18 h ». Alimente aussi `openingHours` du JSON-LD. */
-  horaires: null as string | null,
-  /**
-   * {{À REMPLIR}} — horaires au format schema.org (ex. « Mo-Fr 08:00-18:00 »).
-   * Laisser `null` tant que `horaires` n'est pas validé.
-   */
-  horairesSchema: null as string | null,
+  /** Validé par le client (21/10/2026). */
+  telephone: '+33 6 67 27 67 64' as string | null,
+  /** Validé par le client (21/10/2026). */
+  emailContact: 'contact@clean-bureau.fr' as string | null,
+  /** Validé par le client (21/10/2026). */
+  horaires: 'Du lundi au dimanche, de 9 h à 17 h 30' as string | null,
+  /** Même horaire au format schema.org, pour `openingHours` du JSON-LD. */
+  horairesSchema: 'Mo-Su 09:00-17:30' as string | null,
 
-  /** {{À REMPLIR}} — mentions légales */
+  /** Mentions légales — validées par le client (21/10/2026). */
   legal: {
-    raisonSociale: null as string | null,
-    formeJuridique: null as string | null,
+    raisonSociale: 'Clean Bureau' as string | null,
+    formeJuridique: 'Entrepreneur individuel (EI)' as string | null,
+    /** Sans objet pour une entreprise individuelle : pas de capital social. */
     capital: null as string | null,
-    siret: null as string | null,
-    rcs: null as string | null,
+    siret: '101 881 886 00010' as string | null,
+    rcs: '101 881 886 R.C.S. Paris' as string | null,
+    /** {{À REMPLIR}} — vide dans le dossier du 21/10/2026. */
     tva: null as string | null,
+    /** {{À REMPLIR}} — pour une EI, le nom et le prénom de l'entrepreneur. */
     directeurPublication: null as string | null,
   },
 
@@ -90,7 +95,8 @@ export const site = {
    * Ne JAMAIS remplir sans document source.
    */
   chiffres: {
-    anneeCreation: null as number | null,
+    /** Validé par le client : création en mars 2026. */
+    anneeCreation: 2026 as number | null,
     nbSalaries: null as number | null,
     nbSitesClients: null as number | null,
     m2TraitesAn: null as number | null,

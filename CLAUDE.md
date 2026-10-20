@@ -13,10 +13,10 @@ Ces valeurs sont référencées partout dans le code (`src/config/site.ts`). Tan
 |---|---|---|
 | `NOM_ENTREPRISE` | clean-bureau | ✅ |
 | `ZONE_INTERVENTION` | {{ex. Île-de-France, rayon 50 km autour de Paris}} | ❌ |
-| `ADRESSE_SIEGE` | {{À REMPLIR}} | ❌ |
-| `TELEPHONE` | {{format +33 1 XX XX XX XX}} | ❌ |
-| `EMAIL_CONTACT` | {{À REMPLIR}} | ❌ |
-| `SIRET` / `TVA` | {{pour mentions légales}} | ❌ |
+| `ADRESSE_SIEGE` | 11 rue Pauly, 75014 Paris | ✅ |
+| `TELEPHONE` | +33 6 67 27 67 64 | ✅ |
+| `EMAIL_CONTACT` | contact@clean-bureau.fr | ✅ |
+| `SIRET` / `TVA` | SIRET 101 881 886 00010 · TVA {{À REMPLIR}} | 🟡 |
 | `DOMAINE` | {{ex. https://nomentreprise.fr}} | ❌ |
 | `ANNEE_CREATION`, `NB_SALARIES`, `NB_SITES_CLIENTS`, `M2_TRAITES_AN`, `TAUX_SATISFACTION`, `DELAI_INTERVENTION` | {{chiffres réels uniquement}} | ❌ |
 | `CERTIFICATIONS` | {{Qualipropre ? ISO 9001 ? Ecolabel ? sinon : ne rien afficher}} | ❌ |

@@ -22,6 +22,13 @@ export const PHOTO_HERO: Photo = {
   alt: 'Agent de propreté intervenant avec une autolaveuse dans un hall tertiaire vitré',
 };
 
+export const PHOTO_EQUIPE: Photo = {
+  src: '/images/equipe/equipe-clean-bureau.png',
+  alt: 'Agents d’entretien en tenue Clean Bureau, avec chariot, gants et produits, dans un espace de bureaux',
+  width: 640,
+  height: 427,
+};
+
 export const PHOTO_PAR_SERVICE: Record<string, Photo> = {
   'entretien-regulier': {
     src: '/images/services/entretien-regulier.png',

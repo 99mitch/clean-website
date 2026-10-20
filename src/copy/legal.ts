@@ -31,7 +31,8 @@ export const mentions = frenchify({
       paragraphes: [
         `Le présent site est édité par ${site.nom}, entreprise de propreté installée à Paris (${site.localisation.codePostal}).`,
       ],
-      champs: ['RAISON_SOCIALE', 'FORME_JURIDIQUE', 'CAPITAL', 'ADRESSE_SIEGE', 'RCS', 'SIRET', 'TVA', 'TELEPHONE', 'EMAIL_CONTACT'],
+      // Pas de capital social pour une entreprise individuelle.
+      champs: ['RAISON_SOCIALE', 'FORME_JURIDIQUE', 'ADRESSE_SIEGE', 'RCS', 'SIRET', 'TVA', 'TELEPHONE', 'EMAIL_CONTACT'],
       liens: [{ href: '/contact', label: 'Nous écrire via le formulaire de contact' }],
     },
     {

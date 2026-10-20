@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { PendingData } from '@/components/ui/PendingData';
-import { adresseLignes, site, telHref } from '@/config/site';
+import { site, telHref } from '@/config/site';
 import { footer, nav } from '@/copy/common';
 import { Logo } from './Logo';
 
@@ -44,21 +44,6 @@ export function Footer() {
 
             <dl className="mt-10 border-t border-paper/20">
               <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/70">{footer.siegeLabel}</dt>
-                <dd className="mt-1">
-                  <address className="text-15 not-italic text-paper/85">
-                    {adresseLignes().map((ligne) => (
-                      <span key={ligne} className="block">
-                        {ligne}
-                      </span>
-                    ))}
-                  </address>
-                  {site.horaires ? (
-                    <span className="mt-1 block text-15 text-paper/85">{site.horaires}</span>
-                  ) : null}
-                </dd>
-              </div>
-              <div className="border-b border-paper/20 py-3">
                 <dt className="eyebrow text-paper/70">{footer.zoneLabel}</dt>
                 <dd className="mt-1 text-15 text-paper/85">{footer.zone}</dd>
               </div>
@@ -86,6 +71,9 @@ export function Footer() {
                   ) : (
                     <PendingData label="EMAIL_CONTACT" />
                   )}
+                  {site.horaires ? (
+                    <span className="block text-15 text-paper/85">{site.horaires}</span>
+                  ) : null}
                   {/* Toujours un moyen de nous joindre, même sans coordonnées validées. */}
                   <Link
                     href="/contact"

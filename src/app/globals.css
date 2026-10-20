@@ -294,6 +294,21 @@
   .ledger-row:focus-within::before {
     transform: scaleY(1);
   }
+
+  /* Variante posée sur un fond coloré (fiches secteur) : filet, onglet et
+   * survol dérivent de la couleur du texte, claire ou foncée selon le fond. */
+  .ledger-row-inherit {
+    border-top-color: color-mix(in srgb, currentColor 25%, transparent);
+  }
+
+  .ledger-row-inherit::before {
+    background-color: currentColor;
+  }
+
+  .ledger-row-inherit:hover,
+  .ledger-row-inherit:focus-within {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+  }
 }
 
 @layer utilities {

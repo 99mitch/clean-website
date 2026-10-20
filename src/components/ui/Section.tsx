@@ -17,9 +17,12 @@ export function Section({
   className = '',
   id,
   labelledBy,
+  surface,
 }: {
   children: ReactNode;
   tone?: Tone;
+  /** Classes de fond et de texte qui remplacent `tone` (ex. un palier de `DEGRADE_BLEU`). */
+  surface?: string;
   className?: string;
   id?: string;
   labelledBy?: string;
@@ -28,7 +31,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`${tones[tone]} py-14 sm:py-20 lg:py-28 ${className}`}
+      className={`${surface ?? tones[tone]} py-14 sm:py-20 lg:py-28 ${className}`}
     >
       <Container>{children}</Container>
     </section>

@@ -102,7 +102,6 @@ export const quiSommesNous = frenchify({
   ],
   chiffresTitre: 'En chiffres',
   chiffres: {
-    anneeCreation: 'Année de création',
     nbSalaries: 'Agents',
     nbSitesClients: 'Sites clients',
     m2TraitesAn: 'm² entretenus par an',

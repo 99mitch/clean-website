@@ -23,10 +23,11 @@ export const PHOTO_HERO: Photo = {
 };
 
 export const PHOTO_EQUIPE: Photo = {
-  src: '/images/equipe/equipe-clean-bureau.png',
+  // Agrandie ×2 (Lanczos + accentuation légère) depuis l'original de 640 px.
+  src: '/images/equipe/equipe-clean-bureau.webp',
   alt: 'Agents d’entretien en tenue Clean Bureau, avec chariot, gants et produits, dans un espace de bureaux',
-  width: 640,
-  height: 427,
+  width: 1280,
+  height: 854,
 };
 
 export const PHOTO_PAR_SERVICE: Record<string, Photo> = {

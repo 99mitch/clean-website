@@ -39,7 +39,6 @@ export const footer = frenchify({
   ],
   zoneLabel: 'Zone d\'intervention',
   zone: 'Paris et Île-de-France',
-  siegeLabel: 'Siège',
   contactLabel: 'Contact',
   ecrire: 'Formulaire de contact',
   copyright: (annee: number, nom: string) => `© ${annee} ${nom}`,

@@ -21,6 +21,12 @@ type Tone = 'page' | 'inherit';
 function makeComponents(tone: Tone) {
   const texte = tone === 'page' ? 'text-slate' : '';
   const fort = tone === 'page' ? 'text-ink' : '';
+  // Sur un fond coloré (tone="inherit"), tout dérive de la couleur du texte.
+  const puce = tone === 'page' ? 'before:bg-graphite marker:text-slate' : 'before:bg-current';
+  const lien =
+    tone === 'page'
+      ? 'text-cobalt underline underline-offset-4 hover:text-signal'
+      : 'underline underline-offset-4 hover:opacity-80';
 
   return {
     h2: (props: ComponentProps<'h2'>) => (
@@ -47,7 +53,7 @@ function makeComponents(tone: Tone) {
     li: (props: ComponentProps<'li'>) => (
       <li
         {...props}
-        className={`relative pl-6 text-17 ${texte} before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-3 before:bg-graphite marker:font-mono marker:text-slate [ol>&]:pl-0 [ol>&]:before:hidden`}
+        className={`relative pl-6 text-17 ${texte} before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-3 ${puce} marker:font-mono [ol>&]:pl-0 [ol>&]:before:hidden`}
       >
         {frText(props.children)}
       </li>
@@ -56,7 +62,7 @@ function makeComponents(tone: Tone) {
       <strong {...props} className={`font-semibold ${fort}`} />
     ),
     a: ({ href = '#', children, ...rest }: ComponentProps<'a'>) => {
-      const cls = 'text-cobalt underline underline-offset-4 hover:text-signal';
+      const cls = lien;
       if (href.startsWith('/')) {
         return (
           <Link href={href} className={cls}>
@@ -73,7 +79,7 @@ function makeComponents(tone: Tone) {
     blockquote: (props: ComponentProps<'blockquote'>) => (
       <blockquote
         {...props}
-        className="mt-8 border-l-2 border-signal pl-6 text-21 text-ink"
+        className={`mt-8 border-l-2 border-signal pl-6 text-21 ${fort}`}
       />
     ),
     hr: () => <hr className="rule my-12 border-t" />,

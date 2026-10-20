@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { Icon } from '@/components/ui/Icon';
-import { site, telHref } from '@/config/site';
+import { site } from '@/config/site';
 import { nav } from '@/copy/common';
 import { Logo } from './Logo';
 import { NavAutoClose } from './NavAutoClose';
@@ -14,7 +13,6 @@ import { NavLink } from './NavLink';
  * est signalée par `aria-current` (voir NavLink).
  */
 export function Header() {
-  const tel = telHref();
 
   return (
     <header className="site-header sticky top-0 z-50 border-b border-ink bg-paper/95 py-4 backdrop-blur-sm">
@@ -40,16 +38,6 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {tel ? (
-              <a
-                href={tel}
-                data-analytics="tel_click"
-                className="hidden min-h-11 items-center gap-2 font-mono text-13 tracking-[0.06em] text-ink hover:text-signal md:inline-flex"
-              >
-                <Icon name="phone" size={16} />
-                {site.telephone}
-              </a>
-            ) : null}
             <div className="hidden sm:block">
               <ButtonLink href="/devis" variant="devis">
                 {nav.devis}

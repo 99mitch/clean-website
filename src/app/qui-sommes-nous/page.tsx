@@ -40,15 +40,14 @@ export default function QuiSommesNousPage() {
       />
 
       <Section className="pt-6! sm:pt-8! lg:pt-10!">
-        {/* Photo à sa largeur réelle (640 px) au plus : pas d'agrandissement flou. */}
-        <div className="relative mx-auto aspect-[640/427] w-full max-w-[40rem] overflow-hidden rounded-card border border-ink">
+        <div className="relative mx-auto aspect-[1280/854] w-full max-w-[60rem] overflow-hidden rounded-card border border-ink">
           <Image
             src={PHOTO_EQUIPE.src}
             alt={PHOTO_EQUIPE.alt}
             fill
             preload
             quality={90}
-            sizes="(min-width: 688px) 640px, calc(100vw - 48px)"
+            sizes="(min-width: 1008px) 960px, calc(100vw - 48px)"
             className="object-cover"
           />
         </div>
@@ -92,19 +91,11 @@ function Chiffres() {
     const valeur = site.chiffres[cle as keyof typeof site.chiffres];
     return valeur === null
       ? []
-      : [{
-          cle,
-          label,
-          // Une année ne prend pas d'espace de milliers.
-          valeur:
-            cle === 'anneeCreation'
-              ? String(valeur)
-              : `${valeur.toLocaleString('fr-FR')}${unites[cle] ?? ''}`,
-        }];
+      : [{ cle, label, valeur: `${valeur.toLocaleString('fr-FR')}${unites[cle] ?? ''}` }];
   });
 
   if (entrees.length === 0) {
-    return <PendingData label="CHIFFRES CLÉS : année, agents, sites, m², satisfaction" className="mx-auto mt-12 max-w-[48rem]" />;
+    return <PendingData label="CHIFFRES CLÉS : agents, sites, m², satisfaction" className="mx-auto mt-12 max-w-[48rem]" />;
   }
 
   return (

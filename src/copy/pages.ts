@@ -119,7 +119,7 @@ export const quiSommesNous = frenchify({
         probleme: { titre: 'Un prestataire injoignable', texte: 'Un problème urgent, et personne ne répond au téléphone.' },
         reponse: {
           titre: 'Un interlocuteur unique',
-          texte: `Une personne dédiée à votre site, qui vous répond directement et intervient sous ${site.delais.urgence} en cas d'urgence.`,
+          texte: `Une personne dédiée à votre site, qui vous répond directement, avec une intervention possible ${site.delais.urgence} en cas d'urgence.`,
         },
       },
       {
@@ -157,7 +157,7 @@ export const quiSommesNous = frenchify({
   chiffres: [
     { valeur: site.delais.devis, label: 'pour recevoir votre devis' },
     { valeur: site.delais.visite, label: 'pour la visite technique' },
-    { valeur: site.delais.urgence, label: 'pour intervenir en cas d\'urgence' },
+    { valeur: 'Jour J', label: `intervention d'urgence possible ${site.delais.urgence}` },
     { valeur: site.preavis, label: 'de préavis, sans engagement de durée' },
   ],
   valeurs: {

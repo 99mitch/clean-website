@@ -36,7 +36,7 @@ export const home = frenchify({
       {
         titre: 'Disponibilité',
         texte:
-          `Un référent joignable, un devis sous ${delais.devis} et une intervention d'urgence sous ${delais.urgence}, y compris en dehors des horaires de bureau.`,
+          `Un référent joignable, un devis sous ${delais.devis} et une intervention d'urgence possible ${delais.urgence}, y compris en dehors des horaires de bureau.`,
       },
       {
         titre: 'Flexibilité',
@@ -128,7 +128,7 @@ export const home = frenchify({
         titre: 'Mise en place',
         texte:
           'Équipe nommée, remplaçants identifiés, cahier de liaison ouvert dès la première intervention.',
-        duree: `À la date convenue · urgence sous ${delais.urgence}`,
+        duree: `À la date convenue · urgence possible ${delais.urgence}`,
       },
       {
         titre: 'Contrôle qualité',

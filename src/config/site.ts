@@ -114,7 +114,8 @@ export const site = {
   delais: {
     devis: '24 h',
     visite: '72 h',
-    urgence: '24 h',
+    /** Formulation demandée par le client le 22/10/2026 (« possible dans la journée »). */
+    urgence: 'dans la journée',
   },
   /** Préavis de résiliation, validé par le client (22/10/2026). */
   preavis: '1 mois',

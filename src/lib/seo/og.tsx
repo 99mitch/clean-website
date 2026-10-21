@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { site } from '@/config/site';
-import type { Photo } from '@/lib/photos';
+import { LOGO_MARQUE, type Photo } from '@/lib/photos';
 import { fr } from '@/lib/typo';
 
 /**
@@ -65,7 +65,10 @@ export async function renderOg({
   sousTitre?: string;
   photo?: Photo;
 }) {
-  const photoSrc = photo ? await dataUri(photo.src) : null;
+  const [photoSrc, logoSrc] = await Promise.all([
+    photo ? dataUri(photo.src) : null,
+    dataUri(LOGO_MARQUE.src),
+  ]);
   const titreFr = fr(titre);
   const sousTitreFr = sousTitre ? fr(sousTitre) : null;
   const size = titleSize(titreFr, Boolean(photoSrc));
@@ -121,7 +124,13 @@ export async function renderOg({
         >
           {/* Marque */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <Plaque />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={logoSrc}
+              alt=""
+              width={64}
+              height={Math.round((64 * LOGO_MARQUE.height) / LOGO_MARQUE.width)}
+            />
             <span style={{ fontFamily: 'Bricolage', fontSize: 34, letterSpacing: -2 }}>{site.logo}</span>
           </div>
 
@@ -200,41 +209,5 @@ export async function renderOg({
       </div>
     ),
     { ...OG_SIZE, fonts: await fonts },
-  );
-}
-
-/** La plaque terrazzo de l'icône, dessinée en boîtes (Satori ne lit pas de SVG externe). */
-function Plaque() {
-  const eclat = (left: number, top: number, d: number, opacity = 1) => (
-    <div
-      style={{
-        position: 'absolute',
-        left,
-        top,
-        width: d,
-        height: d,
-        borderRadius: d,
-        backgroundColor: C.paper,
-        opacity,
-      }}
-    />
-  );
-  return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        width: 48,
-        height: 48,
-        borderRadius: 11,
-        backgroundColor: C.cobalt,
-      }}
-    >
-      {eclat(10, 10.5, 12)}
-      {eclat(27, 25.5, 13.5)}
-      {eclat(29.6, 9.4, 6.8, 0.72)}
-      {eclat(10, 30.4, 8.3, 0.72)}
-      {eclat(22.9, 22.1, 3.8, 0.5)}
-    </div>
   );
 }

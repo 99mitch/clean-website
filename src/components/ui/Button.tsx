@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
 
-type Variant = 'devis' | 'ink' | 'outline' | 'adaptive' | 'ghost';
+type Variant = 'devis' | 'ink' | 'outline' | 'adaptive' | 'ghost' | 'paper';
 type Size = 'md' | 'lg';
 
 /**
@@ -21,6 +21,8 @@ const variants: Record<Variant, string> = {
   /** Contour clair sur fond sombre ; au survol, le bouton se remplit de papier. */
   adaptive:
     'border border-current text-current hover:border-paper hover:bg-paper hover:text-abyss focus-visible:bg-paper focus-visible:text-abyss',
+  /** Aplat papier sur fond cobalt, là où le bouton `devis` se fondrait dans le fond. */
+  paper: 'bg-paper text-cobalt hover:bg-white',
   ghost:
     'border-b border-current pb-1 text-ink hover:text-signal min-h-11 px-0',
 };

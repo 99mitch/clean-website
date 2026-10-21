@@ -309,6 +309,25 @@
   .ledger-row-inherit:focus-within {
     background-color: color-mix(in srgb, currentColor 8%, transparent);
   }
+
+  /* Vague du pied de page : son fond reprend la couleur de la dernière
+   * section de la page, pour une transition sans bande parasite. Papier par
+   * défaut ; `:has()` non pris en charge → papier, sans casse. */
+  .footer-vague {
+    background-color: var(--color-paper);
+  }
+  main:has(> section:last-of-type.bg-white) + footer .footer-vague {
+    background-color: var(--color-white);
+  }
+  main:has(> section:last-of-type.bg-mist) + footer .footer-vague {
+    background-color: var(--color-mist);
+  }
+  main:has(> section:last-of-type.bg-ink) + footer .footer-vague {
+    background-color: var(--color-ink);
+  }
+  main:has(> section:last-of-type.bg-abyss) + footer .footer-vague {
+    background-color: var(--color-abyss);
+  }
 }
 
 @layer utilities {

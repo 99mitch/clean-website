@@ -79,57 +79,161 @@ export const blogIndex = frenchify({
   par: 'Par',
 });
 
+/**
+ * Texte fourni par le client (modèle « qui-sommes-nous », 22/10/2026), adapté à
+ * nos données validées : zone, délais (`site.delais`) et préavis. Les chiffres
+ * non validés du modèle (nombre de clients, délai de rappel, part de produits
+ * écolabellisés) sont remplacés par nos engagements contractuels (§0).
+ */
 export const quiSommesNous = frenchify({
   meta: {
     title: 'Entreprise de nettoyage à Paris 14e : qui sommes-nous',
-    description:
-      'Entreprise de nettoyage basée à Paris 14e, active dans toute l\'Île-de-France : des équipes stables et un protocole écrit pour chaque intervention.',
+    description: `${site.nom} entretient bureaux et commerces à Paris et en Île-de-France : équipes fiables, produits écologiques, réponse rapide et tarifs clairs.`,
   },
   eyebrow: 'L\'entreprise',
-  titre: 'Nos équipes restent. Notre qualité aussi.',
-  intro:
-    'On ne nettoie pas avec des produits. On nettoie avec des gens. Leur condition de travail, c\'est votre qualité de service.',
-  /**
-   * Texte proposé par l'audit du 27/09/2026. Les chiffres ne s'insèrent que
-   * lorsqu'ils sont validés dans `site.chiffres` (§0) : sinon, la phrase reste
-   * vraie sans eux.
-   */
-  presentation: `${site.nom} est une entreprise de propreté${site.chiffres.anneeCreation ? ` fondée en ${site.chiffres.anneeCreation} et` : ''} installée dans le 14e arrondissement de Paris. Nous intervenons dans toute l'Île-de-France${site.chiffres.nbSitesClients ? ` pour ${site.chiffres.nbSitesClients} clients` : ''} : bureaux, copropriétés, sites industriels et bâtiments publics.`,
-  histoire: [
-    `Nos${site.chiffres.nbSalaries ? ` ${site.chiffres.nbSalaries}` : ''} agents sont recrutés en priorité en CDI et formés en continu. Une équipe stable connaît vos locaux, vos accès et vos contraintes. C'est ce qui garantit le même résultat, semaine après semaine.`,
-    'Chaque intervention suit un protocole écrit, propre à votre site. Chaque passage est daté et documenté. Si un écart est constaté, il est signalé et corrigé.',
-    'Notre objectif : que le nettoyage ne soit plus un sujet pour vous.',
+  titre: 'Des locaux propres chaque matin, sans avoir à y penser.',
+  intro: `${site.nom} entretient les bureaux et commerces de Paris et d'Île-de-France. Nous avons créé cette entreprise avec une idée simple : un prestataire de nettoyage doit être joignable, régulier, respectueux de votre santé et transparent sur ses prix.`,
+  zone: 'Intervention à Paris et dans toute l\'Île-de-France.',
+  boutons: { devis: 'Demander un devis gratuit', appeler: 'Nous appeler' },
+  fiche: {
+    label: 'Exemple de fiche de passage envoyée après une intervention',
+    titre: 'Fiche de passage',
+    date: 'Mardi, 7 h 00',
+    lignes: [
+      { tache: 'Bureaux et open space, 2ᵉ étage', heure: '7 h 40' },
+      { tache: 'Sanitaires désinfectés, consommables remplis', heure: '8 h 05' },
+      { tache: 'Cuisine et salle de pause', heure: '8 h 20' },
+      { tache: 'Vitrine d\'entrée et accueil', heure: '8 h 35' },
+    ],
+    produits: 'Produits écolabellisés',
+    termine: 'Terminé avant votre arrivée',
+  },
+  comparatif: {
+    titre: 'Ce qui ne va pas avec le nettoyage, et ce que nous faisons autrement.',
+    intro:
+      'Beaucoup d\'entreprises changent de prestataire pour les mêmes raisons. Nous avons construit notre façon de travailler pour y répondre, point par point.',
+    colonnes: { probleme: 'Ce que vous vivez souvent', reponse: 'Ce que nous faisons' },
+    prefixes: { probleme: 'Problème :', reponse: 'Notre réponse :' },
+    lignes: [
+      {
+        probleme: { titre: 'Un prestataire injoignable', texte: 'Un problème urgent, et personne ne répond au téléphone.' },
+        reponse: {
+          titre: 'Un interlocuteur unique',
+          texte: `Une personne dédiée à votre site, qui vous répond directement et intervient sous ${site.delais.urgence} en cas d'urgence.`,
+        },
+      },
+      {
+        probleme: { titre: 'Une qualité qui varie', texte: 'Un agent différent chaque semaine, des zones oubliées.' },
+        reponse: {
+          titre: 'La même équipe, un protocole écrit',
+          texte:
+            'Vos agents restent les mêmes, suivent un cahier des charges propre à vos locaux et sont contrôlés régulièrement.',
+        },
+      },
+      {
+        probleme: {
+          titre: 'Des produits agressifs',
+          texte: 'Odeurs fortes et produits irritants pour vos équipes et vos clients.',
+        },
+        reponse: {
+          titre: 'Des produits écologiques',
+          texte: 'Nous utilisons des produits écolabellisés et des méthodes qui limitent l\'eau et les déchets.',
+        },
+      },
+      {
+        probleme: {
+          titre: 'Des prix flous et des contrats rigides',
+          texte: 'Frais cachés, engagements longs, impossible d\'ajuster.',
+        },
+        reponse: {
+          titre: 'Un tarif clair et un contrat souple',
+          texte:
+            'Un devis détaillé, sans frais cachés, et une fréquence que vous pouvez adapter à votre activité.',
+        },
+      },
+    ],
+  },
+  chiffresLabel: 'Nos engagements en chiffres',
+  chiffres: [
+    { valeur: site.delais.devis, label: 'pour recevoir votre devis' },
+    { valeur: site.delais.visite, label: 'pour la visite technique' },
+    { valeur: site.delais.urgence, label: 'pour intervenir en cas d\'urgence' },
+    { valeur: site.preavis, label: 'de préavis, sans engagement de durée' },
   ],
-  chiffresTitre: 'En chiffres',
-  chiffres: {
-    nbSalaries: 'Agents',
-    nbSitesClients: 'Sites clients',
-    m2TraitesAn: 'm² entretenus par an',
-    tauxSatisfaction: 'Clients satisfaits',
-  } as Record<string, string>,
-  sectionsTitre: 'Comment nous travaillons',
-  sections: [
-    {
-      titre: 'Une organisation à taille humaine',
-      texte:
-        'Un référent nommé par contrat, un encadrement de proximité et des équipes stables. Vous parlez à quelqu\'un qui connaît votre site.',
-    },
-    {
-      titre: 'Le recrutement avant tout',
-      texte:
-        'Nous recrutons en CDI dès que la charge le permet, avec des horaires regroupés plutôt qu\'éclatés. Un agent qui reste est un agent qui connaît vos locaux.',
-    },
-    {
-      titre: 'La formation, sur le terrain',
-      texte:
-        'Protocoles, produits, sécurité, gestes et postures. La formation est faite avant la première intervention, et elle est documentée.',
-    },
-    {
-      titre: 'Le contrôle qualité, écrit',
-      texte:
-        'Visites de contrôle planifiées, compte rendu remis au client, écarts corrigés au passage suivant. Un constat sans correction n\'est pas un contrôle.',
-    },
-  ],
+  valeurs: {
+    titre: 'Ce qui guide notre travail.',
+    items: [
+      {
+        titre: 'Proximité',
+        texte:
+          'Nous sommes une entreprise locale. Vous connaissez les personnes qui entrent dans vos locaux, et vous pouvez nous joindre directement.',
+      },
+      {
+        titre: 'Rigueur',
+        texte:
+          'Chaque site a son protocole, ses horaires et ses contrôles qualité. Ce qui est prévu au contrat est fait, à chaque passage.',
+      },
+      {
+        titre: 'Respect de la santé et de l\'environnement',
+        texte: 'Des produits sains pour vos équipes, des méthodes économes en eau, du matériel réutilisable.',
+      },
+      {
+        titre: 'Réactivité et prix justes',
+        texte:
+          'Une réponse rapide quand vous avez besoin de nous, et un tarif adapté à la taille de vos locaux, sans surprise sur la facture.',
+      },
+    ],
+  },
+  etapes: {
+    titre: 'Comment démarrer avec nous.',
+    items: [
+      { titre: 'Visite gratuite', texte: 'Nous venons voir vos locaux et écouter vos besoins.' },
+      {
+        titre: `Devis sous ${site.delais.devis}`,
+        texte: 'Un prix détaillé, avec la fréquence et les tâches incluses.',
+      },
+      { titre: 'Premier passage', texte: 'Votre équipe démarre avec un protocole écrit pour votre site.' },
+      { titre: 'Suivi régulier', texte: 'Point qualité avec votre interlocuteur et ajustements si besoin.' },
+    ],
+  },
+  faq: {
+    titre: 'Questions fréquentes',
+    items: [
+      {
+        question: 'Quels types de locaux entretenez-vous ?',
+        reponse:
+          'Bureaux, open spaces, commerces, cabinets médicaux et professions libérales, showrooms et parties communes. Nous intervenons aussi pour des nettoyages ponctuels : fin de chantier, déménagement, remise en état.',
+      },
+      {
+        question: 'À quels horaires intervenez-vous ?',
+        reponse:
+          'Tôt le matin, en journée ou le soir, selon ce qui gêne le moins votre activité. La plupart de nos clients préfèrent un passage avant l\'ouverture.',
+      },
+      {
+        question: 'Faut-il s\'engager sur une longue durée ?',
+        reponse: `Non. Nos contrats sont souples : vous pouvez ajuster la fréquence des passages et y mettre fin avec un préavis de ${site.preavis}, précisé dans votre devis.`,
+      },
+      {
+        question: 'Que se passe-t-il si un agent est absent ?',
+        reponse:
+          'Nous le remplaçons par un agent qui connaît le protocole de votre site, et vous êtes prévenu à l\'avance.',
+      },
+      {
+        question: 'Fournissez-vous les produits et le matériel ?',
+        reponse:
+          'Oui, tout est inclus : produits écolabellisés, matériel professionnel et, si vous le souhaitez, consommables (papier, savon, sacs).',
+      },
+      {
+        question: 'Dans quelle zone intervenez-vous ?',
+        reponse:
+          'À Paris et dans toute l\'Île-de-France. Contactez-nous si vos locaux sont un peu plus loin : nous étudions chaque demande.',
+      },
+    ],
+  },
+  appel: {
+    titre: 'Parlons de vos locaux.',
+    texte: `Indiquez-nous la surface, le type de locaux et la fréquence souhaitée. Nous vous envoyons un devis gratuit sous ${site.delais.devis}, sans engagement.`,
+  },
 });
 
 export const engagementsPage = frenchify({

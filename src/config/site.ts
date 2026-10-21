@@ -117,6 +117,8 @@ export const site = {
     visite: '72 h',
     urgence: '24 h',
   },
+  /** Préavis de résiliation, validé par le client (22/10/2026). */
+  preavis: '1 mois',
 
   /**
    * Délai de réponse annoncé dans l'accusé de réception du devis (§7).

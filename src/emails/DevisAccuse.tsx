@@ -5,11 +5,13 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Text,
 } from '@react-email/components';
-import { site } from '@/config/site';
+import { absoluteUrl, site } from '@/config/site';
+import { LOGO_MARQUE } from '@/lib/photos';
 
 /**
  * Accusé de réception client (§7) : annonce un délai de réponse explicite
@@ -28,6 +30,13 @@ export function DevisAccuse({
       <Preview>Votre demande de devis est bien arrivée</Preview>
       <Body style={{ backgroundColor: '#F1F4F7', fontFamily: 'Arial, sans-serif' }}>
         <Container style={{ backgroundColor: '#FFFFFF', padding: '32px', maxWidth: '640px' }}>
+          <Img
+            src={absoluteUrl(LOGO_MARQUE.src)}
+            alt={site.nom}
+            width={64}
+            height={Math.round((64 * LOGO_MARQUE.height) / LOGO_MARQUE.width)}
+            style={{ marginBottom: '24px' }}
+          />
           <Heading style={{ fontSize: '20px', color: '#0A0E12', margin: 0 }}>
             Votre demande est bien arrivée
           </Heading>

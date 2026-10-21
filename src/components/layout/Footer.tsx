@@ -1,33 +1,31 @@
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
-import { PendingData } from '@/components/ui/PendingData';
+import { Icon } from '@/components/ui/Icon';
 import { site, telHref } from '@/config/site';
 import { footer, nav } from '@/copy/common';
 import { Logo } from './Logo';
 
 /**
- * Pied de dossier — compact : les mêmes pages que la navbar, pas un plan de
- * site. La vague en tête du pied de page est un aplat unique, dessiné à la
- * main sur le modèle Haikei (SVG statique, aucune requête réseau).
+ * Pied de page — trois lignes : la marque et les pages, les deux moyens de
+ * nous joindre, puis les mentions. Rien d'autre : les horaires et l'adresse
+ * sont sur /contact.
+ *
+ * La vague de tête (SVG statique, modèle Haikei) prend la couleur de la
+ * dernière section de la page (`.footer-vague` dans globals.css), pour que la
+ * transition reste nette quelle que soit la page.
  */
 export function Footer() {
   const tel = telHref();
   const annee = new Date().getFullYear();
 
   return (
-    <footer className="on-dark bg-cobalt pb-[calc(4.5rem+env(safe-area-inset-bottom))] text-paper sm:pb-0">
-      {/*
-        Vague de transition — sur le modèle Haikei (SVG statique, sans
-        dépendance réseau) : le fond de la bande reprend la couleur de ce qui
-        précède habituellement le pied de page (le bandeau <DevisCTA />, en
-        abyss), et la vague en aplat cobalt annonce le pied de page.
-      */}
-      <div className="bg-abyss">
+    <footer className="on-dark text-paper">
+      <div className="footer-vague">
         <svg
           viewBox="0 0 1440 96"
           preserveAspectRatio="none"
           aria-hidden="true"
-          className="block h-12 w-full sm:h-16"
+          className="block h-10 w-full sm:h-14"
         >
           <path
             fill="var(--color-cobalt)"
@@ -36,88 +34,73 @@ export function Footer() {
         </svg>
       </div>
 
-      <Container className="pb-14 pt-4">
-        <div className="grid gap-12 border-t-2 border-paper/80 pt-8 sm:grid-cols-2">
-          <div>
-            <Logo tone="paper" />
-            <p className="mt-5 max-w-[30ch] text-15 text-paper/80">{site.baseline}</p>
-
-            <dl className="mt-10 border-t border-paper/20">
-              <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/70">{footer.zoneLabel}</dt>
-                <dd className="mt-1 text-15 text-paper/85">{footer.zone}</dd>
-              </div>
-              <div className="border-b border-paper/20 py-3">
-                <dt className="eyebrow text-paper/70">{footer.contactLabel}</dt>
-                <dd className="mt-1 space-y-1">
-                  {tel ? (
-                    <a
-                      href={tel}
-                      data-analytics="tel_click"
-                      className="block font-mono text-15 text-paper/85 hover:text-paper"
+      {/* Fond porté par ce bloc et non par <footer> : aucun liseré cobalt au-dessus de la vague. */}
+      <div className="-mt-px bg-cobalt pb-[calc(4.5rem+env(safe-area-inset-bottom))] sm:pb-0">
+        <Container className="pb-8 pt-6 sm:pt-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <Link href="/" className="inline-flex" aria-label={`${site.nom}, retour à l’accueil`}>
+                <Logo tone="paper" />
+              </Link>
+              <p className="mt-3 max-w-[34ch] text-15 text-paper/80">{site.baseline}</p>
+            </div>
+  
+            <nav aria-label={nav.footerLabel}>
+              <ul className="grid list-none grid-cols-2 gap-x-8 sm:flex sm:flex-wrap sm:gap-x-7 lg:justify-end">
+                {footer.liens.map((lien) => (
+                  <li key={lien.href}>
+                    <Link
+                      href={lien.href}
+                      className="inline-flex min-h-11 items-center font-mono text-13 uppercase tracking-[0.12em] text-paper/80 hover:text-paper"
                     >
-                      {site.telephone}
-                    </a>
-                  ) : (
-                    <PendingData label="TELEPHONE" />
-                  )}
-                  {site.emailContact ? (
-                    <a
-                      href={`mailto:${site.emailContact}`}
-                      className="block font-mono text-15 text-paper/85 hover:text-paper"
-                    >
-                      {site.emailContact}
-                    </a>
-                  ) : (
-                    <PendingData label="EMAIL_CONTACT" />
-                  )}
-                  {site.horaires ? (
-                    <span className="block text-15 text-paper/85">{site.horaires}</span>
-                  ) : null}
-                  {/* Toujours un moyen de nous joindre, même sans coordonnées validées. */}
-                  <Link
-                    href="/contact"
-                    className="inline-flex min-h-11 items-center text-15 text-paper/85 underline underline-offset-4 hover:text-paper"
-                  >
-                    {footer.ecrire}
-                  </Link>
-                </dd>
-              </div>
-            </dl>
+                      {lien.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
-
-          <nav aria-label={nav.footerLabel} className="sm:justify-self-end">
-            <ul className="list-none">
-              {footer.liens.map((lien) => (
-                <li key={lien.href} className="border-b border-paper/12">
-                  <Link
-                    href={lien.href}
-                    className="flex min-h-11 items-center text-15 text-paper/80 hover:text-paper"
-                  >
-                    {lien.label}
+  
+          <div className="mt-8 flex flex-col gap-1 border-y border-paper/20 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10">
+            {tel ? (
+              <a
+                href={tel}
+                data-analytics="tel_click"
+                className="inline-flex min-h-11 items-center gap-3 font-mono text-15 text-paper hover:text-paper/80"
+              >
+                <Icon name="phone" size={18} />
+                {site.telephone}
+              </a>
+            ) : null}
+            {site.emailContact ? (
+              <a
+                href={`mailto:${site.emailContact}`}
+                className="inline-flex min-h-11 items-center gap-3 font-mono text-15 text-paper hover:text-paper/80"
+              >
+                <Icon name="mail" size={18} />
+                {site.emailContact}
+              </a>
+            ) : null}
+            <p className="inline-flex min-h-11 items-center gap-3 text-15 text-paper/80 sm:ml-auto">
+              <Icon name="pin" size={18} />
+              {footer.zone}
+            </p>
+          </div>
+  
+          <div className="mt-4 flex flex-col gap-1 font-mono text-13 text-paper/75 sm:flex-row sm:items-center sm:justify-between">
+            <p className="py-3">{footer.copyright(annee, site.nom)}</p>
+            <ul className="flex list-none flex-wrap gap-x-6">
+              {footer.legal.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="inline-flex min-h-11 items-center hover:text-paper">
+                    {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </nav>
-        </div>
-
-        <div className="mt-14 flex flex-col gap-3 border-t border-paper/20 pt-6 font-mono text-13 text-paper/75 sm:flex-row sm:items-center sm:justify-between">
-          <p>{footer.copyright(annee, site.nom)}</p>
-          <ul className="flex list-none flex-wrap gap-x-6 gap-y-0">
-            {footer.legal.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="inline-flex min-h-11 items-center hover:text-paper"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </div>
     </footer>
   );
 }

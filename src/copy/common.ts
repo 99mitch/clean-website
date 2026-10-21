@@ -16,31 +16,27 @@ export const nav = frenchify({
   liens: [
     { href: '/', label: 'Accueil' },
     { href: '/services', label: 'Prestations' },
-    { href: '/secteurs', label: 'Secteurs d’activité' },
+    { href: '/secteurs', label: 'Secteurs' },
     { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
   ],
 });
 
 export const footer = frenchify({
-  /** Mêmes pages que la navbar — un pied de page dense, pas un plan de site. */
+  /** Pages principales, sans l'accueil (le logo y ramène) : pas un plan de site. */
   liens: [
-    { href: '/', label: 'Accueil' },
     { href: '/services', label: 'Prestations' },
-    { href: '/secteurs', label: 'Secteurs d’activité' },
+    { href: '/secteurs', label: 'Secteurs' },
     { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
     { href: '/blog', label: 'Ressources' },
     { href: '/recrutement', label: 'Nous rejoindre' },
-    { href: '/contact', label: 'Nous contacter' },
+    { href: '/contact', label: 'Contact' },
   ],
   legal: [
     { href: '/mentions-legales', label: 'Mentions légales' },
     { href: '/politique-de-confidentialite', label: 'Confidentialité' },
     { href: '/accessibilite', label: 'Accessibilité' },
   ],
-  zoneLabel: 'Zone d\'intervention',
   zone: 'Paris et Île-de-France',
-  contactLabel: 'Contact',
-  ecrire: 'Formulaire de contact',
   copyright: (annee: number, nom: string) => `© ${annee} ${nom}`,
 });
 

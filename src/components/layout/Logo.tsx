@@ -1,17 +1,22 @@
+import Image from 'next/image';
 import { site } from '@/config/site';
+import { LOGO_MARQUE } from '@/lib/photos';
 
 /**
- * Marque typographique. Le carré plein est une plaque d'échantillon ; sa
- * moitié basse porte la trame, sa moitié haute est traitée. Le logo dit donc
- * la même chose que le site.
+ * Logo : monogramme CB suivi de la graphie en minuscules. Le monogramme est
+ * décoratif ici, le nom écrit à côté porte l'information.
  */
 export function Logo({ tone = 'ink' }: { tone?: 'ink' | 'paper' }) {
   return (
     <span className="inline-flex items-center gap-2.5">
-      <span
-        aria-hidden="true"
-        className={`sample block h-5 w-5 ${tone === 'paper' ? 'bg-paper/20' : ''}`}
-        data-mat="terrazzo"
+      <Image
+        src={LOGO_MARQUE.src}
+        alt=""
+        // Taille d'affichage fixe : srcset 1x / 2x, chargé d'emblée (au-dessus de la ligne de flottaison).
+        width={48}
+        height={Math.round((48 * LOGO_MARQUE.height) / LOGO_MARQUE.width)}
+        loading="eager"
+        className="h-9 w-auto"
       />
       <span
         className={`font-display text-21 font-extrabold tracking-[-0.06em] ${

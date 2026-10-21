@@ -22,6 +22,9 @@ export const PHOTO_HERO: Photo = {
   alt: 'Agent de propreté intervenant avec une autolaveuse dans un hall tertiaire vitré',
 };
 
+/** Monogramme CB détouré (fond transparent) : header, footer, partage, e-mail. */
+export const LOGO_MARQUE = { src: '/images/logo/clean-bureau.png', width: 480, height: 358 };
+
 export const PHOTO_EQUIPE: Photo = {
   // Agrandie ×2 (Lanczos + accentuation légère) depuis l'original de 640 px.
   src: '/images/equipe/equipe-clean-bureau.webp',

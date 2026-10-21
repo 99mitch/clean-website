@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { site } from '@/config/site';
+import { Icon } from '@/components/ui/Icon';
+import { site, telAffiche, telHref } from '@/config/site';
 import { nav } from '@/copy/common';
 import { Logo } from './Logo';
 import { NavAutoClose } from './NavAutoClose';
@@ -13,6 +14,8 @@ import { NavLink } from './NavLink';
  * est signalée par `aria-current` (voir NavLink).
  */
 export function Header() {
+  const tel = telHref();
+  const numero = telAffiche();
 
   return (
     <header className="site-header sticky top-0 z-50 border-b border-ink bg-paper/95 py-4 backdrop-blur-sm">
@@ -25,10 +28,11 @@ export function Header() {
           <nav aria-label={nav.primaryLabel} className="hidden lg:block">
             <ul className="flex items-center">
               {nav.liens.map((lien) => (
-                <li key={lien.href}>
+                // Entre lg et xl, « Accueil » cède sa place au bouton d'appel : le logo y ramène déjà.
+                <li key={lien.href} className={lien.href === '/' ? 'lg:max-xl:hidden' : undefined}>
                   <NavLink
                     href={lien.href}
-                    className="flex min-h-11 items-center border-b-2 border-transparent px-4 font-mono text-13 uppercase tracking-[0.12em] text-slate hover:text-ink aria-[current]:border-ink aria-[current]:text-ink xl:px-5"
+                    className="flex min-h-11 items-center whitespace-nowrap border-b-2 border-transparent px-3.5 font-mono text-13 uppercase tracking-[0.12em] text-slate hover:text-ink aria-[current]:border-ink aria-[current]:text-ink xl:px-5"
                   >
                     {lien.label}
                   </NavLink>
@@ -37,9 +41,23 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Appel direct : icône seule quand la place manque, numéro en clair dès xl. */}
+            {tel && numero ? (
+              <a
+                href={tel}
+                data-analytics="tel_click"
+                aria-label={nav.appelerLabel(numero)}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2.5 border border-ink px-3 font-mono text-13 font-medium tracking-[0.06em] text-ink transition-colors duration-150 hover:bg-ink hover:text-paper xl:px-4"
+              >
+                <Icon name="phone" size={17} />
+                <span aria-hidden="true" className="hidden whitespace-nowrap sm:inline lg:hidden xl:inline">
+                  {numero}
+                </span>
+              </a>
+            ) : null}
             <div className="hidden sm:block">
-              <ButtonLink href="/devis" variant="devis">
+              <ButtonLink href="/devis" variant="devis" className="whitespace-nowrap">
                 {nav.devis}
               </ButtonLink>
             </div>

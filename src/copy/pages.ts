@@ -253,7 +253,7 @@ export const engagementsPage = frenchify({
         'Dosage centralisé des produits pour supprimer les surdosages sur site.',
         'Microfibre et lavage mécanisé plutôt que consommation de détergents.',
         'Tri des déchets d\'exploitation et reprise des contenants vides par le fournisseur.',
-        'Produits écolabellisés dès qu\'un équivalent existe pour l\'usage concerné.',
+        'Produits écolabellisés, pour notre engagement RSE.',
       ],
     },
     {

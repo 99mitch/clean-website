@@ -12,7 +12,7 @@ import { PHOTO_PAR_SERVICE } from '@/lib/photos';
 import { breadcrumbLd } from '@/lib/seo/jsonld';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { materiaux } from '@/lib/materiaux';
-import { DEGRADE_BLEU } from '@/lib/ui/degrade';
+import { degradeBleu } from '@/lib/ui/degrade';
 
 /**
  * Plaque d'échantillon affichée quand une prestation n'a pas de photo
@@ -54,7 +54,7 @@ export default async function ServicesPage() {
           {services.map((service, index) => {
             const inversee = index % 2 === 1;
             const photo = PHOTO_PAR_SERVICE[service.meta.slug];
-            const degrade = DEGRADE_BLEU[index] ?? DEGRADE_BLEU[3];
+            const degrade = degradeBleu(index, services.length);
 
             return (
               <Reveal

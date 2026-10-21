@@ -36,15 +36,27 @@ export const PHOTO_EQUIPE: Photo = {
 export const PHOTO_PAR_SERVICE: Record<string, Photo> = {
   'entretien-regulier': {
     src: '/images/services/entretien-regulier.png',
+    width: 546,
+    height: 366,
     alt: 'Agents de propreté lavant les sols d’un hall d’immeuble tertiaire',
   },
   'remise-en-etat': {
     src: '/images/services/remise-en-etat.png',
+    width: 593,
+    height: 393,
     alt: 'Agent effectuant une injection-extraction de moquette après travaux',
   },
   vitrerie: {
     src: '/images/services/vitrerie.png',
+    width: 598,
+    height: 397,
     alt: 'Agent nettoyant une vitre extérieure à la raclette',
+  },
+  'services-associes': {
+    src: '/images/services/services-associes.png',
+    width: 674,
+    height: 445,
+    alt: 'Agent balayant des gravats sur un chantier en fin de travaux',
   },
 };
 

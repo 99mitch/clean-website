@@ -109,11 +109,10 @@ export const site = {
    * Promesse de délai UNIQUE, reprise à l'identique partout (accueil,
    * méthode, secteurs, page merci). Audit du 27/09/2026 : trois promesses
    * contradictoires cohabitaient (24-48 h, J+2 puis 48 h, 24 h).
-   * ⚠️ Formulation proposée par l'audit — à confirmer par le client : ne
-   * l'afficher que s'il peut la tenir à coup sûr.
+   * Devis sous 24 h : demandé par le client le 22/10/2026.
    */
   delais: {
-    devis: '48 h',
+    devis: '24 h',
     visite: '72 h',
     urgence: '24 h',
   },
@@ -197,6 +196,11 @@ export const site = {
 /** Téléphone au format `tel:` (E.164 approximé par suppression des espaces). */
 export function telHref(): string | null {
   return site.telephone ? `tel:${site.telephone.replace(/[^\d+]/g, '')}` : null;
+}
+
+/** Numéro au format national (06 …), plus lisible qu'en +33 dans l'en-tête. */
+export function telAffiche(): string | null {
+  return site.telephone ? site.telephone.replace(/^\+33\s?/, '0') : null;
 }
 
 /**

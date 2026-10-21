@@ -51,7 +51,7 @@ export const home = frenchify({
       {
         titre: 'Responsabilité',
         texte:
-          'Personnel déclaré, formé et assuré. Produits écolabellisés dès qu’un équivalent existe. Un écart constaté est signalé, puis corrigé.',
+          'Personnel déclaré, formé et assuré. Produits écolabellisés, pour notre engagement RSE. Un écart constaté est signalé, puis corrigé.',
       },
     ],
   },

@@ -11,6 +11,7 @@ export const nav = frenchify({
   devis: 'Demander un devis',
   contact: 'Nous contacter',
   appeler: 'Appeler',
+  appelerLabel: (numero: string) => `Nous appeler au ${numero}`,
 
   /** Liens à plat — une page par titre, aucun menu déroulant. */
   liens: [

@@ -65,7 +65,12 @@ export const emailAdapter: LeadAdapter = {
           ? [{ path: site.plaquetteUrl, filename: 'plaquette.pdf' }]
           : undefined,
       });
-      if (accuse.error) throw new Error(accuse.error.message);
+      // Le lead est déjà livré en interne : un accusé en échec (adresse client
+      // invalide, domaine expéditeur non vérifié) ne doit pas faire croire au
+      // visiteur que sa demande est perdue, ni l'inciter à la renvoyer.
+      if (accuse.error) {
+        console.error('[devis] accusé de réception non envoyé', accuse.error.message);
+      }
       return;
     }
 

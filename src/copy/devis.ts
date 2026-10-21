@@ -49,7 +49,7 @@ const steps: StepCopy[] = [
   {
     numero: '04',
     titre: 'Quelles prestations ?',
-    aide: 'Plusieurs choix possibles. La liste s\'adapte au type de local indiqué à l\'étape 01.',
+    aide: 'Plusieurs choix possibles.',
     options: [
       { value: 'entretien-regulier', label: 'Entretien régulier', aide: 'Sols, sanitaires, poussières, déchets' },
       { value: 'remise-en-etat', label: 'Remise en état', aide: 'Après travaux, avant emménagement, fin de bail' },
@@ -155,7 +155,7 @@ export const devis = frenchify({
     suite: 'Et ensuite',
     etapes: [
       `Sous ${site.delais.devis} : un premier chiffrage établi à partir de vos réponses.`,
-      `Sous ${site.delais.visite} : une visite technique sur site, ou un échange téléphonique si le périmètre est simple.`,
+      `${site.delais.visite} après le devis : une visite technique sur site, ou un échange téléphonique si le périmètre est simple.`,
       'Ensuite : le cahier des charges définitif, avec le protocole détaillé.',
     ],
     retour: 'Retour à l\'accueil',

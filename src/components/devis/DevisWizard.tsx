@@ -12,7 +12,6 @@ import { track } from '@/lib/analytics';
 import {
   TOTAL_STEPS,
   contactSchema,
-  prestationsParTypeLocal,
   type DevisDraft,
   type Frequence,
   type Prestation,
@@ -23,6 +22,23 @@ import { ChoiceCard, Fieldset } from './ChoiceCard';
 import { Field, TextArea } from './Field';
 
 const STORAGE_KEY = 'devis-draft';
+
+/**
+ * Vrai après le premier montage du parcours dans ce document. Une navigation
+ * interne (header, retour depuis une autre page) remonte le composant sans
+ * recharger le document : c'est ce qui distingue « je reviens au devis »
+ * (parcours vierge) de « je recharge la page » (réponses restaurées).
+ */
+let dejaMonteDansCeDocument = false;
+
+function estRechargement(): boolean {
+  try {
+    const [entree] = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+    return entree?.type === 'reload';
+  } catch {
+    return false;
+  }
+}
 
 type ContactValues = z.infer<typeof contactSchema>;
 
@@ -55,27 +71,66 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
   const skipped = useMemo(() => new Set(prefill.skip), [prefill.skip]);
 
   /* ---- Réhydratation : sessionStorage (§7) ---------------------------
-   * sessionStorage est un système externe, indisponible au rendu serveur :
-   * la synchronisation ne peut donc se faire qu'après montage. L'étape, elle,
-   * vient de `?step=` et est résolue côté serveur.
+   * Les réponses ne sont restaurées que sur un rechargement de /devis (F5) :
+   * quitter le parcours puis y revenir repart d'un formulaire vierge, avec
+   * le seul pré-remplissage de l'URL. sessionStorage est indisponible au
+   * rendu serveur, d'où la synchronisation après montage.
    */
-  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (hydrated.current) return;
     hydrated.current = true;
     renderedAt.current = Date.now();
 
+    const restaurer = !dejaMonteDansCeDocument && estRechargement();
+    dejaMonteDansCeDocument = true;
+
+    let depart: DevisDraft = prefill.draft;
     try {
-      const stored = window.sessionStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored) as DevisDraft;
-        setDraft((current) => ({ ...parsed, ...current }));
-      }
+      const stored = restaurer ? window.sessionStorage.getItem(STORAGE_KEY) : null;
+      // Ce que l'utilisateur a modifié prime sur le pré-remplissage de l'URL.
+      if (stored) depart = { ...prefill.draft, ...(JSON.parse(stored) as DevisDraft) };
+      else window.sessionStorage.removeItem(STORAGE_KEY);
     } catch {
       // Un sessionStorage indisponible ne doit pas bloquer le parcours.
     }
+    setDraft(depart);
+
+    // Jamais au-delà de la première étape sans réponse : un `?step=` hérité
+    // d'une visite précédente ne doit pas ouvrir une étape inaccessible.
+    const ouverte = firstOpenStep(depart, skipped);
+    const cible = restaurer ? Math.min(prefill.step ?? ouverte, ouverte) : ouverte;
+    if (cible !== step || prefill.step !== undefined) {
+      setStep(cible);
+      const params = new URLSearchParams(window.location.search);
+      params.set('step', String(cible));
+      router.replace(`/devis?${params.toString()}`, { scroll: false });
+    }
+    // Montage uniquement : les dépendances sont les valeurs initiales.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  /* eslint-enable react-hooks/set-state-in-effect */
+
+  /* ---- Retour par l'historique depuis une autre page (bfcache) ------- */
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      try {
+        window.sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // idem
+      }
+      setDraft(prefill.draft);
+      setStepError(null);
+      setSubmitError(null);
+      setSubmitting(false);
+      const cible = firstOpenStep(prefill.draft, skipped);
+      setStep(cible);
+      const params = new URLSearchParams(window.location.search);
+      params.set('step', String(cible));
+      router.replace(`/devis?${params.toString()}`, { scroll: false });
+    };
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
+  }, [prefill.draft, router, skipped]);
 
   /* ---- Persistance ---------------------------------------------------- */
   useEffect(() => {
@@ -172,17 +227,12 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
     void form.handleSubmit(submit)(event);
   };
 
-  const prestationsDisponibles = useMemo<Prestation[]>(
-    () => prestationsParTypeLocal[draft.typeLocal ?? 'autre'],
-    [draft.typeLocal],
-  );
-
   const stepCopy = copy.steps[step - 1];
   const tel = telHref();
 
   return (
     <div>
-      <StepProgress current={step} onJump={goTo} draft={draft} />
+      <StepProgress current={step} onJump={goTo} draft={draft} skipped={skipped} />
 
       {/* Annonce du changement d'étape (§10). */}
       <p aria-live="polite" className="sr-only">
@@ -218,15 +268,7 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
                 aide={option.aide}
                 checked={draft.typeLocal === option.value}
                 onChange={(value) => {
-                  setDraft((d) => ({
-                    ...d,
-                    typeLocal: value as TypeLocal,
-                    // Les prestations dépendent du type de local : on purge
-                    // celles qui ne sont plus proposées.
-                    prestations: d.prestations?.filter((p) =>
-                      prestationsParTypeLocal[value as TypeLocal].includes(p),
-                    ),
-                  }));
+                  setDraft((d) => ({ ...d, typeLocal: value as TypeLocal }));
                   next(1);
                 }}
               />
@@ -280,33 +322,32 @@ export function DevisWizard({ prefill }: { prefill: DevisPrefill }) {
               error={stepError ?? undefined}
               errorId="step-error"
             >
-              {copy.steps[3]
-                .options.filter((option) =>
-                  prestationsDisponibles.includes(option.value as Prestation),
-                )
-                .map((option) => (
-                  <ChoiceCard
-                    key={option.value}
-                    type="checkbox"
-                    name="prestations"
-                    value={option.value}
-                    label={option.label}
-                    aide={option.aide}
-                    checked={
-                      draft.prestations?.includes(option.value as Prestation) ??
-                      false
-                    }
-                    describedBy={stepError ? 'step-error' : undefined}
-                    onChange={(value, checked) =>
-                      setDraft((d) => {
-                        const current = new Set(d.prestations ?? []);
-                        if (checked) current.add(value as Prestation);
-                        else current.delete(value as Prestation);
-                        return { ...d, prestations: [...current] };
-                      })
-                    }
-                  />
-                ))}
+              {/* Toutes les prestations, quel que soit le type de local. */}
+              {copy.steps[3].options.map((option) => (
+                <ChoiceCard
+                  key={option.value}
+                  type="checkbox"
+                  name="prestations"
+                  value={option.value}
+                  label={option.label}
+                  aide={option.aide}
+                  checked={
+                    draft.prestations?.includes(option.value as Prestation) ??
+                    false
+                  }
+                  describedBy={stepError ? 'step-error' : undefined}
+                  onChange={(value, checked) => {
+                    // Une case cochée lève l'erreur « au moins une prestation ».
+                    if (checked) setStepError(null);
+                    setDraft((d) => {
+                      const current = new Set(d.prestations ?? []);
+                      if (checked) current.add(value as Prestation);
+                      else current.delete(value as Prestation);
+                      return { ...d, prestations: [...current] };
+                    });
+                  }}
+                />
+              ))}
             </Fieldset>
 
             {/* Seule étape à choix multiple : elle a donc un bouton (§7). */}
@@ -539,18 +580,22 @@ function StepProgress({
   current,
   onJump,
   draft,
+  skipped,
 }: {
   current: number;
   onJump: (step: number) => void;
   draft: DevisDraft;
+  skipped: Set<number>;
 }) {
+  const ouverte = firstOpenStep(draft, skipped);
   return (
     <nav aria-label={copy.progression.label}>
       <ol className="grid list-none grid-cols-5 gap-x-2">
         {copy.steps.map((stepCopy, index) => {
           const number = index + 1;
           const isCurrent = number === current;
-          const reachable = number < current || isAnswered(draft, number - 1);
+          // Accessible : déjà passée, ou toutes les étapes précédentes ont une réponse.
+          const reachable = number < current || number <= ouverte;
           return (
             <li key={stepCopy.numero}>
               <button

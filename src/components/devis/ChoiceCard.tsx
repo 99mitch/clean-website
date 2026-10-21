@@ -41,7 +41,25 @@ export function ChoiceCard({
         name={name}
         value={value}
         checked={checked}
-        onChange={(event) => onChange(value, event.currentTarget.checked)}
+        // Radio : `click` et non `change`, qui ne se déclenche pas sur un
+        // choix déjà coché (retour arrière, réponse restaurée) — sinon
+        // recliquer la même réponse ne fait pas avancer le parcours.
+        // Les flèches et l'espace sur un choix non coché déclenchent aussi `click`.
+        onClick={type === 'radio' ? () => onChange(value, true) : undefined}
+        // Espace ou Entrée sur le choix déjà coché : aucun `click` natif, on
+        // valide donc ce choix explicitement pour passer à l'étape suivante.
+        onKeyDown={
+          type === 'radio' && checked
+            ? (event) => {
+                if (event.key !== ' ' && event.key !== 'Enter') return;
+                event.preventDefault();
+                onChange(value, true);
+              }
+            : undefined
+        }
+        onChange={
+          type === 'checkbox' ? (event) => onChange(value, event.currentTarget.checked) : () => {}
+        }
         aria-describedby={[aideId, describedBy].filter(Boolean).join(' ') || undefined}
         className="sr-only"
       />

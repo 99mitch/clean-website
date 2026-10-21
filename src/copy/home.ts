@@ -122,7 +122,7 @@ export const home = frenchify({
         titre: 'Visite technique',
         texte:
           'Relevé des surfaces, des revêtements et des accès, sur site avec le responsable des lieux. Le cahier des charges suit : périmètre, fréquences, produits, matériel, prix. Aucune ligne « divers ».',
-        duree: `Sous ${delais.visite}`,
+        duree: `${delais.visite} après le devis chiffré`,
       },
       {
         titre: 'Mise en place',

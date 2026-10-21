@@ -12,7 +12,7 @@ import type { Lead, LeadAdapter } from './types';
  *
  * Variables d'environnement (provisionnées par l'intégration Vercel × Resend) :
  *   RESEND_API_KEY   — clé d'API
- *   LEADS_EMAIL_TO   — destinataire interne
+ *   LEADS_EMAIL_TO   — destinataire interne (défaut : `site.emailContact`)
  *   LEADS_EMAIL_FROM — expéditeur vérifié sur le domaine
  */
 
@@ -26,12 +26,12 @@ export const emailAdapter: LeadAdapter = {
 
   async sendLead(lead: Lead) {
     const resend = client();
-    const to = process.env.LEADS_EMAIL_TO;
+    const to = process.env.LEADS_EMAIL_TO || site.emailContact;
     const from = process.env.LEADS_EMAIL_FROM;
 
     if (!resend || !to || !from) {
       throw new Error(
-        'Configuration email incomplète : RESEND_API_KEY, LEADS_EMAIL_TO et LEADS_EMAIL_FROM sont requis.',
+        'Configuration email incomplète : RESEND_API_KEY et LEADS_EMAIL_FROM sont requis (LEADS_EMAIL_TO ou site.emailContact pour le destinataire).',
       );
     }
 

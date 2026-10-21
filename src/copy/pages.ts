@@ -156,7 +156,7 @@ export const quiSommesNous = frenchify({
   chiffresLabel: 'Nos engagements en chiffres',
   chiffres: [
     { valeur: site.delais.devis, label: 'pour recevoir votre devis' },
-    { valeur: site.delais.visite, label: 'pour la visite technique' },
+    { valeur: site.delais.visite, label: 'après le devis, pour la visite technique' },
     { valeur: 'Jour J', label: `intervention d'urgence possible ${site.delais.urgence}` },
     { valeur: site.preavis, label: 'de préavis, sans engagement de durée' },
   ],

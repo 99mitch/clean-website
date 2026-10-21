@@ -209,7 +209,7 @@ Seule dépendance client du header : `<NavAutoClose />`, qui referme les menus a
 01 · Type de local        bureaux · commerce · médical · industriel · immeuble · autre
 02 · Surface              < 100 / 100-300 / 300-1000 / 1000-3000 / > 3000 m²
 03 · Fréquence            quotidien · 2-3×/sem · hebdo · mensuel · ponctuel/one-shot
-04 · Prestations          multi-sélection, filtrée selon l'étape 01
+04 · Prestations          multi-sélection, toutes les prestations quel que soit le local
 05 · Coordonnées          société, nom, email, téléphone, code postal, message libre
 ```
 

@@ -38,33 +38,6 @@ export type Surface = (typeof surfaceValues)[number];
 export type Frequence = (typeof frequenceValues)[number];
 export type Prestation = (typeof prestationValues)[number];
 
-/** Prestations proposées à l'étape 04, filtrées selon l'étape 01 (§7). */
-export const prestationsParTypeLocal: Record<TypeLocal, Prestation[]> = {
-  bureaux: [
-    'entretien-regulier',
-    'vitrerie',
-    'remise-en-etat',
-    'services-associes',
-  ],
-  commerce: [
-    'entretien-regulier',
-    'vitrerie',
-    'remise-en-etat',
-  ],
-  industriel: [
-    'entretien-regulier',
-    'remise-en-etat',
-    'services-associes',
-  ],
-  immeuble: [
-    'entretien-regulier',
-    'vitrerie',
-    'remise-en-etat',
-    'services-associes',
-  ],
-  autre: [...prestationValues],
-};
-
 export const step1Schema = z.object({ typeLocal: z.enum(typeLocalValues) });
 export const step2Schema = z.object({ surface: z.enum(surfaceValues) });
 export const step3Schema = z.object({ frequence: z.enum(frequenceValues) });

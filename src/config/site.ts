@@ -113,7 +113,8 @@ export const site = {
    */
   delais: {
     devis: '24 h',
-    visite: '72 h',
+    /** Visite technique : 24 h après l'envoi du devis chiffré (client, 22/10/2026). */
+    visite: '24 h',
     /** Formulation demandée par le client le 22/10/2026 (« possible dans la journée »). */
     urgence: 'dans la journée',
   },
